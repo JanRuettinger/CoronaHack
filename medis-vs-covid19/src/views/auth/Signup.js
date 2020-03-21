@@ -1,17 +1,17 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Stepper from '@material-ui/core/Stepper'
+import Step from '@material-ui/core/Step'
+import StepLabel from '@material-ui/core/StepLabel'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import {
   Card,
   CardHeader,
   CardContent,
   CardActions,
   Divider
-} from '@material-ui/core';
+} from '@material-ui/core'
 
 import { createStudentDocument, createInstitutionDocument } from '../../utilities';
 import { auth } from '../../firebase';
@@ -24,21 +24,21 @@ import { isJSDocAugmentsTag } from 'typescript';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   button: {
     width: 100,
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(1)
   },
   instructions: {
     position: 'relative',
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   footerButton: {
     marginLeft: 'auto',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   card: {
     position: 'absolute',
@@ -46,56 +46,65 @@ const useStyles = makeStyles(theme => ({
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)'
-  },
-}));
+  }
+}))
 
 function getSteps() {
-  return ['Rolle', 'Persönliche Information', 'Über deinen Einsatz', 'Deine Qualifikation'];
+  return [
+    'Rolle',
+    'Persönliche Information',
+    'Über deinen Einsatz',
+    'Deine Qualifikation'
+  ]
 }
 
-function getStepContent(step) {
-  switch (step) {
+const CurrentStep = props => {
+  const { activeStep } = props
+
+  switch (activeStep) {
     case 0:
-      return <Step0/>;
+      return <Step0 {...props} />
     case 1:
-      return <Step1/>;
+      return <Step1 {...props} />
     case 2:
-      return <Step2/>;
+      return <Step2 {...props} />
     case 3:
-      return <Step3/>;
+      return <Step3 {...props} />
     default:
-      return 'Unknown step';
+      return 'Unknown step'
   }
 }
 
 export default function HorizontalLinearStepper() {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
-  const steps = getSteps();
+  const classes = useStyles()
+  const [activeStep, setActiveStep] = React.useState(0)
+  const [skipped, setSkipped] = React.useState(new Set())
+  const steps = getSteps()
+
+  const [role, setRole] = useState('helper')
 
   const isStepSkipped = step => {
-    return skipped.has(step);
-  };
+    return skipped.has(step)
+  }
 
   const handleNext = () => {
-    let newSkipped = skipped;
+    let newSkipped = skipped
     if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
+      newSkipped = new Set(newSkipped.values())
+      newSkipped.delete(activeStep)
     }
 
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-    setSkipped(newSkipped);
-  };
+    setActiveStep(prevActiveStep => prevActiveStep + 1)
+    setSkipped(newSkipped)
+  }
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-  };
+    setActiveStep(prevActiveStep => prevActiveStep - 1)
+  }
 
   const handleReset = () => {
-    setActiveStep(0);
-  };
+    setActiveStep(0)
+  }
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -103,7 +112,7 @@ export default function HorizontalLinearStepper() {
     var email = "example@gmail.com"
     var password = "noidea"
     var displayName = "MyExample"
-    if(true){ // TODO: change to state - e.g isStudent
+    if(role === 'helper'){
       try {
         const { user } = await auth.createUserWithEmailAndPassword(
           email,
@@ -136,20 +145,20 @@ export default function HorizontalLinearStepper() {
         <CardContent>
           <div>
             {activeStep === 0 ? (
-              <div/>
+              <div />
             ) : (
               <Stepper activeStep={activeStep}>
                 {steps.map((label, index) => {
-                  const stepProps = {};
-                  const labelProps = {};
+                  const stepProps = {}
+                  const labelProps = {}
                   if (isStepSkipped(index)) {
-                    stepProps.completed = false;
+                    stepProps.completed = false
                   }
                   return (
                     <Step key={label} {...stepProps}>
                       <StepLabel {...labelProps}>{label}</StepLabel>
                     </Step>
-                  );
+                  )
                 })}
               </Stepper>
             )}
@@ -166,7 +175,7 @@ export default function HorizontalLinearStepper() {
               </div>
             ) : (
               <div className={classes.instructions}>
-                {getStepContent(activeStep)}
+                <CurrentStep {...{ activeStep, role, setRole }} />
               </div>
             )}
           </div>
@@ -176,13 +185,12 @@ export default function HorizontalLinearStepper() {
           <div className={classes.footerButton}>
             <div className={classes.button}>
               {activeStep === 0 ? (
-                <div/>
+                <div />
               ) : (
                 <Button disabled={activeStep === 0} onClick={handleBack}>
                   Zurück
                 </Button>
-              )
-              }
+              )}
             </div>
             <Button
               color="primary"
@@ -196,5 +204,5 @@ export default function HorizontalLinearStepper() {
         </CardActions>
       </Card>
     </div>
-  );
+  )
 }
