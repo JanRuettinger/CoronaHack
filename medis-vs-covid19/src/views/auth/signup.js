@@ -5,8 +5,6 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import {
   Card,
   CardHeader,
@@ -95,10 +93,7 @@ export default function HorizontalLinearStepper() {
 
   return (
     <div className={classes.root}>
-      <Card
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+      <Card>
         <CardHeader title="Simple Modal" />
         <Divider />
         <CardContent>
@@ -161,12 +156,11 @@ export default function HorizontalLinearStepper() {
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
-          <Button onClick={onClose}>
+          <Button>
             Dismiss
           </Button>
           <Button
             color="primary"
-            onClick={onClose}
             variant="contained"
           >
             Confirm
