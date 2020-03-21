@@ -29,14 +29,21 @@ const useStyles = makeStyles(theme => ({
   selectionHeader: {
     fontWeight: 'bold',
     marginBottom: 10,
+    paddingTop: 4,
+    textAlignVertical: 'center'
   },
   icon: {
     width: 40,
     height: 40,
+    marginTop: 8
   },
   iconDiv: {
+    marginLeft: 'auto',
     position: 'relative',
     verticalAlign: 'middle',
+  },
+  radio: {
+    height: 30,
   },
   selectionMain: {
 
@@ -60,6 +67,7 @@ const Step_0 = props => {
         <div className={classes.cardColumns}>
           <div>
             <Radio
+              className={classes.radio}
               checked={selectedValue === 'a'}
               onChange={handleChange}
               value="a"
@@ -75,7 +83,7 @@ const Step_0 = props => {
               Ich möchte gern in einer Einrichtung Unterstützung leisten
             </Typography>
           </div>
-          <div>
+          <div className={classes.iconDiv}>
             <PermIdentityIcon className={classes.icon} />
           </div>
         </div>
@@ -84,6 +92,7 @@ const Step_0 = props => {
         <div className={classes.cardColumns}>
           <div>
             <Radio
+              className={classes.radio}
               checked={selectedValue === 'b'}
               onChange={handleChange}
               value="b"
