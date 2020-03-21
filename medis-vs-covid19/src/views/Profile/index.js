@@ -11,9 +11,7 @@ import {
   Typography
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Connections from './Connections';
 import Account from './Account';
-import Projects from './Projects';
 import Deployment from './Deployment';
 
 const useStyles = makeStyles((theme) => ({
@@ -82,7 +80,6 @@ function Profile({ match, history }) {
         <div className={classes.content}>
           {currentTab === 'account' && <Account />}
           {currentTab === 'deployment' && <Deployment />}
-          {currentTab === 'qualification' && <Projects />}
         </div>
       </Container>
     </Page>
