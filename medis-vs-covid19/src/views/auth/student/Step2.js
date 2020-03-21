@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 import {
   Typography,
   TextField,
   Divider,
   Checkbox,
   FormControlLabel
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   section: { marginBottom: '50px' },
@@ -23,10 +23,42 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     height: '150px' // quick and dirty way to hold 3 checkboxes per column
   }
-}));
+}))
 
 const Step_2 = props => {
-  const classes = useStyles();
+  const classes = useStyles()
+
+  const {
+    setPrefLocation,
+    setStartDate,
+    setAvailability,
+    setCompensation,
+    setOperationPlace,
+    operationPlace
+  } = props
+
+  const changeLocation = event => {
+    setPrefLocation(event.target.value)
+  }
+
+  const changeStartDate = event => {
+    setStartDate(event.target.value)
+  }
+
+  const changeAvailability = event => {
+    setAvailability(event.target.value)
+  }
+
+  const changeCompensation = event => {
+    setCompensation(event.target.value)
+  }
+
+  const changeOperationPlace = event => {
+    setOperationPlace({
+      ...operationPlace,
+      [event.target.name]: event.target.checked
+    })
+  }
 
   return (
     <div>
@@ -37,6 +69,7 @@ const Step_2 = props => {
             label="Bevorzugter Einsatzort"
             variant="outlined"
             className={classes.field}
+            onChange={changeLocation}
           />
         </div>
         <TextField
@@ -44,12 +77,14 @@ const Step_2 = props => {
           label="Zeitpunkt"
           variant="outlined"
           className={classes.field}
+          onChange={changeStartDate}
         />
         <TextField
           id="availability"
           label="Zeitliche Verfügbarkeit"
           variant="outlined"
           className={classes.field}
+          onChange={changeAvailability}
         />
         <div>
           <TextField
@@ -57,6 +92,7 @@ const Step_2 = props => {
             label="Vergütung"
             variant="outlined"
             className={classes.field}
+            onChange={changeCompensation}
           />
         </div>
       </section>
@@ -66,26 +102,38 @@ const Step_2 = props => {
         </Typography>
         <Divider />
         <div className={classes.checkboxContainer}>
-          <FormControlLabel control={<Checkbox />} label="Krankenhaus" />
           <FormControlLabel
-            control={<Checkbox />}
+            control={<Checkbox onChange={changeOperationPlace} />}
+            label="Krankenhaus"
+          />
+          <FormControlLabel
+            control={<Checkbox onChange={changeOperationPlace} />}
             label="Pflegedienst / Pflegeheim"
           />
           <FormControlLabel
-            control={<Checkbox />}
+            control={<Checkbox onChange={changeOperationPlace} />}
             label="Ich helfe dort, wo ich gebraucht werde"
           />
-          <FormControlLabel control={<Checkbox />} label="Arztpraxis" />
-          <FormControlLabel control={<Checkbox />} label="Apotheke" />
-          <FormControlLabel control={<Checkbox />} label="Rettungsdienst" />
           <FormControlLabel
-            control={<Checkbox />}
+            control={<Checkbox onChange={changeOperationPlace} />}
+            label="Arztpraxis"
+          />
+          <FormControlLabel
+            control={<Checkbox onChange={changeOperationPlace} />}
+            label="Apotheke"
+          />
+          <FormControlLabel
+            control={<Checkbox onChange={changeOperationPlace} />}
+            label="Rettungsdienst"
+          />
+          <FormControlLabel
+            control={<Checkbox onChange={changeOperationPlace} />}
             label="Gesundheitsamt / Versorgungsinstitution"
           />
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Step_2;
+export default Step_2

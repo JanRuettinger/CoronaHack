@@ -19,6 +19,7 @@ import Step0 from './student/Step0'
 import Step1 from './student/Step1'
 import Step2 from './student/Step2'
 import Step3 from './student/Step3'
+import InstitutionSignup from './institution/InstitutionSignup'
 import { flexibleCompare } from '@fullcalendar/core';
 import { isJSDocAugmentsTag } from 'typescript';
 
@@ -81,7 +82,27 @@ export default function HorizontalLinearStepper() {
   const [skipped, setSkipped] = React.useState(new Set())
   const steps = getSteps()
 
+  // Signup data
   const [role, setRole] = useState('helper')
+
+  //Student data
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  const [email, setEmail] = useState('')
+  const [pwd, setPwd] = useState('')
+  const [prefLocation, setPrefLocation] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [compensation, setCompensation] = useState('')
+  const [availability, setAvailability] = useState('')
+  const [operationPlace, setOperationPlace] = useState({})
+
+  //Institution data
+  const [institutionName, setInstitutionName] = useState('')
+  const [institutionLocation, setInstitutionLocation] = useState('')
+  const [institutionEmail, setInstitutionEmail] = useState('')
+  const [institutionMobile, setInstitutionMobile] = useState('')
+  const [institutionKind, setInstitutionKind] = useState('hospital')
 
   const isStepSkipped = step => {
     return skipped.has(step)
@@ -175,7 +196,51 @@ export default function HorizontalLinearStepper() {
               </div>
             ) : (
               <div className={classes.instructions}>
-                <CurrentStep {...{ activeStep, role, setRole }} />
+                {role === 'helper' ? (
+                  <CurrentStep
+                    {...{
+                      activeStep,
+                      role,
+                      setRole,
+                      firstname,
+                      setFirstname,
+                      lastname,
+                      setLastname,
+                      mobileNumber,
+                      setMobileNumber,
+                      email,
+                      setEmail,
+                      pwd,
+                      setPwd,
+                      prefLocation,
+                      setPrefLocation,
+                      startDate,
+                      setStartDate,
+                      compensation,
+                      setCompensation,
+                      availability,
+                      setAvailability
+                    }}
+                  />
+                ) : (
+                  <InstitutionSignup
+                    {...{
+                      activeStep,
+                      role,
+                      setRole,
+                      institutionName,
+                      setInstitutionName,
+                      institutionLocation,
+                      setInstitutionLocation,
+                      institutionEmail,
+                      setInstitutionEmail,
+                      institutionMobile,
+                      setInstitutionMobile,
+                      institutionKind,
+                      setInstitutionKind
+                    }}
+                  />
+                )}
               </div>
             )}
           </div>

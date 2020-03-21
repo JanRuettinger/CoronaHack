@@ -16,6 +16,28 @@ const useStyles = makeStyles(theme => ({
 const Step_1 = props => {
   const classes = useStyles();
 
+  const {setFirstname, setLastname, setMobileNumber, setEmail, setPwd} = props;
+
+  const changeFirstname = event => {
+    setFirstname(event.target.value)
+  };
+
+  const changeLastname = event => {
+    setLastname(event.target.value)
+  };
+
+  const changeMobile = event => {
+    setMobileNumber(event.target.value)
+  };
+
+  const changeEmail = event => {
+    setEmail(event.target.value)
+  };
+
+  const changePassword = event => {
+    setPwd(event.target.value)
+  };
+
   return (
     <div>
       <section className={classes.section}>
@@ -26,18 +48,21 @@ const Step_1 = props => {
           label="Vorname"
           variant="outlined"
           className={classes.field}
+          onChange={changeFirstname}
         />
         <TextField
           id="lastname"
           label="Nachname"
           variant="outlined"
           className={classes.field}
+          onChange={changeLastname}
         />
         <TextField
           id="mobile"
           label="Mobil"
           variant="outlined"
           className={classes.field}
+          onChange={changeMobile}
         />
       </section>
       <section className={classes.section}>
@@ -49,6 +74,7 @@ const Step_1 = props => {
           type="email"
           variant="outlined"
           className={classes.field}
+          onChange={changeEmail}
         />
         <TextField
           id="password"
@@ -56,6 +82,7 @@ const Step_1 = props => {
           type="password"
           variant="outlined"
           className={classes.field}
+          onChange={changePassword}
         />
         <TextField
           id="verifypassword"
