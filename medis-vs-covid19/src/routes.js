@@ -23,7 +23,7 @@ export default [
       {
         path: '/auth/signup',
         exact: true,
-        component: lazy(() => import('src/views/auth/signup'))
+        component: lazy(() => import('src/views/auth/Signup'))
       },
       {
         component: () => <Redirect to="/errors/error-404" />
