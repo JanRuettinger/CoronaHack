@@ -78,7 +78,19 @@ export default function HorizontalLinearStepper() {
   const [skipped, setSkipped] = React.useState(new Set())
   const steps = getSteps()
 
+  // Signup data
   const [role, setRole] = useState('helper')
+
+  //Student data
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  const [email, setEmail] = useState('')
+  const [pwd, setPwd] = useState('')
+  const [prefLocation, setPrefLocation] = useState('')
+  const [startEarliestFrom, setStartEarliestFrom] = useState('')
+  const [compensation, setCompensation] = useState('')
+  const [timeBudget, setTimeBudget] = useState('')
 
   const isStepSkipped = step => {
     return skipped.has(step)
