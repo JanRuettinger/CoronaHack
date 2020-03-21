@@ -11,6 +11,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 
+import {professions, progressOptions} from './config'
+
 const useStyles = makeStyles((theme) => ({
   section: { marginBottom: '20px' },
   heading: {
@@ -50,21 +52,28 @@ const Step_3 = (props) => {
 
   const handleChangeRadio = () => {};
 
+  const changeProfession = event => {
+    setProfession(event.target.value)
+  }
+
   return (
     <div>
       <section className={classes.section}>
-        <TextField
-          id="eductionallevel"
-          label="Ausbildungsgrad"
-          variant="outlined"
-          className={classes.field}
-        />
-        <TextField
-          id="eductionalregion"
-          label="Ausbildungsabschnitt"
-          variant="outlined"
-          className={classes.field}
-        />
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel id="profession">Ausbildungsgrad</InputLabel>
+          <Select
+            labelId="profession"
+            id="profession"
+            value={profession}
+            onChange={changeProfession}
+          >
+            {professions.map(({text, fieldValue}) => {
+                return(
+                <MenuItem value={fieldValue}>{text}</MenuItem>
+                )
+            })}
+          </Select> 
+        </FormControl>
         <FormControl className={classes.formControlSelect}>
           <Select
             id="eductionalregion"
@@ -72,6 +81,10 @@ const Step_3 = (props) => {
             variant="outlined"
             className={classes.field}
           >
+            {profession === 'sonstige' ? (<div>TODO Eingabefeld für profession</div>
+            ) : (
+              progressOptions.get(profession).map(({text, fieldValue}) => (<MenuItem value={fieldValue}>{text}</MenuItem>))
+            )}
             <MenuItem value={1}>Vorklinischer Abschnitt (1. - 4. Semester)</MenuItem>
             <MenuItem value={2}>5. - 8. Semester</MenuItem>
             <MenuItem value={3}>> 8. Semester</MenuItem>

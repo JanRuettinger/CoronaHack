@@ -94,7 +94,10 @@ export default function HorizontalLinearStepper() {
   const [startDate, setStartDate] = useState('')
   const [compensation, setCompensation] = useState('')
   const [availability, setAvailability] = useState('')
-  const [operationPlace, setOperationPlace] = useState({})
+  const [operationPlace, setOperationPlace] = useState({}) // "Bevorzugte Einsatzstellen"
+  const [profession, setProfession] = useState('')
+  const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
+  
 
   const isStepSkipped = step => {
     return skipped.has(step)
@@ -167,11 +170,14 @@ export default function HorizontalLinearStepper() {
                   prefLocation, setPrefLocation,
                   startDate, setStartDate,
                   compensation, setCompensation,
-                  availability, setAvailability
+                  availability, setAvailability,
+                  operationPlace, setOperationPlace,
+                  profession, setProfession, 
+                  educationalProgress, setEducationalProgress
                   }
                 }/>
               ) : (
-                <InstitutionSignup {...{ activeStep, role, setRole}}/>
+                <div></div>
               )
             }</div>)}
             </div>
