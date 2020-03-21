@@ -12,11 +12,6 @@ import PresentationView from './views_old/Presentation';
 
 export default [
   {
-    path: '/',
-    exact: true,
-    component: lazy(() => import('src/views/LP/LP'))
-  },
-  {
     path: '/auth',
     component: AuthLayout,
     routes: [
