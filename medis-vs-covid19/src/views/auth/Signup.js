@@ -13,6 +13,8 @@ import {
   Divider
 } from '@material-ui/core'
 
+import { useFormik } from 'formik'
+
 import Step0 from './student/Step0'
 import Step1 from './student/Step1'
 import Step2 from './student/Step2'
@@ -80,6 +82,13 @@ export default function HorizontalLinearStepper() {
 
   const [role, setRole] = useState('helper')
 
+  const formik = useFormik({
+    initialValues: { role: 'helper' },
+    onSubmit: values => {
+      console.log(values)
+    }
+  })
+
   const isStepSkipped = step => {
     return skipped.has(step)
   }
@@ -141,7 +150,7 @@ export default function HorizontalLinearStepper() {
               </div>
             ) : (
               <div className={classes.instructions}>
-                <CurrentStep {...{ activeStep, role, setRole }} />
+                <CurrentStep {...{ activeStep, formik }} />
               </div>
             )}
           </div>
@@ -169,6 +178,7 @@ export default function HorizontalLinearStepper() {
           </div>
         </CardActions>
       </Card>
+      {JSON.stringify(formik.values)}
     </div>
   )
 }

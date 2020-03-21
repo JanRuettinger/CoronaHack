@@ -1,10 +1,10 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import PermIdentityIcon from '@material-ui/icons/PermIdentity';
-import HomeIcon from '@material-ui/icons/Home';
-import Radio from '@material-ui/core/Radio';
-import { Card } from '@material-ui/core';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import PermIdentityIcon from '@material-ui/icons/PermIdentity'
+import HomeIcon from '@material-ui/icons/Home'
+import Radio from '@material-ui/core/Radio'
+import { Card } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   mainCard: {},
@@ -42,16 +42,16 @@ const useStyles = makeStyles(theme => ({
     height: 30
   },
   selectionMain: {}
-}));
+}))
 
 const Step_0 = props => {
-  const { role, setRole } = props;
-  const classes = useStyles();
+  const { formik } = props
+  const classes = useStyles()
   // const [selectedValue, setSelectedValue] = React.useState('a');
 
-  const handleChange = event => {
-    setRole(event.target.value);
-  };
+  // const handleChange = event => {
+  //   setRole(event.target.value)
+  // }
 
   return (
     <div className={classes.mainCard}>
@@ -63,10 +63,11 @@ const Step_0 = props => {
           <div>
             <Radio
               className={classes.radio}
-              checked={role === 'helper'}
-              onChange={handleChange}
+              checked={formik.values.role === 'helper'}
+              onChange={() => formik.setFieldValue('role', 'helper')}
               value="helper"
-              name="radio-button-demo"
+              id="role"
+              name="role"
               inputProps={{ 'aria-label': 'A' }}
             />
           </div>
@@ -88,10 +89,11 @@ const Step_0 = props => {
           <div>
             <Radio
               className={classes.radio}
-              checked={role === 'facility'}
-              onChange={handleChange}
+              checked={formik.values.role === 'facility'}
+              onChange={() => formik.setFieldValue('role', 'facility')}
               value="facility"
-              name="radio-button-demo"
+              name="role"
+              id="role"
               inputProps={{ 'aria-label': 'B' }}
             />
           </div>
@@ -109,7 +111,7 @@ const Step_0 = props => {
         </div>
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default Step_0;
+export default Step_0
