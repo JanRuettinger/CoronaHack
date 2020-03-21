@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -13,29 +13,29 @@ import {
   Divider
 } from '@material-ui/core';
 
-import Step0 from './student/Step0'
-import Step1 from './student/Step1'
-import Step2 from './student/Step2'
-import Step3 from './student/Step3'
+import Step0 from './student/Step0';
+import Step1 from './student/Step1';
+import Step2 from './student/Step2';
+import Step3 from './student/Step3';
 import { flexibleCompare } from '@fullcalendar/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   button: {
     width: 100,
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(1)
   },
   instructions: {
     position: 'relative',
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   footerButton: {
     marginLeft: 'auto',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   card: {
     position: 'absolute',
@@ -43,33 +43,42 @@ const useStyles = makeStyles(theme => ({
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)'
-  },
+  }
 }));
 
 function getSteps() {
-  return ['Rolle', 'Persönliche Information', 'Über deinen Einsatz', 'Deine Qualifikation'];
+  return [
+    'Rolle',
+    'Persönliche Information',
+    'Über deinen Einsatz',
+    'Deine Qualifikation'
+  ];
 }
 
-function getStepContent(step) {
-  switch (step) {
+const CurrentStep = props => {
+  const { activeStep } = props;
+
+  switch (activeStep) {
     case 0:
-      return <Step0/>;
+      return <Step0 {...props} />;
     case 1:
-      return <Step1/>;
+      return <Step1 {...props} />;
     case 2:
-      return <Step2/>;
+      return <Step2 {...props} />;
     case 3:
-      return <Step3/>;
+      return <Step3 {...props} />;
     default:
       return 'Unknown step';
   }
-}
+};
 
 export default function HorizontalLinearStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
+
+  const [role, setRole] = useState('helper');
 
   const isStepSkipped = step => {
     return skipped.has(step);
@@ -102,7 +111,7 @@ export default function HorizontalLinearStepper() {
         <CardContent>
           <div>
             {activeStep === 0 ? (
-              <div/>
+              <div />
             ) : (
               <Stepper activeStep={activeStep}>
                 {steps.map((label, index) => {
@@ -132,7 +141,7 @@ export default function HorizontalLinearStepper() {
               </div>
             ) : (
               <div className={classes.instructions}>
-                {getStepContent(activeStep)}
+                <CurrentStep {...{ activeStep, role, setRole }} />
               </div>
             )}
           </div>
@@ -142,13 +151,12 @@ export default function HorizontalLinearStepper() {
           <div className={classes.footerButton}>
             <div className={classes.button}>
               {activeStep === 0 ? (
-                <div/>
+                <div />
               ) : (
                 <Button disabled={activeStep === 0} onClick={handleBack}>
                   Zurück
                 </Button>
-              )
-              }
+              )}
             </div>
             <Button
               color="primary"
