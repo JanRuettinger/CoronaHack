@@ -44,6 +44,10 @@ const Step_2 = props => {
     setCompensation(event.target.value)
   }
 
+  const changeOperationPlace = event => {
+    setOperationPlace({...operationPlace, [event.target.name]: event.target.checked})
+  }
+
   return (
     <div>
       <section className={classes.section}>
@@ -68,7 +72,7 @@ const Step_2 = props => {
           label="Zeitliche Verfügbarkeit"
           variant="outlined"
           className={classes.field}
-          onChange={changeAvialability}
+          onChange={changeAvailability}
         />
         <div>
           <TextField
@@ -76,6 +80,7 @@ const Step_2 = props => {
             label="Vergütung"
             variant="outlined"
             className={classes.field}
+            onChange={changeCompensation}
           />
         </div>
       </section>
@@ -85,20 +90,20 @@ const Step_2 = props => {
         </Typography>
         <Divider />
         <div className={classes.checkboxContainer}>
-          <FormControlLabel control={<Checkbox />} label="Krankenhaus" />
+          <FormControlLabel control={<Checkbox onChange={changeOperationPlace}/>} label="Krankenhaus" />
           <FormControlLabel
-            control={<Checkbox />}
+            control={<Checkbox onChange={changeOperationPlace}/>}
             label="Pflegedienst / Pflegeheim"
           />
           <FormControlLabel
-            control={<Checkbox />}
+            control={<Checkbox onChange={changeOperationPlace}/>}
             label="Ich helfe dort, wo ich gebraucht werde"
           />
-          <FormControlLabel control={<Checkbox />} label="Arztpraxis" />
-          <FormControlLabel control={<Checkbox />} label="Apotheke" />
-          <FormControlLabel control={<Checkbox />} label="Rettungsdienst" />
+          <FormControlLabel control={<Checkbox onChange={changeOperationPlace}/>} label="Arztpraxis" />
+          <FormControlLabel control={<Checkbox onChange={changeOperationPlace}/>} label="Apotheke" />
+          <FormControlLabel control={<Checkbox onChange={changeOperationPlace}/>} label="Rettungsdienst" />
           <FormControlLabel
-            control={<Checkbox />}
+            control={<Checkbox onChange={changeOperationPlace}/>}
             label="Gesundheitsamt / Versorgungsinstitution"
           />
         </div>
