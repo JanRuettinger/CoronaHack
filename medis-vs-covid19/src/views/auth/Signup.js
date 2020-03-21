@@ -99,28 +99,28 @@ export default function HorizontalLinearStepper() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const { email, password, displayName } = this.state;
-    // var email = "example@gmail.com"
-    // var password = "noidea"
-    // var displayName = "MyExample"
+    // const { email, password, displayName } = this.state;
+    var email = "example@gmail.com"
+    var password = "noidea"
+    var displayName = "MyExample"
     if(true){ // TODO: change to state - e.g isStudent
       try {
-        const { student } = await auth.createUserWithEmailAndPassword(
+        const { user } = await auth.createUserWithEmailAndPassword(
           email,
           password,
         );
-        createStudentDocument(student, { displayName });
+        createStudentDocument(user, { displayName });
       } catch (error) {
         alert(error);
       }
     }
     else {
       try {
-        const { institution } = await auth.createUserWithEmailAndPassword(
+        const { user } = await auth.createUserWithEmailAndPassword(
           email,
           password,
         );
-        createInstitutionDocument(institution, { displayName });
+        createInstitutionDocument(user, { displayName });
       } catch (error) {
         alert(error);
       }
