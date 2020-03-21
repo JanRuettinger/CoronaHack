@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 import {
   Typography,
   TextField,
   Divider,
   Checkbox,
   FormControlLabel
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   section: { marginBottom: '50px' },
@@ -23,12 +23,19 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     height: '150px' // quick and dirty way to hold 3 checkboxes per column
   }
-}));
+}))
 
 const Step_2 = props => {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const {setPrefLocation, setStartDate, setAvailability, setCompensation} = props;
+  const {
+    setPrefLocation,
+    setStartDate,
+    setAvailability,
+    setCompensation,
+    setOperationPlace,
+    operationPlace
+  } = props
 
   const changeLocation = event => {
     setPrefLocation(event.target.value)
@@ -47,7 +54,10 @@ const Step_2 = props => {
   }
 
   const changeOperationPlace = event => {
-    setOperationPlace({...operationPlace, [event.target.name]: event.target.checked})
+    setOperationPlace({
+      ...operationPlace,
+      [event.target.name]: event.target.checked
+    })
   }
 
   return (
@@ -92,26 +102,38 @@ const Step_2 = props => {
         </Typography>
         <Divider />
         <div className={classes.checkboxContainer}>
-          <FormControlLabel control={<Checkbox onChange={changeOperationPlace}/>} label="Krankenhaus" />
           <FormControlLabel
-            control={<Checkbox onChange={changeOperationPlace}/>}
+            control={<Checkbox onChange={changeOperationPlace} />}
+            label="Krankenhaus"
+          />
+          <FormControlLabel
+            control={<Checkbox onChange={changeOperationPlace} />}
             label="Pflegedienst / Pflegeheim"
           />
           <FormControlLabel
-            control={<Checkbox onChange={changeOperationPlace}/>}
+            control={<Checkbox onChange={changeOperationPlace} />}
             label="Ich helfe dort, wo ich gebraucht werde"
           />
-          <FormControlLabel control={<Checkbox onChange={changeOperationPlace}/>} label="Arztpraxis" />
-          <FormControlLabel control={<Checkbox onChange={changeOperationPlace}/>} label="Apotheke" />
-          <FormControlLabel control={<Checkbox onChange={changeOperationPlace}/>} label="Rettungsdienst" />
           <FormControlLabel
-            control={<Checkbox onChange={changeOperationPlace}/>}
+            control={<Checkbox onChange={changeOperationPlace} />}
+            label="Arztpraxis"
+          />
+          <FormControlLabel
+            control={<Checkbox onChange={changeOperationPlace} />}
+            label="Apotheke"
+          />
+          <FormControlLabel
+            control={<Checkbox onChange={changeOperationPlace} />}
+            label="Rettungsdienst"
+          />
+          <FormControlLabel
+            control={<Checkbox onChange={changeOperationPlace} />}
             label="Gesundheitsamt / Versorgungsinstitution"
           />
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Step_2;
+export default Step_2

@@ -96,6 +96,13 @@ export default function HorizontalLinearStepper() {
   const [availability, setAvailability] = useState('')
   const [operationPlace, setOperationPlace] = useState({})
 
+  //Institution data
+  const [institutionName, setInstitutionName] = useState('')
+  const [institutionLocation, setInstitutionLocation] = useState('')
+  const [institutionEmail, setInstitutionEmail] = useState('')
+  const [institutionMobile, setInstitutionMobile] = useState('')
+  const [institutionKind, setInstitutionKind] = useState('hospital')
+
   const isStepSkipped = step => {
     return skipped.has(step)
   }
@@ -155,26 +162,56 @@ export default function HorizontalLinearStepper() {
                   Reset
                 </Button>
               </div>
-            ) : (<div className={classes.instructions}>{
-              role === 'helper' ? (
-                <CurrentStep {...{ activeStep, 
-                  role, setRole,
-                  firstname, setFirstname, 
-                  lastname, setLastname,
-                  mobileNumber, setMobileNumber,
-                  email, setEmail,
-                  pwd, setPwd,
-                  prefLocation, setPrefLocation,
-                  startDate, setStartDate,
-                  compensation, setCompensation,
-                  availability, setAvailability
-                  }
-                }/>
-              ) : (
-                <InstitutionSignup {...{ activeStep, role, setRole}}/>
-              )
-            }</div>)}
-            </div>
+            ) : (
+              <div className={classes.instructions}>
+                {role === 'helper' ? (
+                  <CurrentStep
+                    {...{
+                      activeStep,
+                      role,
+                      setRole,
+                      firstname,
+                      setFirstname,
+                      lastname,
+                      setLastname,
+                      mobileNumber,
+                      setMobileNumber,
+                      email,
+                      setEmail,
+                      pwd,
+                      setPwd,
+                      prefLocation,
+                      setPrefLocation,
+                      startDate,
+                      setStartDate,
+                      compensation,
+                      setCompensation,
+                      availability,
+                      setAvailability
+                    }}
+                  />
+                ) : (
+                  <InstitutionSignup
+                    {...{
+                      activeStep,
+                      role,
+                      setRole,
+                      institutionName,
+                      setInstitutionName,
+                      institutionLocation,
+                      setInstitutionLocation,
+                      institutionEmail,
+                      setInstitutionEmail,
+                      institutionMobile,
+                      setInstitutionMobile,
+                      institutionKind,
+                      setInstitutionKind
+                    }}
+                  />
+                )}
+              </div>
+            )}
+          </div>
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>

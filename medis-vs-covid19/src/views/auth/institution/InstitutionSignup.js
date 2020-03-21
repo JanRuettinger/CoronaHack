@@ -18,11 +18,13 @@ const useStyles = makeStyles(theme => ({
   },
   fieldHalfWidth: {
     padding: '5px',
-    width: 'calc(50% - 10px)'
+    width: 'calc(50% - 10px)',
+    marginBottom: '10px'
   },
   fieldFullWidth: {
     padding: '5px',
-    width: 'calc(100% - 20px)'
+    width: 'calc(100% - 20px)',
+    marginBottom: '10px'
   },
   checkboxContainer: {
     display: 'flex',
@@ -46,23 +48,39 @@ const useStyles = makeStyles(theme => ({
 const InstitutionSignup = props => {
   const classes = useStyles()
 
-  // const {setPrefLocation, setStartDate, setAvailability, setCompensation} = props;
+  const {
+    activeStep,
+    role,
+    setRole,
+    institutionName,
+    setInstitutionName,
+    institutionLocation,
+    setInstitutionLocation,
+    institutionEmail,
+    setInstitutionEmail,
+    institutionMobile,
+    setInstitutionMobile,institutionKind, setInstitutionKind
+  } = props
 
-  // const changeLocation = event => {
-  //   setPrefLocation(event.target.value)
-  // }
+  const changeInstitiutionName = event => {
+    setInstitutionName(event.target.value)
+  }
 
-  // const changeStartDate = event => {
-  //   setStartDate(event.target.value)
-  // }
+  const changeInstitiutionLocation = event => {
+    setInstitutionLocation(event.target.value)
+  }
 
-  // const changeAvailability = event => {
-  //   setAvailability(event.target.value)
-  // }
+  const changeInstitutionEmail = event => {
+    setInstitutionEmail(event.target.value)
+  }
 
-  // const changeCompensation = event => {
-  //   setCompensation(event.target.value)
-  // }
+  const changeInstitiutionMobile = event => {
+    setInstitutionMobile(event.target.value)
+  }
+
+  const handleChangeRadio = event => {
+    setInstitutionKind(event.target.value)
+  };
 
   return (
     <div>
@@ -72,14 +90,14 @@ const InstitutionSignup = props => {
           label="Name der Institution"
           variant="outlined"
           className={classes.fieldFullWidth}
-          // onChange={changeLocation}
+          onChange={changeInstitiutionName}
         />
         <TextField
           id="location"
           label="Ort"
           variant="outlined"
           className={classes.fieldHalfWidth}
-          // onChange={changeStartDate}
+          onChange={changeInstitiutionLocation}
         />
         <div>
           <TextField
@@ -87,13 +105,14 @@ const InstitutionSignup = props => {
             label="Email"
             variant="outlined"
             className={classes.fieldHalfWidth}
-            // onChange={changeAvailability}
-          />
+            onChange={changeInstitutionEmail}
+            />
           <TextField
             id="mobile"
             label="Mobil"
             variant="outlined"
             className={classes.fieldHalfWidth}
+            onChange={changeInstitiutionMobile}
           />
         </div>
       </section>
@@ -103,8 +122,8 @@ const InstitutionSignup = props => {
           className={classes.radioGroup}
           aria-label="institution"
           name="institution"
-          value={'hospital'}
-          // onChange={handleChangeRadio}
+          value={institutionKind}
+          onChange={handleChangeRadio}
         >
           <div className={classes.radioContainer}>
             <FormControlLabel
