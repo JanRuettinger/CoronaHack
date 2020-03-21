@@ -13,11 +13,14 @@ import {
   Divider
 } from '@material-ui/core';
 
+import { createStudentDocument, createInstitutionDocument } from '../../utilities';
+import { auth } from '../../firebase';
 import Step0 from './student/Step0'
 import Step1 from './student/Step1'
 import Step2 from './student/Step2'
 import Step3 from './student/Step3'
 import { flexibleCompare } from '@fullcalendar/core';
+import { isJSDocAugmentsTag } from 'typescript';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -94,6 +97,37 @@ export default function HorizontalLinearStepper() {
     setActiveStep(0);
   };
 
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const { email, password, displayName } = this.state;
+    // var email = "example@gmail.com"
+    // var password = "noidea"
+    // var displayName = "MyExample"
+    if(true){ // TODO: change to state - e.g isStudent
+      try {
+        const { student } = await auth.createUserWithEmailAndPassword(
+          email,
+          password,
+        );
+        createStudentDocument(student, { displayName });
+      } catch (error) {
+        alert(error);
+      }
+    }
+    else {
+      try {
+        const { institution } = await auth.createUserWithEmailAndPassword(
+          email,
+          password,
+        );
+        createInstitutionDocument(institution, { displayName });
+      } catch (error) {
+        alert(error);
+      }
+    }
+    
+  };
+
   return (
     <div className={classes.root}>
       <Card className={classes.card}>
@@ -126,8 +160,8 @@ export default function HorizontalLinearStepper() {
                 <Typography className={classes.instructions}>
                   All steps completed - you&apos;re finished
                 </Typography>
-                <Button onClick={handleReset} className={classes.button}>
-                  Reset
+                <Button onClick={handleSubmit} className={classes.button}>
+                  Submit
                 </Button>
               </div>
             ) : (
