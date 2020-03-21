@@ -13,31 +13,52 @@ import {
   Divider
 } from '@material-ui/core';
 
+import Step0 from './student/Step0'
+import Step1 from './student/Step1'
+import Step2 from './student/Step2'
+import Step3 from './student/Step3'
+import { flexibleCompare } from '@fullcalendar/core';
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
   button: {
+    width: 100,
     marginRight: theme.spacing(1),
   },
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  footerButton: {
+    marginLeft: 'auto',
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  card: {
+    position: 'absolute',
+    width: 1000,
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)'
+  },
 }));
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Rolle', 'Persönliche Information', 'Über deinen Einsatz', 'Deine Qualifikation'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return 'Select campaign settings...';
+      return <Step0/>;
     case 1:
-      return 'What is an ad group anyways?';
+      return <Step1/>;
     case 2:
-      return 'This is the bit I really care about!';
+      return <Step2/>;
+    case 3:
+      return <Step3/>;
     default:
       return 'Unknown step';
   }
@@ -48,10 +69,6 @@ export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
-
-  const isStepOptional = step => {
-    return step === 1;
-  };
 
   const isStepSkipped = step => {
     return skipped.has(step);
@@ -72,48 +89,36 @@ export default function HorizontalLinearStepper() {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-    setSkipped(prevSkipped => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
   const handleReset = () => {
     setActiveStep(0);
   };
 
   return (
     <div className={classes.root}>
-      <Card>
+      <Card className={classes.card}>
         <CardHeader title="Anmeldeformular" />
         <Divider />
         <CardContent>
-          <Stepper activeStep={activeStep}>
-            {steps.map((label, index) => {
-              const stepProps = {};
-              const labelProps = {};
-              if (isStepOptional(index)) {
-                labelProps.optional = <Typography variant="caption">Optional</Typography>;
-              }
-              if (isStepSkipped(index)) {
-                stepProps.completed = false;
-              }
-              return (
-                <Step key={label} {...stepProps}>
-                  <StepLabel {...labelProps}>{label}</StepLabel>
-                </Step>
-              );
-            })}
-          </Stepper>
+          <div>
+            {activeStep === 0 ? (
+              <div/>
+            ) : (
+              <Stepper activeStep={activeStep}>
+                {steps.map((label, index) => {
+                  const stepProps = {};
+                  const labelProps = {};
+                  if (isStepSkipped(index)) {
+                    stepProps.completed = false;
+                  }
+                  return (
+                    <Step key={label} {...stepProps}>
+                      <StepLabel {...labelProps}>{label}</StepLabel>
+                    </Step>
+                  );
+                })}
+              </Stepper>
+            )}
+          </div>
           <div>
             {activeStep === steps.length ? (
               <div>
@@ -127,50 +132,32 @@ export default function HorizontalLinearStepper() {
             ) : (
               <div>
                 <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                <div>
-                  <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                    Back
-                  </Button>
-                  {isStepOptional(activeStep) && (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleSkip}
-                      className={classes.button}
-                    >
-                      Skip
-                    </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
-                </div>
               </div>
             )}
           </div>
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
-          <div>
-            {activeStep === 0 ? (
-              <div/>
-            ) : (
-              <Button>
-                Zurück
-              </Button>
-            )}
+          <div className={classes.footerButton}>
+            <div className={classes.button}>
+              {activeStep === 0 ? (
+                <div/>
+              ) : (
+                <Button disabled={activeStep === 0} onClick={handleBack}>
+                  Zurück
+                </Button>
+              )
+              }
+            </div>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={handleNext}
+              className={classes.button}
+            >
+              Weiter
+            </Button>
           </div>
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            Weiter
-          </Button>
         </CardActions>
       </Card>
     </div>
