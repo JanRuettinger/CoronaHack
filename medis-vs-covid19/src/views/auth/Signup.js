@@ -17,6 +17,9 @@ import Step0 from './student/Step0'
 import Step1 from './student/Step1'
 import Step2 from './student/Step2'
 import Step3 from './student/Step3'
+
+import InstitutionSignup from './institution/InstitutionSignup'
+
 import { flexibleCompare } from '@fullcalendar/core'
 
 const useStyles = makeStyles(theme => ({
@@ -151,12 +154,26 @@ export default function HorizontalLinearStepper() {
                   Reset
                 </Button>
               </div>
-            ) : (
-              <div className={classes.instructions}>
-                <CurrentStep {...{ activeStep, role, setRole }} />
-              </div>
-            )}
-          </div>
+            ) : (<div className={classes.instructions}>{
+              role === 'helper' ? (
+                <CurrentStep {...{ activeStep, 
+                  role, setRole,
+                  firstname, setFirstname, 
+                  lastname, setLastname,
+                  mobileNumber, setMobileNumber,
+                  email, setEmail,
+                  pwd, setPwd,
+                  prefLocation, setPrefLocation,
+                  startEarliestFrom, setStartEarliestFrom,
+                  compensation, setCompensation,
+                  timeBudget, setTimeBudget
+                  }
+                }/>
+              ) : (
+                <InstitutionSignup {...{ activeStep, role, setRole}}/>
+              )
+            }</div>)}
+            </div>
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
