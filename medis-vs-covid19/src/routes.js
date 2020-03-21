@@ -21,29 +21,9 @@ export default [
     component: AuthLayout,
     routes: [
       {
-        path: '/auth/login',
+        path: '/auth/signup',
         exact: true,
-        component: lazy(() => import('src/views/auth/login/login'))
-      },
-      {
-        path: '/auth/signup/1',
-        exact: true,
-        component: lazy(() => import('src/views/auth/signup/step_1'))
-      },
-      {
-        path: '/auth/signup/2',
-        exact: true,
-        component: lazy(() => import('src/views/auth/signup/step_2'))
-      },
-      {
-        path: '/auth/signup/3',
-        exact: true,
-        component: lazy(() => import('src/views/auth/signup/step_3'))
-      },
-      {
-        path: '/auth/signup/4',
-        exact: true,
-        component: lazy(() => import('src/views/auth/signup/step_4'))
+        component: lazy(() => import('src/views/auth/signup'))
       },
       {
         component: () => <Redirect to="/errors/error-404" />
