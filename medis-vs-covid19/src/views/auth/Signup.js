@@ -94,6 +94,7 @@ export default function HorizontalLinearStepper() {
   const [startDate, setStartDate] = useState('')
   const [compensation, setCompensation] = useState('')
   const [availability, setAvailability] = useState('')
+  const [operationPlace, setOperationPlace] = useState({})
 
   const isStepSkipped = step => {
     return skipped.has(step)
