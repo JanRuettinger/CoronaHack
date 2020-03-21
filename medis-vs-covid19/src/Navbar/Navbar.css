@@ -1,0 +1,92 @@
+.Navbar-container {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    z-index: 100;
+}
+
+.Navbar-logo {
+    margin-left: 50px;
+}
+
+.Navbar-logo h1{
+    color: white;
+    text-decoration: none;
+}
+
+.Navbar-logo:hover {
+    cursor: pointer;
+    color: grey;
+}
+
+.Navbarlogo-text:hover {
+    color: grey;
+}
+
+.Navbar-items li:hover {
+    color: grey;
+    cursor: pointer;
+}
+
+.Navbar-search {
+    margin-left: 5px;
+    border: none;
+    font-size: 25px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.Navbar-search:focus {
+    border: 1px solid black;
+}
+
+.Navbar-items {
+    list-style: none;
+    display: flex;
+    margin-right: 100px;
+}
+
+.Navbar-items li {
+    margin-left: 100px;
+}
+
+.Navbar-items li:hover {
+    transform: scale(1.1);
+}
+
+.Navbar-drawer {
+    text-align: center;
+    width: 300px;
+}
+
+.Navbar-drawer img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    margin-top: px;
+}
+
+.Navbar-drawer button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    width: 100%;
+    border: none;
+}
+
+.Navbar-drawer button:hover{
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.Navbar-drawer-close{
+    
+    width: 25px !important;
+    float: left;
+}
