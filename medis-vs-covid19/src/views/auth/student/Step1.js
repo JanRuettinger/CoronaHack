@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, TextField, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -14,6 +14,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Step_1 = props => {
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  const [email, setEmail] = useState('')
+  const [pwd, setPwd] = useState('')
   const classes = useStyles();
 
   const changeFirstname = event => {

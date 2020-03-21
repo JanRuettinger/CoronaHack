@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Typography, TextField, Divider, Select
 } from '@material-ui/core';
@@ -10,6 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
+import InputLabel from '@material-ui/core/InputLabel';
 
 import {professions, progressOptions} from './config'
 
@@ -34,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Step_3 = (props) => {
+  const [profession, setProfession] = useState('')
+  const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
   const classes = useStyles();
 
   const [state, setState] = React.useState({

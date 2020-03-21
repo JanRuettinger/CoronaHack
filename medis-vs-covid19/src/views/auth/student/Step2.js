@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import {
   Typography,
   TextField,
@@ -26,6 +26,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Step_2 = props => {
+  const [prefLocation, setPrefLocation] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [compensation, setCompensation] = useState('')
+  const [availability, setAvailability] = useState('')
+  const [operationPlace, setOperationPlace] = useState({}) // "Bevorzugte Einsatzstellen"
   const classes = useStyles();
 
   const changeLocation = event => {
