@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import ProjectCard from 'src/components/ProjectCard';
-import ReviewCard from 'src/views/Profile/Reviews/ReviewCard';
+import ReviewCard from 'src/views_old/Profile/Reviews/ReviewCard';
 import ListCard from './ListCard';
 import DismissCard from './DismissCard';
 

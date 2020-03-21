@@ -1,17 +1,20 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import {
   Container,
   Divider,
   Typography,
   Link,
+  Paper,
+  Card,
+  CardContent,
   colors
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Connections from 'src/views/Profile/Connections';
-import SimpleLists from './SimpleLists';
-import DenseLists from './DenseLists';
+import AboutAuthor from 'src/views_old/ProjectCreate/AboutAuthor';
+import RichEditor from 'src/components/RichEditor';
+import FilesDropzone from 'src/components/FilesDropzone';
+import SimpleForm from './SimpleForm';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,13 +33,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Lists() {
+function Forms() {
   const classes = useStyles();
 
   return (
     <Page
       className={classes.root}
-      title="Lists"
+      title="Forms"
     >
       <Container maxWidth="lg">
         <Typography variant="overline">Components</Typography>
@@ -44,7 +47,7 @@ function Lists() {
           gutterBottom
           variant="h3"
         >
-          Lists
+          Forms
         </Typography>
         <Divider className={classes.divider} />
         <div className={classes.section}>
@@ -52,44 +55,61 @@ function Lists() {
             gutterBottom
             variant="h4"
           >
-            Simple Lists
-          </Typography>
-          <SimpleLists />
-        </div>
-        <div className={classes.section}>
-          <Typography
-            gutterBottom
-            variant="h4"
-          >
-            Dense Lists
-          </Typography>
-          <DenseLists />
-        </div>
-        <div className={classes.section}>
-          <Typography
-            gutterBottom
-            variant="h4"
-          >
-            Example
+            Simple Form
           </Typography>
           <Typography
             gutterBottom
             variant="subtitle2"
           >
-            Here is a complex example used in
+            We used the default styiling as we think it fits our design aesthetic best. For more information on how to do that, visit
             {' '}
             <Link
-              component={RouterLink}
-              to="/profile/1/connections"
+              href="https://material-ui.com/"
+              target="_blank"
             >
-              Profile View
+              Material-UI
             </Link>
+            {' '}
+            documentation.
           </Typography>
-          <Connections />
+          <SimpleForm />
+        </div>
+        <div className={classes.section}>
+          <Typography
+            gutterBottom
+            variant="h4"
+          >
+            Radio Forms
+          </Typography>
+          <AboutAuthor />
+        </div>
+        <div className={classes.section}>
+          <Typography
+            gutterBottom
+            variant="h4"
+          >
+            WYSIWYG Editor
+          </Typography>
+          <Paper>
+            <RichEditor />
+          </Paper>
+        </div>
+        <div className={classes.section}>
+          <Typography
+            gutterBottom
+            variant="h4"
+          >
+            File Uploader
+          </Typography>
+          <Card>
+            <CardContent>
+              <FilesDropzone />
+            </CardContent>
+          </Card>
         </div>
       </Container>
     </Page>
   );
 }
 
-export default Lists;
+export default Forms;
