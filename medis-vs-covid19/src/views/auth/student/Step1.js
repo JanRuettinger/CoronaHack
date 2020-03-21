@@ -16,6 +16,8 @@ const useStyles = makeStyles(theme => ({
 const Step_1 = props => {
   const classes = useStyles();
 
+  const {setFirstname, setLastname, setMobileNumber, setEmail, setPwd} = props;
+
   const changeFirstname = event => {
     setFirstname(event.target.value)
   };

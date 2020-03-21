@@ -28,6 +28,8 @@ const useStyles = makeStyles(theme => ({
 const Step_2 = props => {
   const classes = useStyles();
 
+  const {setPrefLocation, setStartDate, setAvailability, setCompensation} = props;
+
   const changeLocation = event => {
     setPrefLocation(event.target.value)
   }
@@ -68,7 +70,7 @@ const Step_2 = props => {
           label="Zeitliche Verfügbarkeit"
           variant="outlined"
           className={classes.field}
-          onChange={changeAvialability}
+          onChange={changeAvailability}
         />
         <div>
           <TextField
