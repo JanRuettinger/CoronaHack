@@ -5,7 +5,6 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-<<<<<<< HEAD
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
@@ -15,8 +14,6 @@ import {
   CardActions,
   Divider
 } from '@material-ui/core';
-=======
->>>>>>> 0338338cf36b259337b61683be9d167013670ce5
 
 const useStyles = makeStyles(theme => ({
   root: {
