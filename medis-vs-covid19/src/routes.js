@@ -13,6 +13,11 @@ import PresentationView from './views_old/Presentation';
 
 export default [
   {
+    path: '/',
+    exact: true,
+    component: () => <Redirect to="/" />
+  },
+  {
     path: '/auth',
     component: AuthLayout,
     routes: [
@@ -29,6 +34,11 @@ export default [
   {
     path: '/settings',
     component: Profile,
+    routes: []
+  },
+  {
+    path: '/dashboard',
+    component: DashboardLayout,
     routes: []
   },
   {
@@ -54,5 +64,5 @@ export default [
         component: () => <Redirect to="/errors/error-404" />
       }
     ]
-  },
+  }
 ];

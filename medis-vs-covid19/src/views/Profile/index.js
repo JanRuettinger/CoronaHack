@@ -14,6 +14,7 @@ import Page from 'src/components/Page';
 import Account from './Account';
 import Deployment from './Deployment';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {},
   container: {
@@ -27,26 +28,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Profile({ match, history }) {
+function Profile() {
   const classes = useStyles();
-  const { id, tab: currentTab } = match.params;
+
+  const [value, setValue] = React.useState(0);
+
   const tabs = [
-    { value: 'account', label: 'Account' },
-    { value: 'deployment', label: 'Einsatz' },
-    { value: 'qualification', label: 'Qualifikation' },
+    { value: 0, label: 'Account' },  
+    { value: 1, label: 'Einsatz' },  
+    { value: 2, label: 'Qualifikation' }, 
   ];
 
-  const handleTabsChange = (event, value) => {
-    history.push(value);
+  const handleTabsChange = (event, newValue) => {
+    setValue(newValue);
   };
-
-  if (!currentTab) {
-    return <Redirect to={`/profile/${id}/account`} />;
-  }
-
-  if (!tabs.find((tab) => tab.value === currentTab)) {
-    return <Redirect to="/errors/error-404" />;
-  }
 
   return (
     <Page
@@ -65,7 +60,7 @@ function Profile({ match, history }) {
         <Tabs
           onChange={handleTabsChange}
           scrollButtons="auto"
-          value={currentTab}
+          value={value}
           variant="scrollable"
         >
           {tabs.map((tab) => (
@@ -78,17 +73,12 @@ function Profile({ match, history }) {
         </Tabs>
         <Divider className={classes.divider} />
         <div className={classes.content}>
-          {currentTab === 'account' && <Account />}
-          {currentTab === 'deployment' && <Deployment />}
+          {value === 0 && <Account />}
+          {value === 1 && <Deployment />}
         </div>
       </Container>
     </Page>
   );
 }
-
-Profile.propTypes = {
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
-};
 
 export default Profile;
