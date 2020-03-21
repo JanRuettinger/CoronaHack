@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import HomeIcon from '@material-ui/icons/Home';
+import Radio from '@material-ui/core/Radio';
 import {
   Card
 } from '@material-ui/core';
@@ -29,10 +31,12 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 10,
   },
   icon: {
-    marginLeft: 'auto',
-    marginTop: 'auto',
     width: 40,
     height: 40,
+  },
+  iconDiv: {
+    position: 'relative',
+    verticalAlign: 'middle',
   },
   selectionMain: {
 
@@ -41,6 +45,11 @@ const useStyles = makeStyles(theme => ({
 
 const Step_0 = props => {
   const classes = useStyles();
+  const [selectedValue, setSelectedValue] = React.useState('a');
+
+  const handleChange = event => {
+    setSelectedValue(event.target.value);
+  };
 
   return(
     <div className={classes.mainCard}>
@@ -49,6 +58,15 @@ const Step_0 = props => {
       </Typography>
       <Card className={classes.selectionCard}>
         <div className={classes.cardColumns}>
+          <div>
+            <Radio
+              checked={selectedValue === 'a'}
+              onChange={handleChange}
+              value="a"
+              name="radio-button-demo"
+              inputProps={{ 'aria-label': 'A' }}
+            />
+          </div>
           <div>
             <Typography className={classes.selectionHeader}>
               Medizinstudierender
@@ -63,12 +81,28 @@ const Step_0 = props => {
         </div>
       </Card>
       <Card className={classes.selectionCard}>
-        <Typography className={classes.selectionHeader}>
-          Einrichtung
-        </Typography>
-        <Typography className={classes.selectionMain}>
-          Ich habe Bedarf an Unterstützung durch Medizinstudierenden
-        </Typography>
+        <div className={classes.cardColumns}>
+          <div>
+            <Radio
+              checked={selectedValue === 'b'}
+              onChange={handleChange}
+              value="b"
+              name="radio-button-demo"
+              inputProps={{ 'aria-label': 'B' }}
+            />
+          </div>
+          <div>
+            <Typography className={classes.selectionHeader}>
+              Einrichtung
+            </Typography>
+            <Typography className={classes.selectionMain}>
+              Ich habe Bedarf an Unterstützung durch Medizinstudierenden
+            </Typography>
+            </div>
+          <div className={classes.iconDiv}>
+            <HomeIcon className={classes.icon} />
+          </div>
+        </div>
       </Card>
     </div>
   )
