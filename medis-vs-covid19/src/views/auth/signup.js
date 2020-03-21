@@ -94,7 +94,7 @@ export default function HorizontalLinearStepper() {
   return (
     <div className={classes.root}>
       <Card>
-        <CardHeader title="Simple Modal" />
+        <CardHeader title="Anmeldeformular" />
         <Divider />
         <CardContent>
           <Stepper activeStep={activeStep}>
@@ -156,14 +156,20 @@ export default function HorizontalLinearStepper() {
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
-          <Button>
-            Dismiss
-          </Button>
+          <div>
+            {activeStep === 0 ? (
+              <div/>
+            ) : (
+              <Button>
+                Zurück
+              </Button>
+            )}
+          </div>
           <Button
             color="primary"
             variant="contained"
           >
-            Confirm
+            Weiter
           </Button>
         </CardActions>
       </Card>
