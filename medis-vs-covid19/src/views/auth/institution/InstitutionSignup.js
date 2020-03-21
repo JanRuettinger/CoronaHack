@@ -83,8 +83,11 @@ const InstitutionSignup = props => {
   };
 
   return (
-    <div>
-      <section className={classes.section}>
+    <>
+      <div className={classes.container}>
+        <div className={classes.content}>
+    {/* <div> */}
+      {/* <section className={classes.section}> */}
         <TextField
           id="institution-name"
           label="Name der Institution"
@@ -115,7 +118,7 @@ const InstitutionSignup = props => {
             onChange={changeInstitiutionMobile}
           />
         </div>
-      </section>
+      {/* </section> */}
       <section>
         <Typography className={classes.heading}>Art der Institution</Typography>
         <RadioGroup
@@ -189,7 +192,10 @@ const InstitutionSignup = props => {
           />
         </div>
       </section>
-    </div>
+    {/* </div> */}
+      </div>
+      </div>
+    </>
   )
 }
 
