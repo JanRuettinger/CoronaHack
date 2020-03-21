@@ -14,7 +14,7 @@ export default [
   {
     path: '/',
     exact: true,
-    component: () => <Redirect to="/presentation" />
+    component: lazy(() => import('src/views/LP/LP'))
   },
   {
     path: '/auth',
