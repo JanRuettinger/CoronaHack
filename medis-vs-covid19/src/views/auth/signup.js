@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
   },
   instructions: {
+    position: 'relative',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
@@ -130,8 +131,8 @@ export default function HorizontalLinearStepper() {
                 </Button>
               </div>
             ) : (
-              <div>
-                <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+              <div className={classes.instructions}>
+                {getStepContent(activeStep)}
               </div>
             )}
           </div>
