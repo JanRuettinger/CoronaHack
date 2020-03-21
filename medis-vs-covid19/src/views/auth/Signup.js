@@ -91,9 +91,9 @@ export default function HorizontalLinearStepper() {
   const [email, setEmail] = useState('')
   const [pwd, setPwd] = useState('')
   const [prefLocation, setPrefLocation] = useState('')
-  const [startEarliestFrom, setStartEarliestFrom] = useState('')
+  const [startDate, setStartDate] = useState('')
   const [compensation, setCompensation] = useState('')
-  const [timeBudget, setTimeBudget] = useState('')
+  const [availability, setAvailability] = useState('')
 
   const isStepSkipped = step => {
     return skipped.has(step)
@@ -164,9 +164,9 @@ export default function HorizontalLinearStepper() {
                   email, setEmail,
                   pwd, setPwd,
                   prefLocation, setPrefLocation,
-                  startEarliestFrom, setStartEarliestFrom,
+                  startDate, setStartDate,
                   compensation, setCompensation,
-                  timeBudget, setTimeBudget
+                  availability, setAvailability
                   }
                 }/>
               ) : (

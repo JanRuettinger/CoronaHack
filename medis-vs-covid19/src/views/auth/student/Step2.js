@@ -28,6 +28,22 @@ const useStyles = makeStyles(theme => ({
 const Step_2 = props => {
   const classes = useStyles();
 
+  const changeLocation = event => {
+    setPrefLocation(event.target.value)
+  }
+
+  const changeStartDate = event => {
+    setStartDate(event.target.value)
+  }
+
+  const changeAvailability = event => {
+    setAvailability(event.target.value)
+  }
+
+  const changeCompensation = event => {
+    setCompensation(event.target.value)
+  }
+
   return (
     <div>
       <section className={classes.section}>
@@ -37,6 +53,7 @@ const Step_2 = props => {
             label="Bevorzugter Einsatzort"
             variant="outlined"
             className={classes.field}
+            onChange={changeLocation}
           />
         </div>
         <TextField
@@ -44,12 +61,14 @@ const Step_2 = props => {
           label="Zeitpunkt"
           variant="outlined"
           className={classes.field}
+          onChange={changeStartDate}
         />
         <TextField
           id="availability"
           label="Zeitliche Verfügbarkeit"
           variant="outlined"
           className={classes.field}
+          onChange={changeAvialability}
         />
         <div>
           <TextField
