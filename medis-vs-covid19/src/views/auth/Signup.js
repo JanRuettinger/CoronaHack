@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Stepper from '@material-ui/core/Stepper'
+import Step from '@material-ui/core/Step'
+import StepLabel from '@material-ui/core/StepLabel'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import {
   Card,
   CardHeader,
   CardContent,
   CardActions,
   Divider
-} from '@material-ui/core';
+} from '@material-ui/core'
 
-import Step0 from './student/Step0';
-import Step1 from './student/Step1';
-import Step2 from './student/Step2';
-import Step3 from './student/Step3';
-import { flexibleCompare } from '@fullcalendar/core';
+import Step0 from './student/Step0'
+import Step1 from './student/Step1'
+import Step2 from './student/Step2'
+import Step3 from './student/Step3'
+import { flexibleCompare } from '@fullcalendar/core'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     top: '50%',
     transform: 'translate(-50%, -50%)'
   }
-}));
+}))
 
 function getSteps() {
   return [
@@ -52,56 +52,56 @@ function getSteps() {
     'Persönliche Information',
     'Über deinen Einsatz',
     'Deine Qualifikation'
-  ];
+  ]
 }
 
 const CurrentStep = props => {
-  const { activeStep } = props;
+  const { activeStep } = props
 
   switch (activeStep) {
     case 0:
-      return <Step0 {...props} />;
+      return <Step0 {...props} />
     case 1:
-      return <Step1 {...props} />;
+      return <Step1 {...props} />
     case 2:
-      return <Step2 {...props} />;
+      return <Step2 {...props} />
     case 3:
-      return <Step3 {...props} />;
+      return <Step3 {...props} />
     default:
-      return 'Unknown step';
+      return 'Unknown step'
   }
-};
+}
 
 export default function HorizontalLinearStepper() {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
-  const steps = getSteps();
+  const classes = useStyles()
+  const [activeStep, setActiveStep] = React.useState(0)
+  const [skipped, setSkipped] = React.useState(new Set())
+  const steps = getSteps()
 
-  const [role, setRole] = useState('helper');
+  const [role, setRole] = useState('helper')
 
   const isStepSkipped = step => {
-    return skipped.has(step);
-  };
+    return skipped.has(step)
+  }
 
   const handleNext = () => {
-    let newSkipped = skipped;
+    let newSkipped = skipped
     if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
+      newSkipped = new Set(newSkipped.values())
+      newSkipped.delete(activeStep)
     }
 
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-    setSkipped(newSkipped);
-  };
+    setActiveStep(prevActiveStep => prevActiveStep + 1)
+    setSkipped(newSkipped)
+  }
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-  };
+    setActiveStep(prevActiveStep => prevActiveStep - 1)
+  }
 
   const handleReset = () => {
-    setActiveStep(0);
-  };
+    setActiveStep(0)
+  }
 
   return (
     <div className={classes.root}>
@@ -115,16 +115,16 @@ export default function HorizontalLinearStepper() {
             ) : (
               <Stepper activeStep={activeStep}>
                 {steps.map((label, index) => {
-                  const stepProps = {};
-                  const labelProps = {};
+                  const stepProps = {}
+                  const labelProps = {}
                   if (isStepSkipped(index)) {
-                    stepProps.completed = false;
+                    stepProps.completed = false
                   }
                   return (
                     <Step key={label} {...stepProps}>
                       <StepLabel {...labelProps}>{label}</StepLabel>
                     </Step>
-                  );
+                  )
                 })}
               </Stepper>
             )}
@@ -170,5 +170,5 @@ export default function HorizontalLinearStepper() {
         </CardActions>
       </Card>
     </div>
-  );
+  )
 }
