@@ -98,15 +98,21 @@ const CurrentStepFacility = props => {
   }
 }
 
-function getText(activeStep) {
-  const nextLabels = [
+function getText(activeStep, role) {
+  const nextHelperLabels = [
     'Weiter',
     'Weiter',
     'Weiter',
     'Anmelden',
     'Weiter zur Plattform'
   ];
-  return nextLabels[activeStep]
+  const nextFacilityLabels = [
+    'Weiter',
+    'Weiter',
+    'Anmelden',
+    'Weiter zur Plattform'
+  ];
+  return role === 'helper' ? nextHelperLabels[activeStep] : nextFacilityLabels[activeStep] 
 }
 
 
