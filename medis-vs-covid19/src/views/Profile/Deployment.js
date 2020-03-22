@@ -58,16 +58,16 @@ function Deployment({ className, ...rest }) {
 
   // useEffect(() => {
 
-    // let mounted = true;
-    // const fetchPosts = () => {
-    //   axios.get('/api/users/1/posts').then((response) => {
-    //     if (mounted) {
-    //       setPosts(response.data.posts);
-    //     }
-    //   });
-    // };
+  // let mounted = true;
+  // const fetchPosts = () => {
+  //   axios.get('/api/users/1/posts').then((response) => {
+  //     if (mounted) {
+  //       setPosts(response.data.posts);
+  //     }
+  //   });
+  // };
 
-    // fetchPosts();
+  // fetchPosts();
 
   //   return () => {
   //     mounted = false;
@@ -78,7 +78,7 @@ function Deployment({ className, ...rest }) {
     setCalendarTrigger(trigger);
   };
 
-  const handleCalendarChange = () => {};
+  const handleCalendarChange = () => { };
 
   const handleCalendarAccept = (date) => {
     setValues((prevValues) => ({
@@ -101,7 +101,7 @@ function Deployment({ className, ...rest }) {
       jobHospital: !previous,
       jobNursingService: !previous,
       jobRescueService: !previous,
-      jobHealthDepartment: !previous, 
+      jobHealthDepartment: !previous,
     }));
   };
 
@@ -120,17 +120,17 @@ function Deployment({ className, ...rest }) {
 
       {/* basic info */}
 
-          <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        title="Deine Einsatzpräferenzen"
-      />
-      <CardContent className={classes.content}>
-        <form>
-          <div className={classes.form}>
-            <div className={classes.formGroup}>
+      <Card
+        {...rest}
+        className={clsx(classes.root, className)}
+      >
+        <CardHeader
+          title="Deine Einsatzpräferenzen"
+        />
+        <CardContent className={classes.content}>
+          <form>
+            <div className={classes.form}>
+              <div className={classes.formGroup}>
                 <TextField
                   fullWidth
                   label="Bevorzugter Einsatzort"
@@ -139,9 +139,9 @@ function Deployment({ className, ...rest }) {
                   value={values.deploymentLocation}
                   variant="outlined"
                 />
-            </div>
-            <div></div>
-            <div className={classes.formGroup}>
+              </div>
+              <div></div>
+              <div className={classes.formGroup}>
                 <TextField
                   fullWidth
                   label="Umkreis (in km)"
@@ -150,8 +150,8 @@ function Deployment({ className, ...rest }) {
                   value={values.perimeter}
                   variant="outlined"
                 />
-            </div>
-            <div className={classes.formGroup}>
+              </div>
+              <div className={classes.formGroup}>
                 <TextField
                   fullWidth
                   label="Zeitpunkt"
@@ -161,8 +161,8 @@ function Deployment({ className, ...rest }) {
                   value={moment(values.deploymentStart).format('DD.MM.YYYY')}
                   variant="outlined"
                 />
-            </div>
-            <div className={classes.formGroup}>
+              </div>
+              <div className={classes.formGroup}>
                 <TextField
                   fullWidth
                   label="Mobil"
@@ -171,8 +171,8 @@ function Deployment({ className, ...rest }) {
                   value={values.deploymentAvailableTime}
                   variant="outlined"
                 />
-            </div>
-            <div className={classes.formGroup}>
+              </div>
+              <div className={classes.formGroup}>
                 <TextField
                   fullWidth
                   label="Wohnort"
@@ -181,45 +181,45 @@ function Deployment({ className, ...rest }) {
                   value={values.payment}
                   variant="outlined"
                 />
-          </div>
-          </div>
-        </form>
+              </div>
+            </div>
+          </form>
 
-        <Typography variant="h5">
-          Bevorzugte Einsatzstellen (Mehrfachauswahl)
-        </Typography> 
+          <Typography variant="h5">
+            Bevorzugte Einsatzstellen (Mehrfachauswahl)
+        </Typography>
 
-        <div className={classes.checkBoxes}>
-          {[{ name: "jobPharmacy", german:"Apotheke"},
-            { name: "jobDoctorOffice", german:"Pflegedienst / Pflegeheim"},
-            { name: "jobHospital", german:"Gesundheitsamt/ Versorgungsinstitution"},
-            { name: "jobNursingService", german:"Arztpraxis"},
-            { name: "jobRescueService", german:"Rettungsdienst"},
-            { name: "jobHealthDepartment", german:"Krankenhaus"}].map(obj => (
+          <div className={classes.checkBoxes}>
+            {[{ name: "jobPharmacy", german: "Apotheke" },
+            { name: "jobDoctorOffice", german: "Pflegedienst / Pflegeheim" },
+            { name: "jobHospital", german: "Gesundheitsamt/ Versorgungsinstitution" },
+            { name: "jobNursingService", german: "Arztpraxis" },
+            { name: "jobRescueService", german: "Rettungsdienst" },
+            { name: "jobHealthDepartment", german: "Krankenhaus" }].map(obj => (
+              <FormControlLabel
+                key={obj.name}
+                control={<Checkbox checked={values[obj.name]} onChange={(event) => handleFieldChange(event, obj.name, !values[obj.name])} name={obj.name} />}
+                label={obj.german}
+              />
+            ))}
             <FormControlLabel
-              key={obj.name}
-              control={<Checkbox checked={values[obj.name]} onChange={(event) => handleFieldChange(event, obj.name, !values[obj.name] )} name={ obj.name } />}
-              label={ obj.german }
+              control={<Checkbox checked={isCheckAll} onChange={(event) => checkAll()} name="all" />}
+              label="Ich helfe dort, wo ich gebraucht werde"
             />
-          ))}
-      <FormControlLabel
-        control={<Checkbox checked={isCheckAll} onChange={(event) => checkAll()} name="all" />}
-        label="Ich helfe dort, wo ich gebraucht werde"
-      /> 
-      </div>
+          </div>
 
-        <Button
+          <Button
             color="primary"
             variant="contained"
           >
             Speichern
           </Button>
 
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
 
-    
-    <DatePicker
+
+      <DatePicker
         onAccept={handleCalendarAccept}
         onChange={handleCalendarChange}
         onClose={handleCalendarClose}

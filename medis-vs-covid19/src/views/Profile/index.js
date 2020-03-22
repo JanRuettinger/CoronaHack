@@ -13,6 +13,7 @@ import {
 import Page from 'src/components/Page';
 import Account from './Account';
 import Deployment from './Deployment';
+import Qualifications from './Qualifications';
 import Topbar from '../../layouts/Auth/Topbar';
 
 
@@ -35,9 +36,9 @@ function Profile() {
   const [value, setValue] = React.useState(0);
 
   const tabs = [
-    { value: 0, label: 'Account' },  
-    { value: 1, label: 'Einsatz' },  
-    { value: 2, label: 'Qualifikation' }, 
+    { value: 0, label: 'Account' },
+    { value: 1, label: 'Einsatz' },
+    { value: 2, label: 'Qualifikation' },
   ];
 
   const handleTabsChange = (event, newValue) => {
@@ -60,7 +61,7 @@ function Profile() {
               </Typography>
               <Typography variant="body2">
                 Ändere deine Account Informationen
-              </Typography> 
+              </Typography>
 
               <Tabs
                 onChange={handleTabsChange}
@@ -80,6 +81,7 @@ function Profile() {
               <div className={classes.content}>
                 {value === 0 && <Account />}
                 {value === 1 && <Deployment />}
+                {value === 2 && <Qualifications />}
               </div>
             </Container>
           </Page>
