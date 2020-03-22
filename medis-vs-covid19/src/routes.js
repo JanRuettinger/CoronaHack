@@ -4,9 +4,10 @@ import React, { lazy } from 'react'
 import { Redirect } from 'react-router-dom'
 import AuthLayout from './layouts/Auth'
 import LandingPage from './views/LandingPage'
-import DashboardLayout from './layouts/Dashboard'
+import HelperDataBase from './views/HelperDataBase'
+import StudentLayout from './layouts/StudentDashboard'
+import InstitutionLayout from './layouts/InstitutionDashboard'
 import ErrorLayout from './layouts/Error'
-import Profile from './views/Profile'
 // import DashboardAnalyticsView from './views_old/DashboardAnalytics'
 // import DashboardDefaultView from './views_old/DashboardDefault'
 // import OverviewView from './views_old/Overview'
@@ -34,12 +35,31 @@ export default [
   },
   {
     path: '/',
-    component: DashboardLayout,
+    component: InstitutionLayout,
+    routes: [
+      {
+        path: '/dashboard',
+        exact: true,
+        component: lazy(() => import('src/views/InstitutionDashboard'))
+      },
+      {
+        path: '/helferdatenbank',
+        exact: true,
+        component: HelperDataBase
+      },
+      {
+        component: () => <Redirect to="/errors/error-404" />
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: StudentLayout,
     routes: [
       {
         path: '/settings',
         exact: true,
-        component: lazy(() => import('src/views/Profile'))
+        component: lazy(() => import('src/views/StudentSettings'))
       },
       {
         component: () => <Redirect to="/errors/error-404" />
@@ -52,11 +72,6 @@ export default [
   //   component: Profile,
   //   routes: []
   // },
-  {
-    path: '/dashboard',
-    component: DashboardLayout,
-    routes: []
-  },
   {
     path: '/errors',
     component: ErrorLayout,
