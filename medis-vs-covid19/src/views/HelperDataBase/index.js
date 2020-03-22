@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { LinearProgress } from '@material-ui/core';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import HomeIcon from '@material-ui/icons/Home';
-import { Select, MenuItem, TextField, Button, Card, Typography } from '@material-ui/core'
+import { Select, MenuItem, Checkbox, TextField, Button, Card, Typography } from '@material-ui/core'
 import { Link as RouterLink } from 'react-router-dom'
 import Results from './Results';
 import { Container } from '@material-ui/core';
@@ -52,6 +52,15 @@ const useStyles = makeStyles((theme) => ({
   select: {
     minWidth: 150,
     marginBottom: 30
+  },
+  inputGroup: {
+    display: 'flex'
+  },
+  inputTuple: {
+    marginLeft: 30
+  },
+  checkerRow: {
+    display: 'flex'
   }
 }));
 
@@ -59,16 +68,177 @@ function HelperDataBase({ route }) {
   const classes = useStyles();
 
   const [profession, setProfession] = React.useState('');
+  const [abschnitt, setAbschnitt] = React.useState('');
+  const [famulatur, setFamulatur] = React.useState('');
 
   // setProfession(professions[0]['fieldValue']);
+
+  // const [helpers, setHelpers] = useState([]);
+  const customers = [{
+    "id": 0,
+    "name": "Abbie Wilson",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Anästhesie",
+    "startzeit": "21.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "benötigt",
+    "email": "abbie@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "id": 1,
+    "name": "Greta Bistin",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Chirugie",
+    "startzeit": "21.04.2020",
+    "verfuegbarkeit": "20 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "greta@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "id": 2,
+    "name": "David Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Innere Medizin",
+    "startzeit": "24.03.2020",
+    "verfuegbarkeit": "30 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "david@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "id": 3,
+    "name": "David Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Innere Medizin",
+    "startzeit": "24.03.2020",
+    "verfuegbarkeit": "30 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "david@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "id": 4,
+    "name": "Abbie Wilson",
+    "ausbildungsstand": "Ärztin",
+    "ausbildungsdetails": "Innere Medizin",
+    "startzeit": "21.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "benötigt"
+  }
+  ];
+
+  const customersKlinisch = [{
+    "name": "Abbie Wilson",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Anästhesie",
+    "startzeit": "21.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "benötigt",
+    "email": "abbie@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "Greta Bistin",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Chirugie",
+    "startzeit": "21.04.2020",
+    "verfuegbarkeit": "20 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "greta@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "David Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Innere Medizin",
+    "startzeit": "24.03.2020",
+    "verfuegbarkeit": "30 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "david@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "Dorothe Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Innere Medizin",
+    "startzeit": "22.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "Dorothe@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "Gerd Müller",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Notaufnahme",
+    "startzeit": "22.03.2020",
+    "verfuegbarkeit": "20 h pro Woche",
+    "verguetung": "benötigt",
+    "email": "gerd@web.de",
+    "Telefonnummer":"+4917666612312"
+  }];
+
+  const customersKlinischFamu = [{
+    "name": "Greta Bistin",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Klinischer Abschnitt (5. - 10. Semester)",
+    "famulatur": "Notaufnahme",
+    "startzeit": "21.04.2020",
+    "verfuegbarkeit": "20 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "greta@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "David Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Klinischer Abschnitt (5. - 10. Semester)",
+    "famulatur": "Notaufnahme",
+    "startzeit": "24.03.2020",
+    "verfuegbarkeit": "30 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "david@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "Dorothe Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Klinischer Abschnitt (5. - 10. Semester)",
+    "famulatur": "Notaufnahme",
+    "startzeit": "22.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "Dorothe@web.de",
+    "Telefonnummer":"+4917666612312"
+  }];
+
+  const [activeCustomers, setActiveCustomers] = React.useState(customers);
 
   const changeProfession = (e) => {
     setProfession(e.target.value);
   };
- 
-  console.log(profession);
+  const changeAbschnitt = (e) => {
+    setActiveCustomers(customersKlinisch);
+    setAbschnitt(e.target.value);
+  };
+  const changeFamulatur = (e) => {
+    setActiveCustomers(customersKlinischFamu);
+    setFamulatur(e.target.value);
+  };
+  const changeProfCheck = (e) => {
 
-  const [helpers, setHelpers] = useState([]);
+  };
 
   return (
     <>
@@ -80,29 +250,93 @@ function HelperDataBase({ route }) {
           <Typography className={classes.header}>
             Verfügbare Helfer
           </Typography>
-
-          <Typography className={classes.bold}>
-            Gesuchte Kompetenz
-          </Typography>
-          <Select
-            labelId="profession"
-            id="profession"
-            value={profession}
-            onChange={changeProfession}
-            className={classes.select}
-          >
-            {
-              professions.map(({ text, fieldValue }, i) => {
-                return(
-                  <MenuItem value={fieldValue}>{text}</MenuItem>
+          <div className={classes.inputGroup}>
+            <div className={classes.inputTuple}>
+              <Typography className={classes.bold}>
+                Gesuchte Kompetenz *
+              </Typography>
+              <Select
+                labelId="profession"
+                id="profession"
+                value={profession}
+                onChange={changeProfession}
+                className={classes.select}
+              >
+                {
+                  professions.map(({ text, fieldValue }, i) => {
+                    return(
+                      <MenuItem value={fieldValue}>{text}</MenuItem>
+                    )
+                  })
+                }
+              </Select>
+            </div>
+            <div className={classes.inputTuple}>
+              { !(progressOptions.has(profession)) ? (
+                  <div/>
+                ) : (
+                  <div>
+                    <Typography className={classes.bold}>
+                      Ausbildungsabschnitt
+                    </Typography>
+                    <Select
+                      labelId="progress"
+                      id="progress"
+                      value={abschnitt}
+                      onChange={changeAbschnitt}
+                      className={classes.select}
+                    >
+                      {
+                        progressOptions.get(profession).map(({ text, fieldValue }, i) => {
+                          return(
+                            <div className={classes.checkerRow}>
+                              <Checkbox onChange={changeProfCheck} />
+                              <MenuItem value={fieldValue}>{text}</MenuItem>
+                            </div>
+                          )
+                        })
+                      }
+                    </Select>
+                  </div>
                 )
-              })
-            }
-          </Select> 
-          {helpers && (
+              }
+            </div>
+            <div className={classes.inputTuple}>
+              { !famulaturProfessions.has(profession) ? (
+                  <div/>
+                ) : (
+                  <div>
+                    <Typography className={classes.bold}>
+                      Abgeschlossene Famulaturen
+                    </Typography>
+                    <Select
+                      labelId="famulatur"
+                      id="famulatur"
+                      label="Alle"
+                      value={famulatur}
+                      onChange={changeFamulatur}
+                      className={classes.select}
+                    >
+                      {
+                        famulaturProfessions.get(profession).map(({ text, fieldValue }, i) => {
+                          return(
+                            <div className={classes.checkerRow}>
+                              <Checkbox onChange={changeProfCheck} />
+                              <MenuItem value={fieldValue}>{text}</MenuItem>
+                            </div>
+                          )
+                        })
+                      }
+                    </Select>
+                  </div>
+                )
+              }
+            </div>
+          </div>
+          {customers && (
             <Results
               className={classes.results}
-              helpers={helpers}
+              customers={activeCustomers}
             />
           )}
         </Container>
