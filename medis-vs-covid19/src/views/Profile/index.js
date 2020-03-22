@@ -1,7 +1,7 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
+import React from 'react'
+import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/styles'
 import {
   Container,
   Tabs,
@@ -16,11 +16,12 @@ import Deployment from './Deployment';
 import Qualifications from './Qualifications';
 import Topbar from '../../layouts/Auth/Topbar';
 
-
-const useStyles = makeStyles((theme) => ({
-  root: {},
+const useStyles = makeStyles(theme => ({
+  root: {
+    marginTop: theme.spacing(5)
+  },
   container: {
-    marginTop: theme.spacing(3)
+    // marginTop: theme.spacing(2)
   },
   divider: {
     backgroundColor: colors.grey[300]
@@ -28,12 +29,12 @@ const useStyles = makeStyles((theme) => ({
   content: {
     marginTop: theme.spacing(3)
   }
-}));
+}))
 
 function Profile() {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0)
 
   const tabs = [
     { value: 0, label: 'Account' },
@@ -42,53 +43,33 @@ function Profile() {
   ];
 
   const handleTabsChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    setValue(newValue)
+  }
 
   return (
     <>
-      <div className={classes.container}>
+    <Page className={classes.root} title="Profile">
+      <Container maxWidth="lg">
+        <Tabs
+          onChange={handleTabsChange}
+          scrollButtons="auto"
+          value={value}
+          variant="scrollable"
+        >
+          {tabs.map(tab => (
+            <Tab key={tab.value} label={tab.label} value={tab.value} />
+          ))}
+        </Tabs>
+        <Divider className={classes.divider} />
         <div className={classes.content}>
-          <Topbar />
-          <Page
-            className={classes.root}
-            title="Profile"
-          >
-            <Container maxWidth="lg">
-
-              <Typography variant="body2">
-                EINSTELLUNGEN
-              </Typography>
-              <Typography variant="body2">
-                Ändere deine Account Informationen
-              </Typography>
-
-              <Tabs
-                onChange={handleTabsChange}
-                scrollButtons="auto"
-                value={value}
-                variant="scrollable"
-              >
-                {tabs.map((tab) => (
-                  <Tab
-                    key={tab.value}
-                    label={tab.label}
-                    value={tab.value}
-                  />
-                ))}
-              </Tabs>
-              <Divider className={classes.divider} />
-              <div className={classes.content}>
-                {value === 0 && <Account />}
-                {value === 1 && <Deployment />}
-                {value === 2 && <Qualifications />}
-              </div>
-            </Container>
-          </Page>
+          {value === 0 && <Account />}
+          {value === 1 && <Deployment />}
+          {value === 2 && <Qualifications />}
         </div>
-      </div>
-    </>
-  );
+      </Container>
+    </Page>
+  </>
+  )
 }
 
-export default Profile;
+export default Profile

@@ -1,12 +1,12 @@
-import { colors } from '@material-ui/core';
+import { colors } from '@material-ui/core'
 
-const white = '#FFFFFF';
+const white = '#FFFFFF'
 
 export default {
   primary: {
     contrastText: white,
     dark: colors.indigo[900],
-    main: colors.indigo[500],
+    main: '#ED1171',
     light: colors.indigo[100]
   },
   secondary: {
@@ -33,4 +33,4 @@ export default {
     paper: white
   },
   divider: colors.grey[200]
-};
+}

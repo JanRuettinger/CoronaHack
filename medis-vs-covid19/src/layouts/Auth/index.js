@@ -1,17 +1,18 @@
-import React, { Suspense } from 'react';
-import { renderRoutes } from 'react-router-config';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
-import { LinearProgress } from '@material-ui/core';
-import Topbar from './Topbar';
+import React, { Suspense } from 'react'
+import { renderRoutes } from 'react-router-config'
+import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/styles'
+import { LinearProgress } from '@material-ui/core'
+import Topbar from './Topbar'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     minHeight: '100vh',
     display: 'flex',
     '@media all and (-ms-high-contrast:none)': {
       height: 0 // IE11 fix
-    }
+    },
+    backgroundColor: '#7A7B7C'
   },
   content: {
     flexGrow: 1,
@@ -22,14 +23,14 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: 56
     }
   }
-}));
+}))
 
 function Auth({ route }) {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <>
-      <Topbar />
+      {/* <Topbar /> */}
       <div className={classes.container}>
         <div className={classes.content}>
           <Suspense fallback={<LinearProgress />}>
@@ -38,11 +39,11 @@ function Auth({ route }) {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 Auth.propTypes = {
   route: PropTypes.object
-};
+}
 
-export default Auth;
+export default Auth

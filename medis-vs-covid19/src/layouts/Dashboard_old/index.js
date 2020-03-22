@@ -1,12 +1,12 @@
-import React, { Suspense, useState } from 'react'
-import { renderRoutes } from 'react-router-config'
-import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/styles'
-import { LinearProgress } from '@material-ui/core'
-import NavBar from './NavBar'
-import TopBar from './TopBar'
+import React, { Suspense, useState } from 'react';
+import { renderRoutes } from 'react-router-config';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/styles';
+import { LinearProgress } from '@material-ui/core';
+import NavBar from './NavBar';
+import TopBar from './TopBar';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     minHeight: '100vh',
     display: 'flex',
@@ -26,11 +26,11 @@ const useStyles = makeStyles(theme => ({
       paddingTop: 56
     }
   }
-}))
+}));
 
 function Dashboard({ route }) {
-  const classes = useStyles()
-  const [openNavBarMobile, setOpenNavBarMobile] = useState(false)
+  const classes = useStyles();
+  const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
 
   return (
     <>
@@ -47,11 +47,11 @@ function Dashboard({ route }) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 Dashboard.propTypes = {
   route: PropTypes.object
-}
+};
 
-export default Dashboard
+export default Dashboard;

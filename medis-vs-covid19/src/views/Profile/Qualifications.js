@@ -121,7 +121,7 @@ const Qualifications = () => {
                     </form>
 
                     <Button
-                        color="secondary"
+                        color="primary"
                         variant="contained"
                     >
                         Speichern
