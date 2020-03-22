@@ -151,7 +151,7 @@ function LandingPage({ route, history }) {
     auth.signInWithEmailAndPassword(email, password)
     .then(function(firebaseUser) {
       setStatusBase({ msg: "Credentials verified.", key: Math.random() });
-      history.push("/dashboard");
+      history.push("/settings");
     })
     .catch(function(error) {
       var errorCode = error.code;
@@ -241,7 +241,12 @@ function LandingPage({ route, history }) {
               </div>
             </div>
             <div className={classes.selectionCards}>
-              <RouterLink to="/auth/signup">
+              <RouterLink to={{
+                pathname: '/auth/signup',
+                state: {
+                  role: 'helper'
+                }
+              }}>
                 <Button>
                   <Card className={classes.selectionCard}>
                     <div className={classes.cardColumns}>
@@ -260,7 +265,12 @@ function LandingPage({ route, history }) {
                   </Card>
                 </Button>
               </RouterLink>
-              <RouterLink to="/auth/signup">
+              <RouterLink to={{
+                pathname: '/auth/signup',
+                state: {
+                  role: 'facility'
+                }
+              }}>
                 <Button>
                   <Card className={classes.selectionCard}>
                     <div className={classes.cardColumns}>

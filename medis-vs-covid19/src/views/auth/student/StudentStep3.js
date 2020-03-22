@@ -200,6 +200,23 @@ const Step_3 = (props) => {
         defaultValue=""
         variant="outlined"/>
       </section>
+      <section className={classes.section}>
+        <FormControl className={classes.formControl}>
+          <Typography className={classes.heading}>
+            Einverständniserklärungen
+          </Typography>
+          <div className={classes.checkboxContainer}>
+              <FormControlLabel
+                control={<Checkbox checked={anaesthesie} onChange={changeDomainExperience} name="anaesthesie"/>}
+                label="Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann."
+              />
+              <FormControlLabel
+                control={<Checkbox name="datenschutz"/>}
+                label="Hiermit bestätige ich die Datenschutzbestimmungen."
+              />
+          </div>
+        </FormControl>
+      </section>
     </div>
   );
 };

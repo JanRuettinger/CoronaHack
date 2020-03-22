@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom'
 import AuthLayout from './layouts/Auth'
 import LandingPage from './views/LandingPage'
 import HelperDataBase from './views/HelperDataBase'
+import StudentSettings from './views/StudentSettings'
 import StudentLayout from './layouts/StudentDashboard'
 import InstitutionLayout from './layouts/InstitutionDashboard'
 import ErrorLayout from './layouts/Error'
@@ -43,30 +44,15 @@ export default [
         component: HelperDataBase
       },
       {
-        component: () => <Redirect to="/errors/error-404" />
-      }
-    ]
-  },
-  {
-    path: '/',
-    component: StudentLayout,
-    routes: [
-      {
         path: '/settings',
         exact: true,
-        component: lazy(() => import('src/views/StudentSettings'))
+        component: StudentSettings // lazy(() => import('src/views/StudentSettings'))
       },
       {
         component: () => <Redirect to="/errors/error-404" />
       }
     ]
   },
-
-  // {
-  //   path: '/settings',
-  //   component: Profile,
-  //   routes: []
-  // },
   {
     path: '/errors',
     component: ErrorLayout,
