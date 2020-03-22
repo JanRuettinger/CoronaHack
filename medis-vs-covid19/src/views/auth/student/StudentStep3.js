@@ -52,7 +52,11 @@ const Step_3 = (props) => {
     educationalProgress,
     domainExperience,
     certificate,
-    setCertificate
+    setCertificate,
+    confirmation, 
+    setConfirmation, 
+    datenschutz,
+    setDatenschutz
   } = props
 
   const classes = useStyles();
@@ -71,6 +75,14 @@ const Step_3 = (props) => {
 
   const changeDomainExperience = (event) => {
     setDomainExperience({...domainExperience, [event.target.name] : event.target.checked})
+  }
+  
+  const changeConfirmation = (event) => {
+    setConfirmation(event.target.checked)
+  }
+  
+  const changeDatenschutz = (event) => {
+    setDatenschutz(event.target.checked)
   }
 
   const {
@@ -196,11 +208,11 @@ const Step_3 = (props) => {
           </Typography>
           <div className={classes.checkboxContainer}>
               <FormControlLabel
-                control={<Checkbox checked={anaesthesie} onChange={changeDomainExperience} name="anaesthesie"/>}
+                control={<Checkbox checked={confirmation} onChange={changeConfirmation} name="anaesthesie"/>}
                 label="Ich bestätige, dass meine Angaben korrekt sind und ich der Institution meinen Ausbildungsstand nachweisen kann."
               />
               <FormControlLabel
-                control={<Checkbox name="datenschutz"/>}
+                control={<Checkbox name="datenschutz" checked={datenschutz} onChange={changeDatenschutz}/>}
                 label="Hiermit bestätige ich die Datenschutzbestimmungen."
               />
           </div>

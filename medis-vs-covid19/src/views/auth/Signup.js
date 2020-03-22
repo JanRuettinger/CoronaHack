@@ -145,6 +145,8 @@ export default function HorizontalLinearStepper(props) {
   const [domainExperience, setDomainExperience] = useState(initialDomainExperience)
   const [famulaturen, setFamulaturen] = useState('')
   const [certificate, setCertificate] = useState('nocerti')
+  const [datenschutz, setDatenschutz] = useState(false)
+  const [confirmation, setConfirmation] = useState(false)
 
   // Institution data
   const [institutionName, setInstitutionName] = useState('')
@@ -278,7 +280,11 @@ export default function HorizontalLinearStepper(props) {
                       certificate, 
                       setCertificate, 
                       famulaturen, 
-                      setFamulaturen
+                      setFamulaturen,
+                      datenschutz, 
+                      setDatenschutz,
+                      confirmation, 
+                      setConfirmation
                     }}
                   />
                 )}
