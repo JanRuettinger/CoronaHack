@@ -41,6 +41,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     flexWrap: 'wrap',
     height: '150px' // quick and dirty way to hold 3 checkboxes per column
+  }, 
+  datepicker: {
+    padding: '10px',
+    width: 'calc(50% - 10px)'
   }
 }))
 
@@ -103,15 +107,16 @@ const Step_2 = props => {
             KeyboardButtonProps={{
               'aria-label': 'change date',
             }}
+            className={classes.datepicker}
           />
         </MuiPickersUtilsProvider>
         <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel id="profession-select-label">Zeitliche Verfügbarkeit</InputLabel>
+          <InputLabel className={classes.dateLabel} id="profession-select-label">Zeitliche Verfügbarkeit</InputLabel>
           <Select
             id="compensation"
             value={availability}
             onChange={changeAvailability}
-            className={classes.field}
+            
           > 
             {availabilityOptions.map(({text, value}) => <MenuItem value={value}>{text}</MenuItem>)}
           </Select>
@@ -122,7 +127,6 @@ const Step_2 = props => {
             id="compensation"
             value={compensation}
             onChange={changeCompensation}
-            className={classes.field}
             label="Vergütung"
             labelId="compensation-label"
           > 

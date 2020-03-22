@@ -10,6 +10,10 @@ const useStyles = makeStyles(theme => ({
   field: {
     padding: '5px',
     width: 'calc(50% - 10px)'
+  },
+  divider: {
+    marginTop: '4px', 
+    marginBottom: '4px'
   }
 }))
 
@@ -42,7 +46,7 @@ const Step_1 = props => {
     <div>
       <section className={classes.section}>
         <Typography className={classes.heading}>Profil</Typography>
-        <Divider />
+        <Divider className={classes.divider} />
         <TextField
           id="firstname"
           label="Vorname"
@@ -67,7 +71,7 @@ const Step_1 = props => {
       </section>
       <section className={classes.section}>
         <Typography className={classes.heading}>Account</Typography>
-        <Divider />
+        <Divider className={classes.divider}/>
         <TextField
           id="email"
           label="Email"
