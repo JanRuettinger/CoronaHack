@@ -1,9 +1,10 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import { renderRoutes } from 'react-router-config'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles'
 import { LinearProgress } from '@material-ui/core'
-import Topbar from './Topbar'
+import Menu from './Menu'
+import TopBar from './TopBar'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -14,22 +15,27 @@ const useStyles = makeStyles(theme => ({
     }
   },
   content: {
+    paddingTop: 64,
     flexGrow: 1,
     maxWidth: '100%',
     overflowX: 'hidden',
-    paddingTop: 64,
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: 256
+    },
     [theme.breakpoints.down('xs')]: {
       paddingTop: 56
     }
   }
 }))
 
-function Auth({ route }) {
+function MenuNavBar({ route }) {
   const classes = useStyles()
+  const [openNavBarMobile, setOpenNavBarMobile] = useState(false)
 
   return (
     <>
-      {/* <Topbar /> */}
+      <TopBar />
+      <Menu />
       <div className={classes.container}>
         <div className={classes.content}>
           <Suspense fallback={<LinearProgress />}>
@@ -41,8 +47,8 @@ function Auth({ route }) {
   )
 }
 
-Auth.propTypes = {
+MenuNavBar.propTypes = {
   route: PropTypes.object
 }
 
-export default Auth
+export default MenuNavBar
