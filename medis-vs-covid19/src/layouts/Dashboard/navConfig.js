@@ -84,21 +84,17 @@ export default [
         icon: PersonIcon,
         items: [
           {
-            title: 'Timeline',
-            href: '/profile/1/timeline'
+            title: 'Account',
+            href: '/profile/1/account'
           },
           {
-            title: 'Connections',
-            href: '/profile/1/connections'
+            title: 'Einsatz',
+            href: '/profile/1/deployment'
           },
           {
-            title: 'Projects',
-            href: '/profile/1/projects'
+            title: 'Qualifikation',
+            href: '/profile/1/qualification'
           },
-          {
-            title: 'Reviews',
-            href: '/profile/1/reviews'
-          }
         ]
       },
       {

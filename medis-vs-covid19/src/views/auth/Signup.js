@@ -13,14 +13,18 @@ import {
   Divider
 } from '@material-ui/core'
 
+import {
+  createStudentDocument,
+  createInstitutionDocument
+} from '../../utilities'
+import { auth } from '../../firebase'
 import Step0 from './student/Step0'
 import Step1 from './student/Step1'
 import Step2 from './student/Step2'
 import Step3 from './student/Step3'
-
 import InstitutionSignup from './institution/InstitutionSignup'
-
 import { flexibleCompare } from '@fullcalendar/core'
+import { isJSDocAugmentsTag } from 'typescript'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -97,7 +101,13 @@ export default function HorizontalLinearStepper() {
   const [operationPlace, setOperationPlace] = useState({}) // "Bevorzugte Einsatzstellen"
   const [profession, setProfession] = useState('')
   const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
-  
+
+  //Institution data
+  const [institutionName, setInstitutionName] = useState('')
+  const [institutionLocation, setInstitutionLocation] = useState('')
+  const [institutionEmail, setInstitutionEmail] = useState('')
+  const [institutionMobile, setInstitutionMobile] = useState('')
+  const [institutionKind, setInstitutionKind] = useState('hospital')
 
   const isStepSkipped = step => {
     return skipped.has(step)
@@ -120,6 +130,35 @@ export default function HorizontalLinearStepper() {
 
   const handleReset = () => {
     setActiveStep(0)
+  }
+
+  const handleSubmit = async event => {
+    event.preventDefault()
+    // const { email, password, displayName } = this.state;
+    var email = 'example@gmail.com'
+    var password = 'noidea'
+    var displayName = 'MyExample'
+    if (role === 'helper') {
+      try {
+        const { user } = await auth.createUserWithEmailAndPassword(
+          email,
+          password
+        )
+        createStudentDocument(user, { displayName })
+      } catch (error) {
+        alert(error)
+      }
+    } else {
+      try {
+        const { user } = await auth.createUserWithEmailAndPassword(
+          email,
+          password
+        )
+        createInstitutionDocument(user, { displayName })
+      } catch (error) {
+        alert(error)
+      }
+    }
   }
 
   return (
@@ -154,33 +193,60 @@ export default function HorizontalLinearStepper() {
                 <Typography className={classes.instructions}>
                   All steps completed - you&apos;re finished
                 </Typography>
-                <Button onClick={handleReset} className={classes.button}>
-                  Reset
+                <Button onClick={handleSubmit} className={classes.button}>
+                  Submit
                 </Button>
               </div>
-            ) : (<div className={classes.instructions}>{
-              role === 'helper' ? (
-                <CurrentStep {...{ activeStep, 
-                  role, setRole,
-                  firstname, setFirstname, 
-                  lastname, setLastname,
-                  mobileNumber, setMobileNumber,
-                  email, setEmail,
-                  pwd, setPwd,
-                  prefLocation, setPrefLocation,
-                  startDate, setStartDate,
-                  compensation, setCompensation,
-                  availability, setAvailability,
-                  operationPlace, setOperationPlace,
-                  profession, setProfession, 
-                  educationalProgress, setEducationalProgress
-                  }
-                }/>
-              ) : (
-                <div></div>
-              )
-            }</div>)}
-            </div>
+            ) : (
+              <div className={classes.instructions}>
+                {role === 'helper' ? (
+                  <CurrentStep
+                    {...{
+                      activeStep,
+                      role,
+                      setRole,
+                      firstname,
+                      setFirstname,
+                      lastname,
+                      setLastname,
+                      mobileNumber,
+                      setMobileNumber,
+                      email,
+                      setEmail,
+                      pwd,
+                      setPwd,
+                      prefLocation,
+                      setPrefLocation,
+                      startDate,
+                      setStartDate,
+                      compensation,
+                      setCompensation,
+                      availability,
+                      setAvailability
+                    }}
+                  />
+                ) : (
+                  <InstitutionSignup
+                    {...{
+                      activeStep,
+                      role,
+                      setRole,
+                      institutionName,
+                      setInstitutionName,
+                      institutionLocation,
+                      setInstitutionLocation,
+                      institutionEmail,
+                      setInstitutionEmail,
+                      institutionMobile,
+                      setInstitutionMobile,
+                      institutionKind,
+                      setInstitutionKind
+                    }}
+                  />
+                )}
+              </div>
+            )}
+          </div>
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>

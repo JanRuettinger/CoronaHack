@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Typography, TextField, Divider } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react'
+import { Typography, TextField, Divider } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   section: { marginBottom: '50px' },
@@ -11,35 +11,32 @@ const useStyles = makeStyles(theme => ({
     padding: '5px',
     width: 'calc(50% - 10px)'
   }
-}));
+}))
 
 const Step_1 = props => {
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
-  const [mobileNumber, setMobileNumber] = useState('')
-  const [email, setEmail] = useState('')
-  const [pwd, setPwd] = useState('')
-  const classes = useStyles();
+  const classes = useStyles()
+
+  const { setFirstname, setLastname, setMobileNumber, setEmail, setPwd } = props
 
   const changeFirstname = event => {
     setFirstname(event.target.value)
-  };
+  }
 
   const changeLastname = event => {
     setLastname(event.target.value)
-  };
+  }
 
   const changeMobile = event => {
     setMobileNumber(event.target.value)
-  };
+  }
 
   const changeEmail = event => {
     setEmail(event.target.value)
-  };
+  }
 
   const changePassword = event => {
     setPwd(event.target.value)
-  };
+  }
 
   return (
     <div>
@@ -96,7 +93,7 @@ const Step_1 = props => {
         />
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Step_1;
+export default Step_1
