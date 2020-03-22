@@ -12,7 +12,16 @@ const professions = [
 
 const progressOptions = new Map()
 
-progressOptions.set('arzt', [])
+progressOptions.set('arzt', [
+    {text: 'Anästhesie', fieldValue : 'vorklinischer-abschnitt'}, 
+    {text: 'Chirugie', fieldValue: 'klinischer-abschnitt'},
+    {text: 'Intensivmedizin', fieldValue: 'klinischer-abschnitt'},
+    {text: 'Notaufnahme', fieldValue: 'klinischer-abschnitt'}, 
+    {text: 'Innere Medizin', fieldValue: 'praktisches-jahr'},
+    {text: 'Allgemeinmedizin', fieldValue: 'klinischer-abschnitt'},
+    {text: 'Andere', fieldValue: 'klinischer-abschnitt'}
+
+])
 progressOptions.set('medizinstudent', [
     {text: 'Vorklinischer Abschnitt', fieldValue : 'vorklinischer-abschnitt'}, 
     {text: 'Klinischer Abschnitt', fieldValue: 'klinischer-abschnitt'}, 
@@ -53,14 +62,17 @@ progressOptions.set('zahnmedizinstudent', [
 ])
 progressOptions.set('sonstige', [])
 
-const defaultFamulaturOptions = {
+const initialDomainExperience = {
     anaesthesie: false,
     chirugie: false,
     inneremedizin: false, 
     intensivmedizin: false,
     notaufnahme: false,
-    nofamulatur: false,
-    allgemeinmedizin: false
+    allgemeinmedizin: false, 
+    rettungsdienst: false,
+    labor: false, 
+    verwaltung: false,
+    pflege: false
 }
 
 const famulaturProfessions = new Map() // key = profession, value = array w/ famulatur options
@@ -78,5 +90,5 @@ export {
     progressOptions,
     professions,
     famulaturProfessions,
-    defaultFamulaturOptions
+    initialDomainExperience
 } 

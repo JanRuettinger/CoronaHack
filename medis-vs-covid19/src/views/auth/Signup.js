@@ -18,7 +18,7 @@ import {
   createInstitutionDocument
 } from '../../utilities'
 import { auth } from '../../firebase'
-import Step0 from './student/Step0'
+
 import Step1 from './student/Step1'
 import Step2 from './student/Step2'
 import Step3 from './student/Step3'
@@ -27,7 +27,7 @@ import InstitutionSignup from './institution/InstitutionSignup'
 import { flexibleCompare } from '@fullcalendar/core'
 import { isJSDocAugmentsTag } from 'typescript'
 
-import {defaultFamulaturOptions} from './student/config'
+import {initialDomainExperience} from './student/config'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -58,7 +58,6 @@ const useStyles = makeStyles(theme => ({
 
 function getSteps() {
   return [
-    'Rolle',
     'Persönliche Information',
     'Über deinen Einsatz',
     'Deine Qualifikation',
@@ -82,14 +81,12 @@ const CurrentStep = props => {
 
   switch (activeStep) {
     case 0:
-      return <Step0 {...props} />
-    case 1:
       return <Step1 {...props} />
-    case 2:
+    case 1:
       return <Step2 {...props} />
-    case 3:
+    case 2:
       return <Step3 {...props} />
-    case 4:
+    case 3:
       return <Step4 {...props} />
     default:
       return 'Unknown step'
@@ -118,7 +115,7 @@ export default function HorizontalLinearStepper() {
   const [operationPlace, setOperationPlace] = useState({}) // "Bevorzugte Einsatzstellen"
   const [profession, setProfession] = useState('')
   const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
-  const [famulaturen, setFamulaturen] = useState(defaultFamulaturOptions)
+  const [domainExperience, setDomainExperience] = useState(initialDomainExperience)
 
   //Institution data
   const [institutionName, setInstitutionName] = useState('')
@@ -247,8 +244,8 @@ export default function HorizontalLinearStepper() {
                       setProfession,
                       educationalProgress, 
                       setEducationalProgress,
-                      famulaturen, 
-                      setFamulaturen
+                      domainExperience, 
+                      setDomainExperience
                     }}
                   />
                 ) : (

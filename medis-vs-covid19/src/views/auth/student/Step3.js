@@ -47,10 +47,10 @@ const Step_3 = (props) => {
   const {
     setProfession,
     setEducationalProgress,
-    setFamulaturen,
+    setDomainExperience,
     profession,
     educationalProgress,
-    famulaturen   
+    domainExperience
   } = props
 
   const classes = useStyles();
@@ -79,8 +79,8 @@ const Step_3 = (props) => {
     setEducationalProgress(event.target.value)
   }
 
-  const changeFamulaturen = (event) => {
-    setFamulaturen({...famulaturen, [event.target.name] : event.target.checked})
+  const changeDomainExperience = (event) => {
+    setDomainExperience({...domainExperience, [event.target.name] : event.target.checked})
   }
 
   const {
@@ -91,7 +91,11 @@ const Step_3 = (props) => {
     notaufnahme,
     nofamulatur,
     allgemeinmedizin,
-  } = famulaturen
+    pflege,
+    verwaltung,
+    labor, 
+    rettungsdienst
+  } = domainExperience
 
   return (
     <div>
@@ -115,7 +119,7 @@ const Step_3 = (props) => {
         {
           profession ? (
           <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="profession-select-label">Fortschritt</InputLabel>
+            <InputLabel id="profession-select-label">{profession != 'arzt' ? 'Fortschritt' : 'Fachbereich'}</InputLabel>
             <Select
               id="educationalProgress"
               value={educationalProgress}
@@ -128,45 +132,55 @@ const Step_3 = (props) => {
           ) : (<p></p>)
         }
       </section>
-      {
-          famulaturProfessions.get(profession) ? (
-          <section className={classes.section}>
-            <FormControl className={classes.formControl}>
-              <Typography className={classes.heading}>
-                Deine Famulaturen
-              </Typography>
-              <Divider />
-              <div className={classes.checkboxContainer}>
-                  <FormControlLabel
-                    control={<Checkbox checked={anaesthesie} onChange={changeFamulaturen} name="anaesthesie"/>}
-                    label="Anästhesie"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox checked={chirugie} onChange={changeFamulaturen} name="chirugie"/>}
-                    label="Chirugie"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox checked={inneremedizin} onChange={changeFamulaturen} name="inneremedizin"/>}
-                    label="Innere Medizin"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox checked={notaufnahme} onChange={changeFamulaturen} name="notaufnahme"/>}
-                    label="Intensivmedizin"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox checked={allgemeinmedizin} onChange={changeFamulaturen} name="allgemeinmedizin"/>}
-                    label="Allgemeinmedizin"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox checked={nofamulatur} onChange={changeFamulaturen} name="nofamulatur"/>}
-                    label="Keine Famulatur"
-                  />
-              </div>
-            </FormControl>
-          </section>
-          ) : (<p></p>)
-        }
-      
+      <section className={classes.section}>
+        <FormControl className={classes.formControl}>
+          <Typography className={classes.heading}>
+            Hast du eine Vorausbildung oder praktische Berufserfahrung in einem der folgenden Bereiche? (Mehrfachauswahl möglich)
+          </Typography>
+          <div className={classes.checkboxContainer}>
+              <FormControlLabel
+                control={<Checkbox checked={anaesthesie} onChange={changeDomainExperience} name="anaesthesie"/>}
+                label="Anästhesie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={chirugie} onChange={changeDomainExperience} name="chirugie"/>}
+                label="Chirugie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={inneremedizin} onChange={changeDomainExperience} name="inneremedizin"/>}
+                label="Innere Medizin"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={notaufnahme} onChange={changeDomainExperience} name="notaufnahme"/>}
+                label="Notaufnahme"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={intensivmedizin} onChange={changeDomainExperience} name="intensivmedizin"/>}
+                label="Intensivmedizin"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={allgemeinmedizin} onChange={changeDomainExperience} name="allgemeinmedizin"/>}
+                label="Allgemeinmedizin"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={rettungsdienst} onChange={changeDomainExperience} name="rettungsdienst"/>}
+                label="Rettungsdienst"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={labor} onChange={changeDomainExperience} name="labor"/>}
+                label="Labor"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={verwaltung} onChange={changeDomainExperience} name="verwaltung"/>}
+                label="Verwaltung & Logistik"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={pflege} onChange={changeDomainExperience} name="pflege"/>}
+                label="Pflege"
+              />
+          </div>
+        </FormControl>
+      </section>
       <section className={classes.section}>
         <Typography className={classes.heading}>Anerkennung für Studiumsäquivalente</Typography>
         <FormControl component="fieldset">
