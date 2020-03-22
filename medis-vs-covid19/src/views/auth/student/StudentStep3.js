@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    width: 'calc(50% - 10px)'
+    width: '100%'
   },
   formControlSelect: {
     display: 'none'
@@ -60,7 +60,9 @@ const Step_3 = (props) => {
     confirmation, 
     setConfirmation, 
     datenschutz,
-    setDatenschutz
+    setDatenschutz,
+    famulaturen,
+    setFamulaturen
   } = props
 
   const classes = useStyles();
@@ -89,6 +91,10 @@ const Step_3 = (props) => {
     setDatenschutz(event.target.checked)
   }
 
+const changeFamulaturen = (event) => {
+  setFamulaturen({...famulaturen, [event.target.name] : event.target.checked}) 
+}
+
   const {
     anaesthesie,
     chirugie,
@@ -101,6 +107,16 @@ const Step_3 = (props) => {
     labor, 
     rettungsdienst
   } = domainExperience
+  
+  const {
+    famAnaesthesie,
+    famChirugie,
+    famInneremedizin, 
+    famIntensivmedizin,
+    famNotaufnahme,
+    famAllgemeinmedizin, 
+    famNofamulatur
+  } = famulaturen
 
   return (
     <div className={classes.step3Container}>
@@ -121,7 +137,7 @@ const Step_3 = (props) => {
             })}
           </Select> 
         </FormControl>
-        {
+        { //Ausbildungsfortschritt
           profession ? (
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="profession-select-label">{profession != 'arzt' ? 'Fortschritt' : 'Fachbereich'}</InputLabel>
@@ -133,6 +149,49 @@ const Step_3 = (props) => {
             > 
               {progressOptions.get(profession).map(({text, fieldValue}) => (<MenuItem value={fieldValue}>{text}</MenuItem>))}
             </Select>
+          </FormControl>
+          ) : (<p></p>)
+        }
+        { //Famulaturen
+          profession && profession === 'medizinstudent' ? (
+          <FormControl variant="outlined" className={classes.formControl}>
+            <Typography className={classes.heading}>
+                Welche Famulaturen hast du bereits abgeschlossen?
+              </Typography>
+            <div className={classes.checkboxContainer}>
+              <FormControlLabel
+                control={<Checkbox checked={famAnaesthesie} onChange={changeFamulaturen} name="famAnaesthesie"/>}
+                label="Anästhesie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={famChirugie} onChange={changeFamulaturen} name="famChirugie"/>}
+                label="Anästhesie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={famInneremedizin} onChange={changeFamulaturen} name="famInneremedizin"/>}
+                label="Anästhesie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={famIntensivmedizin} onChange={changeFamulaturen} name="famIntensivmedizin"/>}
+                label="Anästhesie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={famNotaufnahme} onChange={changeFamulaturen} name="famNotaufnahme"/>}
+                label="Anästhesie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={famAllgemeinmedizin} onChange={changeFamulaturen} name="famAllgemeinmedizin"/>}
+                label="Anästhesie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={famNofamulatur} onChange={changeFamulaturen} name="famNofamulatur"/>}
+                label="Anästhesie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={famIntensivmedizin} onChange={changeFamulaturen} name="intensivmedizin"/>}
+                label="Anästhesie"
+              />
+            </div>
           </FormControl>
           ) : (<p></p>)
         }

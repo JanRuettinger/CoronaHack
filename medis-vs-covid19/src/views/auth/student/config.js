@@ -76,13 +76,13 @@ const initialDomainExperience = {
 }
 
 const initialFamulaturen = {
-    anaesthesie: false,
-    chirugie: false,
-    inneremedizin: false, 
-    intensivmedizin: false,
-    notaufnahme: false,
-    allgemeinmedizin: false, 
-    nofamulatur: false
+    famAnaesthesie: false,
+    famChirugie: false,
+    famInneremedizin: false, 
+    famIntensivmedizin: false,
+    famNotaufnahme: false,
+    famAllgemeinmedizin: false, 
+    famNofamulatur: false
 }
 
 const famulaturProfessions = new Map() // key = profession, value = array w/ famulatur options
