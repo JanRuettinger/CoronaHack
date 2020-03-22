@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { LinearProgress } from '@material-ui/core';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import HomeIcon from '@material-ui/icons/Home';
-import { Select, MenuItem, TextField, Button, Card, Typography } from '@material-ui/core'
+import { Select, MenuItem, Checkbox, TextField, Button, Card, Typography } from '@material-ui/core'
 import { Link as RouterLink } from 'react-router-dom'
 import Results from './Results';
 import { Container } from '@material-ui/core';
@@ -52,6 +52,15 @@ const useStyles = makeStyles((theme) => ({
   select: {
     minWidth: 150,
     marginBottom: 30
+  },
+  inputGroup: {
+    display: 'flex'
+  },
+  inputTuple: {
+    marginLeft: 30
+  },
+  checkerRow: {
+    display: 'flex'
   }
 }));
 
@@ -59,14 +68,23 @@ function HelperDataBase({ route }) {
   const classes = useStyles();
 
   const [profession, setProfession] = React.useState('');
+  const [abschnitt, setAbschnitt] = React.useState('');
+  const [famulatur, setFamulatur] = React.useState('');
 
   // setProfession(professions[0]['fieldValue']);
 
   const changeProfession = (e) => {
     setProfession(e.target.value);
   };
- 
-  console.log(profession);
+  const changeAbschnitt = (e) => {
+    setAbschnitt(e.target.value);
+  };
+  const changeFamulatur = (e) => {
+    setFamulatur(e.target.value);
+  };
+  const changeProfCheck = (e) => {
+
+  };
 
   const [helpers, setHelpers] = useState([]);
 
@@ -80,25 +98,89 @@ function HelperDataBase({ route }) {
           <Typography className={classes.header}>
             Verfügbare Helfer
           </Typography>
-
-          <Typography className={classes.bold}>
-            Gesuchte Kompetenz
-          </Typography>
-          <Select
-            labelId="profession"
-            id="profession"
-            value={profession}
-            onChange={changeProfession}
-            className={classes.select}
-          >
-            {
-              professions.map(({ text, fieldValue }, i) => {
-                return(
-                  <MenuItem value={fieldValue}>{text}</MenuItem>
+          <div className={classes.inputGroup}>
+            <div className={classes.inputTuple}>
+              <Typography className={classes.bold}>
+                Gesuchte Kompetenz *
+              </Typography>
+              <Select
+                labelId="profession"
+                id="profession"
+                value={profession}
+                onChange={changeProfession}
+                className={classes.select}
+              >
+                {
+                  professions.map(({ text, fieldValue }, i) => {
+                    return(
+                      <MenuItem value={fieldValue}>{text}</MenuItem>
+                    )
+                  })
+                }
+              </Select>
+            </div>
+            <div className={classes.inputTuple}>
+              { !(progressOptions.has(profession)) ? (
+                  <div/>
+                ) : (
+                  <div>
+                    <Typography className={classes.bold}>
+                      Ausbildungsabschnitt
+                    </Typography>
+                    <Select
+                      labelId="progress"
+                      id="progress"
+                      value={abschnitt}
+                      onChange={changeAbschnitt}
+                      className={classes.select}
+                    >
+                      {
+                        progressOptions.get(profession).map(({ text, fieldValue }, i) => {
+                          return(
+                            <div className={classes.checkerRow}>
+                              <Checkbox onChange={changeProfCheck} />
+                              <MenuItem value={fieldValue}>{text}</MenuItem>
+                            </div>
+                          )
+                        })
+                      }
+                    </Select>
+                  </div>
                 )
-              })
-            }
-          </Select> 
+              }
+            </div>
+            <div className={classes.inputTuple}>
+              { !famulaturProfessions.has(profession) ? (
+                  <div/>
+                ) : (
+                  <div>
+                    <Typography className={classes.bold}>
+                      Abgeschlossene Famulaturen
+                    </Typography>
+                    <Select
+                      labelId="famulatur"
+                      id="famulatur"
+                      label="Alle"
+                      value={famulatur}
+                      onChange={changeFamulatur}
+                      className={classes.select}
+                    >
+                      {
+                        famulaturProfessions.get(profession).map(({ text, fieldValue }, i) => {
+                          return(
+                            <div className={classes.checkerRow}>
+                              <Checkbox onChange={changeProfCheck} />
+                              <MenuItem value={fieldValue}>{text}</MenuItem>
+                            </div>
+                          )
+                        })
+                      }
+                    </Select>
+                  </div>
+                )
+              }
+            </div>
+          </div>
           {helpers && (
             <Results
               className={classes.results}
