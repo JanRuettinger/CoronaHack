@@ -57,7 +57,8 @@ const useStyles = makeStyles((theme) => ({
     left: '20%',
   },
   modalCard: {
-    position: 'relative'
+    position: 'relative',
+    minWidth: 300
   },
   moHeader: {
     fontSize: 24,
