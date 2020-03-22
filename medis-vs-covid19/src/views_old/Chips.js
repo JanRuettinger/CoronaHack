@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Page from 'src/components/Page';
-import Filter from 'src/views/ProjectList/Filter';
+import Filter from 'src/views_old/ProjectList/Filter';
 
 const useStyles = makeStyles((theme) => ({
   root: {

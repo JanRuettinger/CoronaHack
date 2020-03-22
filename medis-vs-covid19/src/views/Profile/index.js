@@ -7,14 +7,14 @@ import {
   Tabs,
   Tab,
   Divider,
-  colors
+  colors,
+  Typography
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Header from './Header';
-import Timeline from './Timeline';
-import Connections from './Connections';
-import Projects from './Projects';
-import Reviews from './Reviews';
+import Account from './Account';
+import Deployment from './Deployment';
+import Topbar from '../../layouts/Auth/Topbar';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -29,64 +29,64 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Profile({ match, history }) {
+function Profile() {
   const classes = useStyles();
-  const { id, tab: currentTab } = match.params;
+
+  const [value, setValue] = React.useState(0);
+
   const tabs = [
-    { value: 'timeline', label: 'Timeline' },
-    { value: 'connections', label: 'Connections' },
-    { value: 'projects', label: 'Projects' },
-    { value: 'reviews', label: 'Reviews' }
+    { value: 0, label: 'Account' },  
+    { value: 1, label: 'Einsatz' },  
+    { value: 2, label: 'Qualifikation' }, 
   ];
 
-  const handleTabsChange = (event, value) => {
-    history.push(value);
+  const handleTabsChange = (event, newValue) => {
+    setValue(newValue);
   };
 
-  if (!currentTab) {
-    return <Redirect to={`/profile/${id}/timeline`} />;
-  }
-
-  if (!tabs.find((tab) => tab.value === currentTab)) {
-    return <Redirect to="/errors/error-404" />;
-  }
-
   return (
-    <Page
-      className={classes.root}
-      title="Profile"
-    >
-      <Header />
-      <Container maxWidth="lg">
-        <Tabs
-          onChange={handleTabsChange}
-          scrollButtons="auto"
-          value={currentTab}
-          variant="scrollable"
-        >
-          {tabs.map((tab) => (
-            <Tab
-              key={tab.value}
-              label={tab.label}
-              value={tab.value}
-            />
-          ))}
-        </Tabs>
-        <Divider className={classes.divider} />
+    <>
+      <div className={classes.container}>
         <div className={classes.content}>
-          {currentTab === 'timeline' && <Timeline />}
-          {currentTab === 'connections' && <Connections />}
-          {currentTab === 'projects' && <Projects />}
-          {currentTab === 'reviews' && <Reviews />}
+          <Topbar />
+          <Page
+            className={classes.root}
+            title="Profile"
+          >
+            <Container maxWidth="lg">
+
+              <Typography variant="body2">
+                EINSTELLUNGEN
+              </Typography>
+              <Typography variant="body2">
+                Ändere deine Account Informationen
+              </Typography> 
+
+              <Tabs
+                onChange={handleTabsChange}
+                scrollButtons="auto"
+                value={value}
+                variant="scrollable"
+              >
+                {tabs.map((tab) => (
+                  <Tab
+                    key={tab.value}
+                    label={tab.label}
+                    value={tab.value}
+                  />
+                ))}
+              </Tabs>
+              <Divider className={classes.divider} />
+              <div className={classes.content}>
+                {value === 0 && <Account />}
+                {value === 1 && <Deployment />}
+              </div>
+            </Container>
+          </Page>
         </div>
-      </Container>
-    </Page>
+      </div>
+    </>
   );
 }
-
-Profile.propTypes = {
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
-};
 
 export default Profile;

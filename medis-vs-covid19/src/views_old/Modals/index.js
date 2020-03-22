@@ -10,7 +10,7 @@ import {
   colors
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import CustomerEditModal from 'src/views/CustomerManagementDetails/Summary/CustomerEditModal';
+import CustomerEditModal from 'src/views_old/CustomerManagementDetails/Summary/CustomerEditModal';
 import BaseModal from './BaseModal';
 
 const useStyles = makeStyles((theme) => ({
