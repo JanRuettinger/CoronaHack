@@ -22,18 +22,21 @@ import Step0 from './Step0'
 import StudentStep1 from './student/StudentStep1'
 import StudentStep2 from './student/StudentStep2'
 import StudentStep3 from './student/StudentStep3'
+import StudentStep4 from './student/StudentStep4'
 import IntsitutionStep1 from './institution/InstitutionStep1'
 import InstitutionStep2 from './institution/InstitutionStep2'
 import InstitutionStep3 from './institution/InstitutionStep3'
 import { flexibleCompare } from '@fullcalendar/core'  // needed?
 import { isJSDocAugmentsTag } from 'typescript' // needed?
 
+import {initialDomainExperience} from './student/config'
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
   },
   button: {
-    width: 100,
+    minWidth: 100,
     marginRight: theme.spacing(1)
   },
   stepperContainer: {
@@ -58,9 +61,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+
 function getSteps(role) {
   return role === 'helper'
-    ? ['Persönliche Information', 'Über deinen Einsatz', 'Deine Qualifikation']
+    ? ['Persönliche Information', 'Über deinen Einsatz', 'Deine Qualifikation', 'Vielen Dank']
     : ['Allgemeine Informationen', 'Ansprechpartner', 'Einverständnis']
 }
 
@@ -74,6 +78,8 @@ const CurrentStepStudent = props => {
       return <StudentStep2 {...props} />
     case 3:
       return <StudentStep3 {...props} />
+    case 4:
+      return <StudentStep4 {...props} />
     default:
       return 'Unknown step'
   }
@@ -89,10 +95,20 @@ const CurrentStepFacility = props => {
       return <InstitutionStep2 {...props} />
     case 3:
       return <InstitutionStep3 {...props} />
-    default:
-      return 'Unknown step'
   }
 }
+
+function getText(activeStep) {
+  const nextLabels = [
+    'Weiter',
+    'Weiter',
+    'Weiter',
+    'Anmelden',
+    'Weiter zur Plattform'
+  ];
+  return nextLabels[activeStep]
+}
+
 
 export default function HorizontalLinearStepper() {
   const classes = useStyles()
@@ -112,12 +128,13 @@ export default function HorizontalLinearStepper() {
   const [email, setEmail] = useState('')
   const [pwd, setPwd] = useState('')
   const [prefLocation, setPrefLocation] = useState('')
-  const [startDate, setStartDate] = useState('')
+  const [startDate, setStartDate] = useState(new Date())
   const [compensation, setCompensation] = useState('')
   const [availability, setAvailability] = useState('')
   const [operationPlace, setOperationPlace] = useState({}) // "Bevorzugte Einsatzstellen"
   const [profession, setProfession] = useState('')
   const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
+  const [domainExperience, setDomainExperience] = useState(initialDomainExperience)
 
   // Institution data
   const [institutionName, setInstitutionName] = useState('')
@@ -244,7 +261,15 @@ export default function HorizontalLinearStepper() {
                       compensation,
                       setCompensation,
                       availability,
-                      setAvailability
+                      setAvailability,
+                      operationPlace, 
+                      setOperationPlace, // "Bevorzugte Einsatzstellen"
+                      profession, 
+                      setProfession,
+                      educationalProgress, 
+                      setEducationalProgress,
+                      domainExperience, 
+                      setDomainExperience
                     }}
                   />
                 )}
@@ -288,7 +313,7 @@ export default function HorizontalLinearStepper() {
               onClick={handleNext}
               className={classes.button}
             >
-              Weiter
+              {getText(activeStep)}
             </Button>
           </div>
         </CardActions>

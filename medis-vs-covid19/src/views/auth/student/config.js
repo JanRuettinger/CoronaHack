@@ -1,18 +1,27 @@
-const professions = [{text: 'Arzt/Ärztin', fieldfieldValue: 'arzt'},
-                            {text: 'Medizinstudent', fieldfieldValue: 'medizinstudent'},
-                            {text: 'MFA', fieldfieldValue: 'mfa'},
-                            {text: 'MTA', fieldfieldValue: 'mta'},
-                            {text: 'NotfallsanitäterIn', fieldfieldValue: 'notfallsanitaeter'},
-                            {text: 'PflegestudentIn', fieldfieldValue: 'pflegestudent'},
-                            {text: 'PharmaziestudentIn', fieldfieldValue: 'pharmaziestudent'},
-                            {text: 'SanitäterIn', fieldfieldValue: 'sanitaeter'},
-                            {text: 'ZahnmedizinstudentIn', fieldfieldValue: 'zahnmedizinstudent'},
-                            {text: 'Sonstige', fieldfieldValue: 'sonstige'}
-                        ]
+const professions = [
+    {text: 'Arzt/Ärztin', fieldValue: 'arzt'},
+    {text: 'Medizinstudent', fieldValue: 'medizinstudent'},
+    {text: 'MFA', fieldValue: 'mfa'},
+    {text: 'MTA', fieldValue: 'mta'},
+    {text: 'NotfallsanitäterIn', fieldValue: 'notfallsanitaeter'},
+    {text: 'PflegestudentIn', fieldValue: 'pflegestudent'},
+    {text: 'PharmaziestudentIn', fieldValue: 'pharmaziestudent'},
+    {text: 'SanitäterIn', fieldValue: 'sanitaeter'},
+    {text: 'ZahnmedizinstudentIn', fieldValue: 'zahnmedizinstudent'}
+]
 
 const progressOptions = new Map()
 
-progressOptions.set('arzt', [])
+progressOptions.set('arzt', [
+    {text: 'Anästhesie', fieldValue : 'vorklinischer-abschnitt'}, 
+    {text: 'Chirugie', fieldValue: 'klinischer-abschnitt'},
+    {text: 'Intensivmedizin', fieldValue: 'klinischer-abschnitt'},
+    {text: 'Notaufnahme', fieldValue: 'klinischer-abschnitt'}, 
+    {text: 'Innere Medizin', fieldValue: 'praktisches-jahr'},
+    {text: 'Allgemeinmedizin', fieldValue: 'klinischer-abschnitt'},
+    {text: 'Andere', fieldValue: 'klinischer-abschnitt'}
+
+])
 progressOptions.set('medizinstudent', [
     {text: 'Vorklinischer Abschnitt', fieldValue : 'vorklinischer-abschnitt'}, 
     {text: 'Klinischer Abschnitt', fieldValue: 'klinischer-abschnitt'}, 
@@ -53,7 +62,33 @@ progressOptions.set('zahnmedizinstudent', [
 ])
 progressOptions.set('sonstige', [])
 
+const initialDomainExperience = {
+    anaesthesie: false,
+    chirugie: false,
+    inneremedizin: false, 
+    intensivmedizin: false,
+    notaufnahme: false,
+    allgemeinmedizin: false, 
+    rettungsdienst: false,
+    labor: false, 
+    verwaltung: false,
+    pflege: false
+}
+
+const famulaturProfessions = new Map() // key = profession, value = array w/ famulatur options
+famulaturProfessions.set('medizinstudent',[
+        {text: 'Anästhesie', value: 'anaesthesie'},
+        {text: 'Chirugie', value: 'chirugie'},
+        {text: 'Innere Medizin', value: 'inneremedizin'},
+        {text: 'Intensivmedizin', value: 'intensivmedizin'},
+        {text: 'Notaufnahme', value: 'notaufnahme'},
+        {text: 'Ich habe noch keine Famulatur abgeschlossen', value: 'nofamulatur'},
+        {text: 'Allgemeinmedizin', value: 'allgemeinmedizin'}
+    ])
+
 export {
     progressOptions,
-    professions
+    professions,
+    famulaturProfessions,
+    initialDomainExperience
 } 

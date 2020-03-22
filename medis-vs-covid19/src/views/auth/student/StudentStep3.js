@@ -11,8 +11,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText'
 
-import {professions, progressOptions} from './config'
+import {professions, progressOptions, famulaturProfessions} from './config'
 
 const useStyles = makeStyles((theme) => ({
   section: { marginBottom: '20px' },
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(3),
+    width: 'calc(50% - 10px)'
   },
   formControlSelect: {
     display: 'none'
@@ -32,11 +34,25 @@ const useStyles = makeStyles((theme) => ({
   anmerkungen: {
     width: '100%',
   },
+  checkboxContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    height: '150px' // quick and dirty way to hold 3 checkboxes per column
+  }
 }));
 
 const Step_3 = (props) => {
-  const [profession, setProfession] = useState('')
-  const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
+  
+  const {
+    setProfession,
+    setEducationalProgress,
+    setDomainExperience,
+    profession,
+    educationalProgress,
+    domainExperience
+  } = props
+
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -59,6 +75,28 @@ const Step_3 = (props) => {
     setProfession(event.target.value)
   }
 
+  const changeEducationalProgress = (event) => {
+    setEducationalProgress(event.target.value)
+  }
+
+  const changeDomainExperience = (event) => {
+    setDomainExperience({...domainExperience, [event.target.name] : event.target.checked})
+  }
+
+  const {
+    anaesthesie,
+    chirugie,
+    inneremedizin, 
+    intensivmedizin,
+    notaufnahme,
+    nofamulatur,
+    allgemeinmedizin,
+    pflege,
+    verwaltung,
+    labor, 
+    rettungsdienst
+  } = domainExperience
+
   return (
     <div>
       <section className={classes.section}>
@@ -69,66 +107,79 @@ const Step_3 = (props) => {
             id="profession"
             value={profession}
             onChange={changeProfession}
+            className={classes.field}
           >
-            {professions.map(({text, fieldValue}) => {
+            {professions.map(({text, fieldValue}, i) => {
                 return(
                 <MenuItem value={fieldValue}>{text}</MenuItem>
                 )
             })}
           </Select> 
         </FormControl>
-        <FormControl className={classes.formControlSelect}>
-          <Select
-            id="eductionalregion"
-            value="Ausbildungsabschnitt"
-            variant="outlined"
-            className={classes.field}
-          >
-            {profession === 'sonstige' ? (<div>TODO Eingabefeld für profession</div>
-            ) : (
-              progressOptions.get(profession).map(({text, fieldValue}) => (<MenuItem value={fieldValue}>{text}</MenuItem>))
-            )}
-            <MenuItem value={1}>Vorklinischer Abschnitt (1. - 4. Semester)</MenuItem>
-            <MenuItem value={2}>5. - 8. Semester</MenuItem>
-            <MenuItem value={3}>> 8. Semester</MenuItem>
-          </Select>
-        </FormControl>
+        {
+          profession ? (
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="profession-select-label">{profession != 'arzt' ? 'Fortschritt' : 'Fachbereich'}</InputLabel>
+            <Select
+              id="educationalProgress"
+              value={educationalProgress}
+              onChange={changeEducationalProgress}
+              className={classes.field}
+            > 
+              {progressOptions.get(profession).map(({text, fieldValue}) => (<MenuItem value={fieldValue}>{text}</MenuItem>))}
+            </Select>
+          </FormControl>
+          ) : (<p></p>)
+        }
       </section>
       <section className={classes.section}>
-        <Typography className={classes.heading}>Welche Famulaturen hast du bereits abgeschlossen? (Mehrfachauswahl möglich)</Typography>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={ana} onChange={handleChange} name="ana" />}
-              label="Anasthäsie"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={inn} onChange={handleChange} name="inn" />}
-              label="Innere Medizin"
-            />
-          </FormGroup>
+        <FormControl className={classes.formControl}>
+          <Typography className={classes.heading}>
+            Hast du eine Vorausbildung oder praktische Berufserfahrung in einem der folgenden Bereiche? (Mehrfachauswahl möglich)
+          </Typography>
+          <div className={classes.checkboxContainer}>
+              <FormControlLabel
+                control={<Checkbox checked={anaesthesie} onChange={changeDomainExperience} name="anaesthesie"/>}
+                label="Anästhesie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={chirugie} onChange={changeDomainExperience} name="chirugie"/>}
+                label="Chirugie"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={inneremedizin} onChange={changeDomainExperience} name="inneremedizin"/>}
+                label="Innere Medizin"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={notaufnahme} onChange={changeDomainExperience} name="notaufnahme"/>}
+                label="Notaufnahme"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={intensivmedizin} onChange={changeDomainExperience} name="intensivmedizin"/>}
+                label="Intensivmedizin"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={allgemeinmedizin} onChange={changeDomainExperience} name="allgemeinmedizin"/>}
+                label="Allgemeinmedizin"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={rettungsdienst} onChange={changeDomainExperience} name="rettungsdienst"/>}
+                label="Rettungsdienst"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={labor} onChange={changeDomainExperience} name="labor"/>}
+                label="Labor"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={verwaltung} onChange={changeDomainExperience} name="verwaltung"/>}
+                label="Verwaltung & Logistik"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={pflege} onChange={changeDomainExperience} name="pflege"/>}
+                label="Pflege"
+              />
+          </div>
         </FormControl>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={not} onChange={handleChange} name="not" />}
-              label="Notaufnahme"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={chi} onChange={handleChange} name="chi" />}
-              label="Chirurgie"
-            />
-          </FormGroup>
-        </FormControl>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={int} onChange={handleChange} name="int" />}
-              label="Intensivmedizin"
-            />
-          </FormGroup>
-        </FormControl>
-
       </section>
       <section className={classes.section}>
         <Typography className={classes.heading}>Anerkennung für Studiumsäquivalente</Typography>
