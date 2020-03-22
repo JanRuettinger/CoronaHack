@@ -1,21 +1,23 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/display-name */
-import React, { lazy } from 'react';
-import { Redirect } from 'react-router-dom';
-import AuthLayout from './layouts/Auth';
-import ErrorLayout from './layouts/Error';
-import Profile from './views/Profile';
-import DashboardLayout from './layouts/Dashboard';
-import DashboardAnalyticsView from './views_old/DashboardAnalytics';
-import DashboardDefaultView from './views_old/DashboardDefault';
-import OverviewView from './views_old/Overview';
-import PresentationView from './views_old/Presentation';
+import React, { lazy } from 'react'
+import { Redirect } from 'react-router-dom'
+import AuthLayout from './layouts/Auth'
+import LandingPage from './views/LandingPage'
+import HelperDataBase from './views/HelperDataBase'
+import StudentLayout from './layouts/StudentDashboard'
+import InstitutionLayout from './layouts/InstitutionDashboard'
+import ErrorLayout from './layouts/Error'
+// import DashboardAnalyticsView from './views_old/DashboardAnalytics'
+// import DashboardDefaultView from './views_old/DashboardDefault'
+// import OverviewView from './views_old/Overview'
+// import PresentationView from './views_old/Presentation'
 
 export default [
   {
     path: '/',
     exact: true,
-    component: () => <Redirect to="/" />
+    component: LandingPage
   },
   {
     path: '/auth',
@@ -32,15 +34,44 @@ export default [
     ]
   },
   {
-    path: '/settings',
-    component: Profile,
-    routes: []
+    path: '/',
+    component: InstitutionLayout,
+    routes: [
+      {
+        path: '/dashboard',
+        exact: true,
+        component: lazy(() => import('src/views/InstitutionDashboard'))
+      },
+      {
+        path: '/helferdatenbank',
+        exact: true,
+        component: HelperDataBase
+      },
+      {
+        component: () => <Redirect to="/errors/error-404" />
+      }
+    ]
   },
   {
-    path: '/dashboard',
-    component: DashboardLayout,
-    routes: []
+    path: '/',
+    component: StudentLayout,
+    routes: [
+      {
+        path: '/settings',
+        exact: true,
+        component: lazy(() => import('src/views/StudentSettings'))
+      },
+      {
+        component: () => <Redirect to="/errors/error-404" />
+      }
+    ]
   },
+
+  // {
+  //   path: '/settings',
+  //   component: Profile,
+  //   routes: []
+  // },
   {
     path: '/errors',
     component: ErrorLayout,
@@ -65,4 +96,4 @@ export default [
       }
     ]
   }
-];
+]
