@@ -18,7 +18,7 @@ import {
   createInstitutionDocument
 } from '../../utilities'
 import { auth } from '../../firebase'
-import Step0 from './Step0'
+
 import StudentStep1 from './student/StudentStep1'
 import StudentStep2 from './student/StudentStep2'
 import StudentStep3 from './student/StudentStep3'
@@ -72,13 +72,13 @@ const CurrentStepStudent = props => {
   const { activeStep } = props
 
   switch (activeStep) {
-    case 1:
+    case 0:
       return <StudentStep1 {...props} />
-    case 2:
+    case 1:
       return <StudentStep2 {...props} />
-    case 3:
+    case 2:
       return <StudentStep3 {...props} />
-    case 4:
+    case 3:
       return <StudentStep4 {...props} />
     default:
       return 'Unknown step'
@@ -89,11 +89,11 @@ const CurrentStepFacility = props => {
   const { activeStep } = props
 
   switch (activeStep) {
-    case 1:
+    case 0:
       return <IntsitutionStep1 {...props} />
-    case 2:
+    case 1:
       return <InstitutionStep2 {...props} />
-    case 3:
+    case 2:
       return <InstitutionStep3 {...props} />
   }
 }
@@ -115,8 +115,7 @@ export default function HorizontalLinearStepper(props) {
   const [activeStep, setActiveStep] = React.useState(0)
   const [skipped, setSkipped] = React.useState(new Set())
 
-  // Signup data
-  const [role, setRole] = useState('helper')
+  const {role} = props.location.state
 
   // steps
   const steps = getSteps(role)
@@ -208,10 +207,7 @@ export default function HorizontalLinearStepper(props) {
         <Divider />
         <CardContent>
           <div className={classes.stepperContainer}>
-            {activeStep === 0 ? (
-              <div />
-            ) : (
-              <Stepper activeStep={activeStep - 1}>
+              <Stepper activeStep={activeStep}>
                 {steps.map((label, index) => {
                   const stepProps = {}
                   const labelProps = {}
@@ -225,7 +221,6 @@ export default function HorizontalLinearStepper(props) {
                   )
                 })}
               </Stepper>
-            )}
           </div>
           <div>
             {activeStep === steps.length + 1 ? (
@@ -239,8 +234,7 @@ export default function HorizontalLinearStepper(props) {
               </div>
             ) : (
               <div className={classes.instructions}>
-                {activeStep === 0 && <Step0 setRole={setRole} role={role} />}
-                {role === 'helper' && activeStep > 0 && (
+                {role === 'helper' && (
                   <CurrentStepStudent
                     {...{
                       activeStep,
@@ -274,7 +268,7 @@ export default function HorizontalLinearStepper(props) {
                   />
                 )}
 
-                {role === 'facility' && activeStep > 0 && (
+                {role === 'facility' && (
                   <CurrentStepFacility
                     {...{
                       activeStep,
