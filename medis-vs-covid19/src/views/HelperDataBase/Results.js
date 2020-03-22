@@ -27,6 +27,7 @@ import ReviewStars from 'src/components/ReviewStars';
 import GenericMoreButton from 'src/components/GenericMoreButton';
 import TableEditBar from 'src/components/TableEditBar';
 import Modal from '@material-ui/core/Modal';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -54,11 +55,19 @@ const useStyles = makeStyles((theme) => ({
     background: 'white',
     top: '20%',
     left: '20%',
-    padding: 20
+  },
+  modalCard: {
+    position: 'relative',
+    minWidth: 300
   },
   moHeader: {
     fontSize: 24,
     marginBottom: 20
+  },
+  closeIcon: {
+    position: 'absolute',
+    top: 5,
+    right: 5
   }
 }));
 
@@ -132,16 +141,26 @@ function Results({ className, customers, ...rest }) {
         onClose={handleClose}
       >
         <div className={classes.modalStyle}>
-          <Typography className={classes.moHeader}>Kontaktdaten</Typography>
-          <Typography id="simple-modal-description">
-            Name: {selectedHelper.name}
-          </Typography>
-          <Typography id="simple-modal-description">
-            E-Mail: {selectedHelper.email}
-          </Typography>
-          <Typography id="simple-modal-description">
-            Telefonnummer: {selectedHelper.Telefonnummer}
-          </Typography>
+          <Card className={classes.modalCard}>
+            <CardHeader title="Kontaktdaten" />
+            <Button 
+              onClick={handleClose}
+              className={classes.closeIcon}>
+              <CloseIcon />
+            </Button>
+            <Divider />
+            <CardContent>
+              <Typography id="simple-modal-description">
+                Name: {selectedHelper.name}
+              </Typography>
+              <Typography id="simple-modal-description">
+                E-Mail: {selectedHelper.email}
+              </Typography>
+              <Typography id="simple-modal-description">
+                Telefonnummer: {selectedHelper.Telefonnummer}
+              </Typography>
+            </CardContent>
+          </Card>
         </div>
       </Modal>
       <Typography
