@@ -6,6 +6,11 @@ import {
   Checkbox,
   FormControlLabel
 } from '@material-ui/core'
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
@@ -34,7 +39,8 @@ const Step_2 = props => {
     setAvailability,
     setCompensation,
     setOperationPlace,
-    operationPlace
+    operationPlace,
+    startDate
   } = props
 
   const changeLocation = event => {
@@ -72,6 +78,21 @@ const Step_2 = props => {
             onChange={changeLocation}
           />
         </div>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Date picker inline"
+            value={startDate}
+            onChange={changeStartDate}
+            KeyboardButtonProps={{
+              'aria-label': 'change date',
+            }}
+          />
+        </MuiPickersUtilsProvider>
         <TextField
           id="point-in-time"
           label="Zeitpunkt"

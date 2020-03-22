@@ -95,7 +95,7 @@ export default function HorizontalLinearStepper() {
   const [email, setEmail] = useState('')
   const [pwd, setPwd] = useState('')
   const [prefLocation, setPrefLocation] = useState('')
-  const [startDate, setStartDate] = useState('')
+  const [startDate, setStartDate] = useState(new Date())
   const [compensation, setCompensation] = useState('')
   const [availability, setAvailability] = useState('')
   const [operationPlace, setOperationPlace] = useState({}) // "Bevorzugte Einsatzstellen"
