@@ -25,8 +25,8 @@ import StudentStep3 from './student/StudentStep3'
 import IntsitutionStep1 from './institution/InstitutionStep1'
 import InstitutionStep2 from './institution/InstitutionStep2'
 import InstitutionStep3 from './institution/InstitutionStep3'
-import { flexibleCompare } from '@fullcalendar/core'
-import { isJSDocAugmentsTag } from 'typescript'
+import { flexibleCompare } from '@fullcalendar/core'  // needed?
+import { isJSDocAugmentsTag } from 'typescript' // needed?
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -122,9 +122,15 @@ export default function HorizontalLinearStepper() {
   // Institution data
   const [institutionName, setInstitutionName] = useState('')
   const [institutionLocation, setInstitutionLocation] = useState('')
-  const [institutionEmail, setInstitutionEmail] = useState('')
-  const [institutionMobile, setInstitutionMobile] = useState('')
   const [institutionKind, setInstitutionKind] = useState('hospital')
+
+  const [institutionContactSurName, setInstitutionContactSurName] = useState('')
+  const [institutionContactLastName, setInstitutionContactLastName] = useState('')
+  const [institutionContactMobile, setInstitutionContactMobile] = useState('')
+  const [institutionContactEmail, setInstitutionContactEmail] = useState('')
+  const [institutionContactCheckPassword, setInstitutionContactCheckPassword] = useState('')
+  const [institutionContactPassword, setInstitutionContactPassword] = useState('')
+
 
   const isStepSkipped = step => {
     return skipped.has(step)
@@ -205,7 +211,7 @@ export default function HorizontalLinearStepper() {
             )}
           </div>
           <div>
-            {activeStep === steps.length ? (
+            {activeStep === steps.length + 1 ? (
               <div>
                 <Typography className={classes.instructions}>
                   All steps completed - you&apos;re finished
@@ -247,16 +253,16 @@ export default function HorizontalLinearStepper() {
                   <CurrentStepFacility
                     {...{
                       activeStep,
-                      institutionName,
                       setInstitutionName,
-                      institutionLocation,
                       setInstitutionLocation,
-                      institutionEmail,
-                      setInstitutionEmail,
-                      institutionMobile,
-                      setInstitutionMobile,
                       institutionKind,
-                      setInstitutionKind
+                      setInstitutionKind,
+                      setInstitutionContactSurName,
+                      setInstitutionContactLastName,
+                      setInstitutionContactMobile,
+                      setInstitutionContactEmail,
+                      setInstitutionContactPassword,
+                      setInstitutionContactCheckPassword
                     }}
                   />
                 )}

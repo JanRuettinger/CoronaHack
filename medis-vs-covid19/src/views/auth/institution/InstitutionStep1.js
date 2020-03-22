@@ -3,13 +3,11 @@ import {
   Typography,
   TextField,
   Divider,
-  Checkbox,
   FormControlLabel
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Radio from '@material-ui/core/Radio'
-import { blockRenderMap } from 'src/components/RichEditor/block'
 
 const useStyles = makeStyles(theme => ({
   section: { margin: '30px' },
@@ -52,17 +50,8 @@ const InstitutionSignup = props => {
   const classes = useStyles()
 
   const {
-    activeStep,
-    role,
-    setRole,
-    institutionName,
     setInstitutionName,
-    institutionLocation,
     setInstitutionLocation,
-    institutionEmail,
-    setInstitutionEmail,
-    institutionMobile,
-    setInstitutionMobile,
     institutionKind,
     setInstitutionKind
   } = props
@@ -73,14 +62,6 @@ const InstitutionSignup = props => {
 
   const changeInstitiutionLocation = event => {
     setInstitutionLocation(event.target.value)
-  }
-
-  const changeInstitutionEmail = event => {
-    setInstitutionEmail(event.target.value)
-  }
-
-  const changeInstitiutionMobile = event => {
-    setInstitutionMobile(event.target.value)
   }
 
   const handleChangeRadio = event => {
@@ -142,7 +123,6 @@ const InstitutionSignup = props => {
                   label="Rettungsdienst"
                 />
               </div>
-
               <div className={classes.radioContainer}>
                 <FormControlLabel
                   className={classes.radio}
@@ -165,7 +145,6 @@ const InstitutionSignup = props => {
               </div>
             </RadioGroup>
           </section>
-
         </div>
       </div>
     </>

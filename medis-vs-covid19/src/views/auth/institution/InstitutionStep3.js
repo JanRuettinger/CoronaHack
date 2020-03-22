@@ -1,15 +1,11 @@
 import React from 'react'
 import {
   Typography,
-  TextField,
   Divider,
   Checkbox,
   FormControlLabel
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import Radio from '@material-ui/core/Radio'
-import { blockRenderMap } from 'src/components/RichEditor/block'
 
 const useStyles = makeStyles(theme => ({
   section: { margin: '30px' },
@@ -52,39 +48,9 @@ const useStyles = makeStyles(theme => ({
 const InstitutionSignup = props => {
   const classes = useStyles()
 
-  const {
-    activeStep,
-    role,
-    setRole,
-    institutionName,
-    setInstitutionName,
-    institutionLocation,
-    setInstitutionLocation,
-    institutionEmail,
-    setInstitutionEmail,
-    institutionMobile,
-    setInstitutionMobile,institutionKind, setInstitutionKind
-  } = props
 
-  const changeInstitiutionName = event => {
-    setInstitutionName(event.target.value)
-  }
+  // TODO: pass up values ??
 
-  const changeInstitiutionLocation = event => {
-    setInstitutionLocation(event.target.value)
-  }
-
-  const changeInstitutionEmail = event => {
-    setInstitutionEmail(event.target.value)
-  }
-
-  const changeInstitiutionMobile = event => {
-    setInstitutionMobile(event.target.value)
-  }
-
-  const handleChangeRadio = event => {
-    setInstitutionKind(event.target.value)
-  };
 
   return (
     <>
@@ -96,14 +62,17 @@ const InstitutionSignup = props => {
         <div className={classes.checkboxContainer}>
           <FormControlLabel
             control={<Checkbox />}
+            required
             label="Wir sichern zu, dass den Helfenden ein Arbeitsvertrag oder eine Ausbildungsvereinbarung und die notwendige Schutzkleidung zur Verfügung gestellt wird.*"
-          />
+            />
           <FormControlLabel
             control={<Checkbox />}
+            required
             label="Ich bestätige, dass meine Angaben korrekt sind und dass ich Mitglied der angegebenen Organisation bin.*"
-          />
+            />
           <FormControlLabel
             control={<Checkbox />}
+            required
             label="Hiermit akzeptiere ich die Datenschutzbedingungen.*"
           />
         </div>

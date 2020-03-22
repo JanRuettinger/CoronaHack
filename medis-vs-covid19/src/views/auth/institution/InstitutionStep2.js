@@ -3,13 +3,8 @@ import {
   Typography,
   TextField,
   Divider,
-  Checkbox,
-  FormControlLabel
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import Radio from '@material-ui/core/Radio'
-import { blockRenderMap } from 'src/components/RichEditor/block'
 
 const useStyles = makeStyles(theme => ({
   section: { margin: '30px' },
@@ -39,27 +34,38 @@ const InstitutionStep2 = props => {
   const classes = useStyles()
 
   const {
-    activeStep,
-    role,
-    setRole,
-    institutionName,
-    setInstitutionName,
-    institutionLocation,
-    setInstitutionLocation,
-    institutionEmail,
-    setInstitutionEmail,
-    institutionMobile,
-    setInstitutionMobile,
-    institutionKind,
-    setInstitutionKind
+    setInstitutionContactSurName,
+    setInstitutionContactLastName,
+    setInstitutionContactMobile,
+    setInstitutionContactEmail,
+    setInstitutionContactPassword,
+    setInstitutionContactCheckPassword
   } = props
 
-  const changeInstitutionEmail = event => {
-    setInstitutionEmail(event.target.value)
+  // TODO: pass up values
+
+  const changeInstitiutionSurName = event => {
+    setInstitutionContactSurName(event.target.value)
+  }
+
+  const changeInstitiutionLastName = event => {
+    setInstitutionContactLastName(event.target.value)
   }
 
   const changeInstitiutionMobile = event => {
-    setInstitutionMobile(event.target.value)
+    setInstitutionContactMobile(event.target.value)
+  }
+
+  const changeInstitiutionEmail = event => {
+    setInstitutionContactEmail(event.target.value)
+  }
+
+  const changeInstitiutionPassword = event => {
+    setInstitutionContactPassword(event.target.value)
+  }
+
+  const changeInstitiutionCheckPassword = event => {
+    setInstitutionContactCheckPassword(event.target.value)
   }
 
   return (
@@ -68,20 +74,20 @@ const InstitutionStep2 = props => {
         <div className={classes.content}>
           <section className={classes.section}>
             <Typography className={classes.heading}>Ansprechpartner</Typography>
-            <Divider className={classes.devider}/>
+            <Divider className={classes.devider} />
             <TextField
               id="firstName"
               label="Vorname"
               variant="outlined"
               className={classes.fieldHalfWidth}
-              onChange={changeInstitiutionMobile}
+              onChange={changeInstitiutionSurName}
             />
             <TextField
               id="lastName"
               label="Nachname"
               variant="outlined"
               className={classes.fieldHalfWidth}
-              onChange={changeInstitiutionMobile}
+              onChange={changeInstitiutionLastName}
             />
             <TextField
               id="mobile"
@@ -93,30 +99,30 @@ const InstitutionStep2 = props => {
           </section>
           <section className={classes.section}>
             <Typography className={classes.heading}>Account</Typography>
-            <Divider className={classes.devider}/>
+            <Divider className={classes.devider} />
             <TextField
               id="email"
               label="Email"
               variant="outlined"
               className={classes.fieldHalfWidth}
-              onChange={changeInstitiutionMobile}
-              style={{marginRight: '50px'}}
+              onChange={changeInstitiutionEmail}
+              style={{ marginRight: '50px' }}
             />
             <TextField
               id="pwd"
               label="Password"
-              type='password'
+              type="password"
               variant="outlined"
               className={classes.fieldHalfWidth}
-              onChange={changeInstitiutionMobile}
-              />
+              onChange={changeInstitiutionPassword}
+            />
             <TextField
               id="confirmPwd"
               label="Verify Password"
-              type='password'
+              type="password"
               variant="outlined"
               className={classes.fieldHalfWidth}
-              onChange={changeInstitiutionMobile}
+              onChange={changeInstitiutionCheckPassword}
             />
           </section>
         </div>
