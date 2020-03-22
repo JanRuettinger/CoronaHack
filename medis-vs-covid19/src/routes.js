@@ -1,21 +1,22 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/display-name */
-import React, { lazy } from 'react';
-import { Redirect } from 'react-router-dom';
-import AuthLayout from './layouts/Auth';
-import ErrorLayout from './layouts/Error';
-import Profile from './views/Profile';
-import DashboardLayout from './layouts/Dashboard';
-import DashboardAnalyticsView from './views_old/DashboardAnalytics';
-import DashboardDefaultView from './views_old/DashboardDefault';
-import OverviewView from './views_old/Overview';
-import PresentationView from './views_old/Presentation';
+import React, { lazy } from 'react'
+import { Redirect } from 'react-router-dom'
+import AuthLayout from './layouts/Auth'
+import ErrorLayout from './layouts/Error'
+import Profile from './views/Profile'
+import LandingPage from './views/LandingPage'
+import DashboardLayout from './layouts/Dashboard'
+import DashboardAnalyticsView from './views_old/DashboardAnalytics'
+import DashboardDefaultView from './views_old/DashboardDefault'
+import OverviewView from './views_old/Overview'
+import PresentationView from './views_old/Presentation'
 
 export default [
   {
     path: '/',
     exact: true,
-    component: () => <Redirect to="/" />
+    component: LandingPage
   },
   {
     path: '/auth',
@@ -65,4 +66,4 @@ export default [
       }
     ]
   }
-];
+]
