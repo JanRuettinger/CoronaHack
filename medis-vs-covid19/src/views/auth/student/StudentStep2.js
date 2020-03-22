@@ -66,15 +66,18 @@ const Step_2 = props => {
   return (
     <div>
       <section className={classes.section}>
-        <div>
+        <Typography className={classes.heading}>
+          Zeitliche und örtliche Verfügbarkeit
+        </Typography>
+        <Divider />
           <TextField
+            required
             id="location"
             label="Bevorzugter Einsatzort"
             variant="outlined"
             className={classes.field}
             onChange={changeLocation}
           />
-        </div>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
             disableToolbar
@@ -91,21 +94,21 @@ const Step_2 = props => {
           />
         </MuiPickersUtilsProvider>
         <TextField
+          required
           id="availability"
           label="Zeitliche Verfügbarkeit"
           variant="outlined"
           className={classes.field}
           onChange={changeAvailability}
         />
-        <div>
           <TextField
+            required
             id="compensation"
             label="Vergütung"
             variant="outlined"
             className={classes.field}
             onChange={changeCompensation}
           />
-        </div>
       </section>
       <section className={classes.section}>
         <Typography className={classes.heading}>

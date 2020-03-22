@@ -100,6 +100,8 @@ const Step_3 = (props) => {
   return (
     <div>
       <section className={classes.section}>
+        <Typography className={classes.heading}>Qualifikation</Typography>
+        <Divider />
         <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel id="profession">Ausbildungsgrad</InputLabel>
           <Select
@@ -131,8 +133,6 @@ const Step_3 = (props) => {
           </FormControl>
           ) : (<p></p>)
         }
-      </section>
-      <section className={classes.section}>
         <FormControl className={classes.formControl}>
           <Typography className={classes.heading}>
             Hast du eine Vorausbildung oder praktische Berufserfahrung in einem der folgenden Bereiche? (Mehrfachauswahl möglich)
@@ -180,8 +180,6 @@ const Step_3 = (props) => {
               />
           </div>
         </FormControl>
-      </section>
-      <section className={classes.section}>
         <Typography className={classes.heading}>Anerkennung für Studiumsäquivalente</Typography>
         <FormControl component="fieldset">
           <RadioGroup aria-label="certificate" name="certificate" value={'noCerti'} onChange={handleChangeRadio}>
@@ -189,8 +187,6 @@ const Step_3 = (props) => {
             <FormControlLabel value="noCerti" control={<Radio />} label="Ich helfe auch ohne Anerkennung bzw. benötige diese nicht" />
           </RadioGroup>
         </FormControl>
-      </section>
-      <section className={classes.section}>
         <TextField
         className={classes.anmerkungen}
         id="outlined-multiline-static"
@@ -199,8 +195,6 @@ const Step_3 = (props) => {
         rows="4"
         defaultValue=""
         variant="outlined"/>
-      </section>
-      <section className={classes.section}>
         <FormControl className={classes.formControl}>
           <Typography className={classes.heading}>
             Einverständniserklärungen

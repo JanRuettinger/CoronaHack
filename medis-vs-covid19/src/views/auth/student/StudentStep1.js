@@ -44,6 +44,7 @@ const Step_1 = props => {
         <Typography className={classes.heading}>Profil</Typography>
         <Divider />
         <TextField
+          required
           id="firstname"
           label="Vorname"
           variant="outlined"
@@ -51,6 +52,7 @@ const Step_1 = props => {
           onChange={changeFirstname}
         />
         <TextField
+          required
           id="lastname"
           label="Nachname"
           variant="outlined"
@@ -58,6 +60,7 @@ const Step_1 = props => {
           onChange={changeLastname}
         />
         <TextField
+          required
           id="mobile"
           label="Mobil"
           variant="outlined"
@@ -69,6 +72,7 @@ const Step_1 = props => {
         <Typography className={classes.heading}>Account</Typography>
         <Divider />
         <TextField
+          required
           id="email"
           label="Email"
           type="email"
@@ -77,6 +81,7 @@ const Step_1 = props => {
           onChange={changeEmail}
         />
         <TextField
+          required
           id="password"
           label="Password"
           type="password"
@@ -85,6 +90,7 @@ const Step_1 = props => {
           onChange={changePassword}
         />
         <TextField
+          required
           id="verifypassword"
           label="Verify Password"
           type="password"
