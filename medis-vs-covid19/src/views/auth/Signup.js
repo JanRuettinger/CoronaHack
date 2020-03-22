@@ -18,11 +18,11 @@ import {
   createInstitutionDocument
 } from '../../utilities'
 import { auth } from '../../firebase'
-import Step0 from './student/Step0'
-import Step1 from './student/Step1'
-import Step2 from './student/Step2'
-import Step3 from './student/Step3'
-import InstitutionSignup from './institution/InstitutionSignup'
+import Step0 from './Step0'
+import Step1 from './student/StudentStep1'
+import Step2 from './student/StudentStep2'
+import Step3 from './student/StudentStep3'
+import InstitutionSignup from './institution/InstitutionStep1'
 import { flexibleCompare } from '@fullcalendar/core'
 import { isJSDocAugmentsTag } from 'typescript'
 
@@ -62,12 +62,10 @@ function getSteps() {
   ]
 }
 
-const CurrentStep = props => {
+const CurrentStepStudent = props => {
   const { activeStep } = props
 
   switch (activeStep) {
-    case 0:
-      return <Step0 {...props} />
     case 1:
       return <Step1 {...props} />
     case 2:
@@ -78,6 +76,23 @@ const CurrentStep = props => {
       return 'Unknown step'
   }
 }
+
+// const CurrentStep = props => {
+//   const { activeStep } = props
+
+//   switch (activeStep) {
+//     case 0:
+//       return <Step0 {...props} />
+//     case 1:
+//       return <Step1 {...props} />
+//     case 2:
+//       return <Step2 {...props} />
+//     case 3:
+//       return <Step3 {...props} />
+//     default:
+//       return 'Unknown step'
+//   }
+// }
 
 export default function HorizontalLinearStepper() {
   const classes = useStyles()
@@ -199,12 +214,13 @@ export default function HorizontalLinearStepper() {
               </div>
             ) : (
               <div className={classes.instructions}>
-                {role === 'helper' ? (
-                  <CurrentStep
+                {activeStep === 0 && 
+                <Step0 setRole={setRole} role={role}/>
+                }
+                {role === 'helper' && activeStep > 0 && (
+                  <CurrentStepStudent
                     {...{
                       activeStep,
-                      role,
-                      setRole,
                       firstname,
                       setFirstname,
                       lastname,
@@ -225,12 +241,12 @@ export default function HorizontalLinearStepper() {
                       setAvailability
                     }}
                   />
-                ) : (
+                ) }
+                
+                { role === 'facility' && activeStep > 0 && (
                   <InstitutionSignup
                     {...{
                       activeStep,
-                      role,
-                      setRole,
                       institutionName,
                       setInstitutionName,
                       institutionLocation,
