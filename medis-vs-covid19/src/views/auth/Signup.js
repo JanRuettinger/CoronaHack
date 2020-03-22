@@ -13,22 +13,28 @@ import {
   Divider
 } from '@material-ui/core'
 
-import { createStudentDocument, createInstitutionDocument } from '../../utilities';
-import { auth } from '../../firebase';
-import Step0 from './student/Step0'
+import {
+  createStudentDocument,
+  createInstitutionDocument
+} from '../../utilities'
+import { auth } from '../../firebase'
+
 import Step1 from './student/Step1'
 import Step2 from './student/Step2'
 import Step3 from './student/Step3'
+import Step4 from './student/Step4'
 import InstitutionSignup from './institution/InstitutionSignup'
-import { flexibleCompare } from '@fullcalendar/core';
-import { isJSDocAugmentsTag } from 'typescript';
+import { flexibleCompare } from '@fullcalendar/core'
+import { isJSDocAugmentsTag } from 'typescript'
+
+import {initialDomainExperience} from './student/config'
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
   },
   button: {
-    width: 100,
+    minWidth: 100,
     marginRight: theme.spacing(1)
   },
   instructions: {
@@ -52,11 +58,22 @@ const useStyles = makeStyles(theme => ({
 
 function getSteps() {
   return [
-    'Rolle',
     'Persönliche Information',
     'Über deinen Einsatz',
-    'Deine Qualifikation'
+    'Deine Qualifikation',
+    ''
   ]
+}
+
+function getText(activeStep) {
+  const nextLabels = [
+    'Weiter',
+    'Weiter',
+    'Weiter',
+    'Anmelden',
+    'Weiter zur Plattform'
+  ];
+  return nextLabels[activeStep]
 }
 
 const CurrentStep = props => {
@@ -64,13 +81,13 @@ const CurrentStep = props => {
 
   switch (activeStep) {
     case 0:
-      return <Step0 {...props} />
-    case 1:
       return <Step1 {...props} />
-    case 2:
+    case 1:
       return <Step2 {...props} />
-    case 3:
+    case 2:
       return <Step3 {...props} />
+    case 3:
+      return <Step4 {...props} />
     default:
       return 'Unknown step'
   }
@@ -92,10 +109,13 @@ export default function HorizontalLinearStepper() {
   const [email, setEmail] = useState('')
   const [pwd, setPwd] = useState('')
   const [prefLocation, setPrefLocation] = useState('')
-  const [startDate, setStartDate] = useState('')
+  const [startDate, setStartDate] = useState(new Date())
   const [compensation, setCompensation] = useState('')
   const [availability, setAvailability] = useState('')
-  const [operationPlace, setOperationPlace] = useState({})
+  const [operationPlace, setOperationPlace] = useState({}) // "Bevorzugte Einsatzstellen"
+  const [profession, setProfession] = useState('')
+  const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
+  const [domainExperience, setDomainExperience] = useState(initialDomainExperience)
 
   //Institution data
   const [institutionName, setInstitutionName] = useState('')
@@ -128,35 +148,33 @@ export default function HorizontalLinearStepper() {
   }
 
   const handleSubmit = async event => {
-    event.preventDefault();
+    event.preventDefault()
     // const { email, password, displayName } = this.state;
-    var email = "example@gmail.com"
-    var password = "noidea"
-    var displayName = "MyExample"
-    if(role === 'helper'){
+    var email = 'example@gmail.com'
+    var password = 'noidea'
+    var displayName = 'MyExample'
+    if (role === 'helper') {
       try {
         const { user } = await auth.createUserWithEmailAndPassword(
           email,
-          password,
-        );
-        createStudentDocument(user, { displayName });
+          password
+        )
+        createStudentDocument(user, { displayName })
       } catch (error) {
-        alert(error);
+        alert(error)
       }
-    }
-    else {
+    } else {
       try {
         const { user } = await auth.createUserWithEmailAndPassword(
           email,
-          password,
-        );
-        createInstitutionDocument(user, { displayName });
+          password
+        )
+        createInstitutionDocument(user, { displayName })
       } catch (error) {
-        alert(error);
+        alert(error)
       }
     }
-    
-  };
+  }
 
   return (
     <div className={classes.root}>
@@ -165,7 +183,7 @@ export default function HorizontalLinearStepper() {
         <Divider />
         <CardContent>
           <div>
-            {activeStep === 0 ? (
+            {activeStep === steps.length - 1 ? (
               <div />
             ) : (
               <Stepper activeStep={activeStep}>
@@ -219,7 +237,15 @@ export default function HorizontalLinearStepper() {
                       compensation,
                       setCompensation,
                       availability,
-                      setAvailability
+                      setAvailability,
+                      operationPlace, 
+                      setOperationPlace, // "Bevorzugte Einsatzstellen"
+                      profession, 
+                      setProfession,
+                      educationalProgress, 
+                      setEducationalProgress,
+                      domainExperience, 
+                      setDomainExperience
                     }}
                   />
                 ) : (
@@ -263,7 +289,7 @@ export default function HorizontalLinearStepper() {
               onClick={handleNext}
               className={classes.button}
             >
-              Weiter
+              {getText(activeStep)}
             </Button>
           </div>
         </CardActions>
