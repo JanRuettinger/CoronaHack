@@ -38,11 +38,6 @@ export default [
     component: InstitutionLayout,
     routes: [
       {
-        path: '/dashboard',
-        exact: true,
-        component: lazy(() => import('src/views/InstitutionDashboard'))
-      },
-      {
         path: '/helferdatenbank',
         exact: true,
         component: HelperDataBase

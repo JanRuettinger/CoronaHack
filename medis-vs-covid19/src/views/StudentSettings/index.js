@@ -13,6 +13,7 @@ import {
 import Page from 'src/components/Page'
 import Account from './Account'
 import Deployment from './Deployment'
+import Qualifications from './Qualifications'
 import Topbar from '../../layouts/Auth/Topbar'
 
 const useStyles = makeStyles(theme => ({
@@ -63,6 +64,7 @@ function Profile() {
           <div className={classes.content}>
             {value === 0 && <Account />}
             {value === 1 && <Deployment />}
+            {value === 2 && <Qualifications />}
           </div>
         </Container>
       </Page>
