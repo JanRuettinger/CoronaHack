@@ -125,8 +125,9 @@ function HelperDataBase({ route }) {
   {
     "id": 4,
     "name": "Mary Heart",
-    "ausbildungsstand": "Ärztin",
-    "ausbildungsdetails": "Innere Medizin",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Innere Medizin",
     "startzeit": "21.03.2020",
     "verfuegbarkeit": "10 h pro Woche",
     "verguetung": "benötigt"
