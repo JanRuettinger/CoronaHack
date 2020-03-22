@@ -84,7 +84,8 @@ const Step_3 = (props) => {
             variant="outlined"
             className={classes.field}
           >
-            {profession === 'sonstige' ? (<div>TODO Eingabefeld für profession</div>
+            {!profession || profession === 'sonstige' ? (
+              <div>TODO Eingabefeld für profession</div>
             ) : (
               progressOptions.get(profession).map(({text, fieldValue}) => (<MenuItem value={fieldValue}>{text}</MenuItem>))
             )}

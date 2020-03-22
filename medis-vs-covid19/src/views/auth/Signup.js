@@ -22,6 +22,7 @@ import Step0 from './student/Step0'
 import Step1 from './student/Step1'
 import Step2 from './student/Step2'
 import Step3 from './student/Step3'
+import Step4 from './student/Step4'
 import InstitutionSignup from './institution/InstitutionSignup'
 import { flexibleCompare } from '@fullcalendar/core'
 import { isJSDocAugmentsTag } from 'typescript'
@@ -31,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%'
   },
   button: {
-    width: 100,
+    minWidth: 100,
     marginRight: theme.spacing(1)
   },
   instructions: {
@@ -58,7 +59,8 @@ function getSteps() {
     'Rolle',
     'Persönliche Information',
     'Über deinen Einsatz',
-    'Deine Qualifikation'
+    'Deine Qualifikation',
+    ''
   ]
 }
 
@@ -74,6 +76,8 @@ const CurrentStep = props => {
       return <Step2 {...props} />
     case 3:
       return <Step3 {...props} />
+    case 4:
+      return <Step4 {...props} />
     default:
       return 'Unknown step'
   }
@@ -168,7 +172,7 @@ export default function HorizontalLinearStepper() {
         <Divider />
         <CardContent>
           <div>
-            {activeStep === 0 ? (
+            {activeStep === steps.length - 1 ? (
               <div />
             ) : (
               <Stepper activeStep={activeStep}>
@@ -260,14 +264,26 @@ export default function HorizontalLinearStepper() {
                 </Button>
               )}
             </div>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={handleNext}
-              className={classes.button}
-            >
-              Weiter
-            </Button>
+            {activeStep === steps.length - 1 ? (
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  Weiter zur Plattform
+                </Button>
+              ) : (
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  Weiter
+                </Button>
+              )
+            }
           </div>
         </CardActions>
       </Card>
