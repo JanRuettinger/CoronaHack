@@ -34,7 +34,9 @@ import {initialDomainExperience} from './student/config'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%'
+    width: '100%',
+    paddingLeft: '40px', 
+    paddingRight: '40px'
   },
   button: {
     minWidth: 100,
