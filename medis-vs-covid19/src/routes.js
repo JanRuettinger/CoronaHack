@@ -3,6 +3,7 @@
 import React, { lazy } from 'react'
 import { Redirect } from 'react-router-dom'
 import AuthLayout from './layouts/Auth'
+import LandingPage from './views/LandingPage'
 import DashboardLayout from './layouts/Dashboard'
 import ErrorLayout from './layouts/Error'
 import Profile from './views/Profile'
@@ -15,7 +16,7 @@ export default [
   {
     path: '/',
     exact: true,
-    component: () => <Redirect to="/" />
+    component: LandingPage
   },
   {
     path: '/auth',
