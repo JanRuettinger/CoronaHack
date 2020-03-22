@@ -241,7 +241,12 @@ function LandingPage({ route, history }) {
               </div>
             </div>
             <div className={classes.selectionCards}>
-              <RouterLink to="/auth/signup">
+              <RouterLink to={{
+                pathname: '/auth/signup',
+                state: {
+                  role: 'helper'
+                }
+              }}>
                 <Button>
                   <Card className={classes.selectionCard}>
                     <div className={classes.cardColumns}>
@@ -260,7 +265,12 @@ function LandingPage({ route, history }) {
                   </Card>
                 </Button>
               </RouterLink>
-              <RouterLink to="/auth/signup">
+              <RouterLink to={{
+                pathname: '/auth/signup',
+                state: {
+                  role: 'facility'
+                }
+              }}>
                 <Button>
                   <Card className={classes.selectionCard}>
                     <div className={classes.cardColumns}>

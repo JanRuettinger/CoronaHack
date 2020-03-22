@@ -19,13 +19,15 @@ import {
 } from '../../utilities'
 import { auth } from '../../firebase'
 
-import Step1 from './student/Step1'
-import Step2 from './student/Step2'
-import Step3 from './student/Step3'
-import Step4 from './student/Step4'
-import InstitutionSignup from './institution/InstitutionSignup'
-import { flexibleCompare } from '@fullcalendar/core'
-import { isJSDocAugmentsTag } from 'typescript'
+import StudentStep1 from './student/StudentStep1'
+import StudentStep2 from './student/StudentStep2'
+import StudentStep3 from './student/StudentStep3'
+import StudentStep4 from './student/StudentStep4'
+import IntsitutionStep1 from './institution/InstitutionStep1'
+import InstitutionStep2 from './institution/InstitutionStep2'
+import InstitutionStep3 from './institution/InstitutionStep3'
+import { flexibleCompare } from '@fullcalendar/core'  // needed?
+import { isJSDocAugmentsTag } from 'typescript' // needed?
 
 import {initialDomainExperience} from './student/config'
 
@@ -36,6 +38,9 @@ const useStyles = makeStyles(theme => ({
   button: {
     minWidth: 100,
     marginRight: theme.spacing(1)
+  },
+  stepperContainer: {
+    padding: '0 150px'
   },
   instructions: {
     position: 'relative',
@@ -56,53 +61,72 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function getSteps() {
-  return [
-    'Persönliche Information',
-    'Über deinen Einsatz',
-    'Deine Qualifikation',
-    ''
-  ]
+
+function getSteps(role) {
+  return role === 'helper'
+    ? ['Persönliche Information', 'Über deinen Einsatz', 'Deine Qualifikation', 'Vielen Dank']
+    : ['Allgemeine Informationen', 'Ansprechpartner', 'Einverständnis']
 }
 
-function getText(activeStep) {
-  const nextLabels = [
+const CurrentStepStudent = props => {
+  const { activeStep } = props
+
+  switch (activeStep) {
+    case 0:
+      return <StudentStep1 {...props} />
+    case 1:
+      return <StudentStep2 {...props} />
+    case 2:
+      return <StudentStep3 {...props} />
+    case 3:
+      return <StudentStep4 {...props} />
+    default:
+      return 'Unknown step'
+  }
+}
+
+const CurrentStepFacility = props => {
+  const { activeStep } = props
+
+  switch (activeStep) {
+    case 0:
+      return <IntsitutionStep1 {...props} />
+    case 1:
+      return <InstitutionStep2 {...props} />
+    case 2:
+      return <InstitutionStep3 {...props} />
+  }
+}
+
+function getText(activeStep, role) {
+  const nextHelperLabels = [
     'Weiter',
     'Weiter',
     'Weiter',
     'Anmelden',
     'Weiter zur Plattform'
   ];
-  return nextLabels[activeStep]
+  const nextFacilityLabels = [
+    'Weiter',
+    'Weiter',
+    'Anmelden',
+    'Weiter zur Plattform'
+  ];
+  return role === 'helper' ? nextHelperLabels[activeStep] : nextFacilityLabels[activeStep] 
 }
 
-const CurrentStep = props => {
-  const { activeStep } = props
 
-  switch (activeStep) {
-    case 0:
-      return <Step1 {...props} />
-    case 1:
-      return <Step2 {...props} />
-    case 2:
-      return <Step3 {...props} />
-    case 3:
-      return <Step4 {...props} />
-    default:
-      return 'Unknown step'
-  }
-}
-
-export default function HorizontalLinearStepper() {
+export default function HorizontalLinearStepper(props) {
   const classes = useStyles()
   const [activeStep, setActiveStep] = React.useState(0)
   const [skipped, setSkipped] = React.useState(new Set())
-  const steps = getSteps()
 
-  // Signup data
-  const [role, setRole] = useState('helper')
+  const {role} = props.location.state
 
-  //Student data
+  // steps
+  const steps = getSteps(role)
+
+  // Student data
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [mobileNumber, setMobileNumber] = useState('')
@@ -117,12 +141,18 @@ export default function HorizontalLinearStepper() {
   const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
   const [domainExperience, setDomainExperience] = useState(initialDomainExperience)
 
-  //Institution data
+  // Institution data
   const [institutionName, setInstitutionName] = useState('')
   const [institutionLocation, setInstitutionLocation] = useState('')
-  const [institutionEmail, setInstitutionEmail] = useState('')
-  const [institutionMobile, setInstitutionMobile] = useState('')
   const [institutionKind, setInstitutionKind] = useState('hospital')
+
+  const [institutionContactSurName, setInstitutionContactSurName] = useState('')
+  const [institutionContactLastName, setInstitutionContactLastName] = useState('')
+  const [institutionContactMobile, setInstitutionContactMobile] = useState('')
+  const [institutionContactEmail, setInstitutionContactEmail] = useState('')
+  const [institutionContactCheckPassword, setInstitutionContactCheckPassword] = useState('')
+  const [institutionContactPassword, setInstitutionContactPassword] = useState('')
+
 
   const isStepSkipped = step => {
     return skipped.has(step)
@@ -182,10 +212,7 @@ export default function HorizontalLinearStepper() {
         <CardHeader title="Anmeldeformular" />
         <Divider />
         <CardContent>
-          <div>
-            {activeStep === steps.length - 1 ? (
-              <div />
-            ) : (
+          <div className={classes.stepperContainer}>
               <Stepper activeStep={activeStep}>
                 {steps.map((label, index) => {
                   const stepProps = {}
@@ -200,10 +227,9 @@ export default function HorizontalLinearStepper() {
                   )
                 })}
               </Stepper>
-            )}
           </div>
           <div>
-            {activeStep === steps.length ? (
+            {activeStep === steps.length + 1 ? (
               <div>
                 <Typography className={classes.instructions}>
                   All steps completed - you&apos;re finished
@@ -214,12 +240,10 @@ export default function HorizontalLinearStepper() {
               </div>
             ) : (
               <div className={classes.instructions}>
-                {role === 'helper' ? (
-                  <CurrentStep
+                {role === 'helper' && (
+                  <CurrentStepStudent
                     {...{
                       activeStep,
-                      role,
-                      setRole,
                       firstname,
                       setFirstname,
                       lastname,
@@ -248,22 +272,22 @@ export default function HorizontalLinearStepper() {
                       setDomainExperience
                     }}
                   />
-                ) : (
-                  <InstitutionSignup
+                )}
+
+                {role === 'facility' && (
+                  <CurrentStepFacility
                     {...{
                       activeStep,
-                      role,
-                      setRole,
-                      institutionName,
                       setInstitutionName,
-                      institutionLocation,
                       setInstitutionLocation,
-                      institutionEmail,
-                      setInstitutionEmail,
-                      institutionMobile,
-                      setInstitutionMobile,
                       institutionKind,
-                      setInstitutionKind
+                      setInstitutionKind,
+                      setInstitutionContactSurName,
+                      setInstitutionContactLastName,
+                      setInstitutionContactMobile,
+                      setInstitutionContactEmail,
+                      setInstitutionContactPassword,
+                      setInstitutionContactCheckPassword
                     }}
                   />
                 )}
