@@ -4,14 +4,19 @@ export const collectIdsAndData = doc => ({ id: doc.id, ...doc.data() })
 
 export const createStudentDocument = async (user, additionalData) => {
   // If there is no user, let's not do this.
+  console.log("FAIL")
   if (!user) return;
 
+  console.log("SECCESS")
+  console.log(user)
   // Get a reference to the location in the Firestore where the user
   // document may or may not exist.
   const userRef = firestore.doc(`students/${user.uid}`);
+  console.log(userRef)
 
   // Go and fetch a document from that location.
   const snapshot = await userRef.get();
+  console.log(snapshot)
 
   // If there isn't a document for that user. Let's use information
   // that we got from either Google or our sign up form.

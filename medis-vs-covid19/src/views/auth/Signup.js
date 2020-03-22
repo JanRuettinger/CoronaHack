@@ -35,8 +35,8 @@ import {initialDomainExperience} from './student/config'
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    paddingLeft: '40px', 
-    paddingRight: '40px'
+    paddingLeft: '8%', 
+    paddingRight: '8%'
   },
   button: {
     minWidth: 100,
@@ -151,7 +151,7 @@ export default function HorizontalLinearStepper(props) {
   const [institutionLocation, setInstitutionLocation] = useState('')
   const [institutionKind, setInstitutionKind] = useState('hospital')
 
-  const [institutionContactSurName, setInstitutionContactSurName] = useState('')
+  const [institutionContactName, setInstitutionContactName] = useState('')
   const [institutionContactLastName, setInstitutionContactLastName] = useState('')
   const [institutionContactMobile, setInstitutionContactMobile] = useState('')
   const [institutionContactEmail, setInstitutionContactEmail] = useState('')
@@ -163,7 +163,34 @@ export default function HorizontalLinearStepper(props) {
     return skipped.has(step)
   }
 
-  const handleNext = () => {
+  const handleNext = async event => {
+    if(getText(activeStep) === 'Anmelden'){
+      // TODO: password must be at least 6 char
+      if (role === 'helper') {
+        try {
+          const { user } = await auth.createUserWithEmailAndPassword(
+            email,
+            pwd
+          )
+          createStudentDocument(user, 
+            { firstname , lastname, mobileNumber, prefLocation, startDate, compensation, availability, operationPlace, profession, educationalProgress, domainExperience  })
+        } catch (error) {
+          alert(error)
+        }
+      } else {
+        try {
+          const { user } = await auth.createUserWithEmailAndPassword(
+            institutionContactEmail,
+            institutionContactPassword
+          )
+          createInstitutionDocument(user, 
+            { institutionName , institutionLocation, institutionKind, institutionContactName, institutionContactLastName, institutionContactMobile, institutionContactCheckPassword  })
+        } catch (error) {
+          alert(error)
+        }
+      }
+    }
+
     if(getText(activeStep) === 'Weiter zur Plattform'){
       props.history.push("/settings");
     }
@@ -184,35 +211,6 @@ export default function HorizontalLinearStepper(props) {
 
   const handleReset = () => {
     setActiveStep(0)
-  }
-
-  const handleSubmit = async event => {
-    event.preventDefault()
-    // const { email, password, displayName } = this.state;
-    var email = 'example@gmail.com'
-    var password = 'noidea'
-    var displayName = 'MyExample'
-    if (role === 'helper') {
-      try {
-        const { user } = await auth.createUserWithEmailAndPassword(
-          email,
-          password
-        )
-        createStudentDocument(user, { displayName })
-      } catch (error) {
-        alert(error)
-      }
-    } else {
-      try {
-        const { user } = await auth.createUserWithEmailAndPassword(
-          email,
-          password
-        )
-        createInstitutionDocument(user, { displayName })
-      } catch (error) {
-        alert(error)
-      }
-    }
   }
 
   return (
@@ -243,9 +241,6 @@ export default function HorizontalLinearStepper(props) {
                 <Typography className={classes.instructions}>
                   All steps completed - you&apos;re finished
                 </Typography>
-                <Button onClick={handleSubmit} className={classes.button}>
-                  Submit
-                </Button>
               </div>
             ) : (
               <div className={classes.instructions}>
@@ -291,7 +286,7 @@ export default function HorizontalLinearStepper(props) {
                       setInstitutionLocation,
                       institutionKind,
                       setInstitutionKind,
-                      setInstitutionContactSurName,
+                      setInstitutionContactName,
                       setInstitutionContactLastName,
                       setInstitutionContactMobile,
                       setInstitutionContactEmail,
