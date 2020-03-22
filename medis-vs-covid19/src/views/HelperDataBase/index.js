@@ -73,20 +73,172 @@ function HelperDataBase({ route }) {
 
   // setProfession(professions[0]['fieldValue']);
 
+  // const [helpers, setHelpers] = useState([]);
+  const customers = [{
+    "id": 0,
+    "name": "Abbie Wilson",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Anästhesie",
+    "startzeit": "21.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "benötigt",
+    "email": "abbie@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "id": 1,
+    "name": "Greta Bistin",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Chirugie",
+    "startzeit": "21.04.2020",
+    "verfuegbarkeit": "20 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "", // "greta@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "id": 2,
+    "name": "David Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Innere Medizin",
+    "startzeit": "24.03.2020",
+    "verfuegbarkeit": "30 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "", //"david@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "id": 3,
+    "name": "David Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Innere Medizin",
+    "startzeit": "24.03.2020",
+    "verfuegbarkeit": "30 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "", // "david@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "id": 4,
+    "name": "Abbie Wilson",
+    "ausbildungsstand": "Ärztin",
+    "ausbildungsdetails": "Innere Medizin",
+    "startzeit": "21.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "benötigt"
+  }
+  ];
+
+  const customersKlinisch = [{
+    "name": "Abbie Wilson",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Anästhesie",
+    "startzeit": "21.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "benötigt",
+    "email": "abbie@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "Greta Bistin",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Chirugie",
+    "startzeit": "21.04.2020",
+    "verfuegbarkeit": "20 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "greta@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "David Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Innere Medizin",
+    "startzeit": "24.03.2020",
+    "verfuegbarkeit": "30 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "david@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "Dorothe Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Innere Medizin",
+    "startzeit": "22.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "Dorothe@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "Gerd Müller",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Vorklinischer Abschnitt (1. - 4. Semester)",
+    "famulatur": "Notaufnahme",
+    "startzeit": "22.03.2020",
+    "verfuegbarkeit": "20 h pro Woche",
+    "verguetung": "benötigt",
+    "email": "gerd@web.de",
+    "Telefonnummer":"+4917666612312"
+  }];
+
+  const customersKlinischFamu = [{
+    "name": "Greta Bistin",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Klinischer Abschnitt (5. - 10. Semester)",
+    "famulatur": "Notaufnahme",
+    "startzeit": "21.04.2020",
+    "verfuegbarkeit": "20 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "greta@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "David Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Klinischer Abschnitt (5. - 10. Semester)",
+    "famulatur": "Notaufnahme",
+    "startzeit": "24.03.2020",
+    "verfuegbarkeit": "30 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "david@web.de",
+    "Telefonnummer":"+4917666612312"
+  },
+  {
+    "name": "Dorothe Baumann",
+    "ausbildungsstand": "MedizinstudentIn",
+    "vorbildungsabschnitt": "Klinischer Abschnitt (5. - 10. Semester)",
+    "famulatur": "Notaufnahme",
+    "startzeit": "22.03.2020",
+    "verfuegbarkeit": "10 h pro Woche",
+    "verguetung": "nicht benötigt",
+    "email": "Dorothe@web.de",
+    "Telefonnummer":"+4917666612312"
+  }];
+
+  const [activeCustomers, setActiveCustomers] = React.useState(customers);
+
   const changeProfession = (e) => {
     setProfession(e.target.value);
   };
   const changeAbschnitt = (e) => {
+    setActiveCustomers(customersKlinisch);
     setAbschnitt(e.target.value);
   };
   const changeFamulatur = (e) => {
+    setActiveCustomers(customersKlinischFamu);
     setFamulatur(e.target.value);
   };
   const changeProfCheck = (e) => {
 
   };
-
-  const [helpers, setHelpers] = useState([]);
 
   return (
     <>
@@ -181,10 +333,10 @@ function HelperDataBase({ route }) {
               }
             </div>
           </div>
-          {helpers && (
+          {customers && (
             <Results
               className={classes.results}
-              helpers={helpers}
+              customers={activeCustomers}
             />
           )}
         </Container>

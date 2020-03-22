@@ -26,6 +26,7 @@ import getInitials from 'src/utils/getInitials';
 import ReviewStars from 'src/components/ReviewStars';
 import GenericMoreButton from 'src/components/GenericMoreButton';
 import TableEditBar from 'src/components/TableEditBar';
+import Modal from '@material-ui/core/Modal';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -47,6 +48,17 @@ const useStyles = makeStyles((theme) => ({
   actions: {
     padding: theme.spacing(1),
     justifyContent: 'flex-end'
+  },
+  modalStyle: {
+    position: 'absolute',
+    background: 'white',
+    top: '20%',
+    left: '20%',
+    padding: 20
+  },
+  moHeader: {
+    fontSize: 24,
+    marginBottom: 20
   }
 }));
 
@@ -96,11 +108,40 @@ function Results({ className, customers, ...rest }) {
     setRowsPerPage(event.target.value);
   };
 
+  const [open, setOpen] = React.useState(false);
+
+  let activeCustomer = customers[0];
+  const showData = (e) => {
+    activeCustomer = e.target.getAttribute('dataCustomer');
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div
       {...rest}
       className={clsx(classes.root, className)}
     >
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <div className={classes.modalStyle}>
+          <Typography className={classes.moHeader}>Kontaktdaten</Typography>
+          <Typography id="simple-modal-description">
+            Name: {activeCustomer.name}
+          </Typography>
+          <Typography id="simple-modal-description">
+            E-Mail: {activeCustomer.email}
+          </Typography>
+          <Typography id="simple-modal-description">
+            Telefonnummer: {activeCustomer.Telefonnummer}
+          </Typography>
+        </div>
+      </Modal>
       <Typography
         color="textSecondary"
         gutterBottom
@@ -145,7 +186,7 @@ function Results({ className, customers, ...rest }) {
                     <TableCell>Startzeitpunkt</TableCell>
                     <TableCell>Verfügbarkeit</TableCell>
                     <TableCell>Vergütung</TableCell>
-                    <TableCell align="right">Actions</TableCell>
+                    <TableCell align="right"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -182,29 +223,28 @@ function Results({ className, customers, ...rest }) {
                             >
                               {customer.name}
                             </Link>
-                            <div>{customer.email}</div>
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell>{customer.location}</TableCell>
+                      <TableCell>{customer.ausbildungsstand}</TableCell>
                       <TableCell>
-                        {customer.currency}
-                        {customer.spent}
+                        {customer.vorbildungsabschnitt}
                       </TableCell>
-                      <TableCell>{customer.type}</TableCell>
-                      <TableCell>{customer.projects}</TableCell>
+                      <TableCell>{customer.startzeit}</TableCell>
+                      <TableCell>{customer.verfuegbarkeit}</TableCell>
                       <TableCell>
-                        <ReviewStars value={customer.rating} />
+                        {customer.verguetung}
                       </TableCell>
                       <TableCell align="right">
                         <Button
                           color="primary"
                           component={RouterLink}
                           size="small"
-                          to="/management/customers/1"
+                          dataCustomer={customer}
+                          onClick={showData}
                           variant="outlined"
                         >
-                          View
+                          Kontaktdaten
                         </Button>
                       </TableCell>
                     </TableRow>
