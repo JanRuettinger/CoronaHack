@@ -9,11 +9,12 @@ import {
   Divider,
   colors,
   Typography
-} from '@material-ui/core'
-import Page from 'src/components/Page'
-import Account from './Account'
-import Deployment from './Deployment'
-import Topbar from '../../layouts/Auth/Topbar'
+} from '@material-ui/core';
+import Page from 'src/components/Page';
+import Account from './Account';
+import Deployment from './Deployment';
+import Qualifications from './Qualifications';
+import Topbar from '../../layouts/Auth/Topbar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,8 +39,8 @@ function Profile() {
   const tabs = [
     { value: 0, label: 'Account' },
     { value: 1, label: 'Einsatz' },
-    { value: 2, label: 'Qualifikation' }
-  ]
+    { value: 2, label: 'Qualifikation' },
+  ];
 
   const handleTabsChange = (event, newValue) => {
     setValue(newValue)
@@ -47,26 +48,27 @@ function Profile() {
 
   return (
     <>
-      <Page className={classes.root} title="Profile">
-        <Container maxWidth="lg">
-          <Tabs
-            onChange={handleTabsChange}
-            scrollButtons="auto"
-            value={value}
-            variant="scrollable"
-          >
-            {tabs.map(tab => (
-              <Tab key={tab.value} label={tab.label} value={tab.value} />
-            ))}
-          </Tabs>
-          <Divider className={classes.divider} />
-          <div className={classes.content}>
-            {value === 0 && <Account />}
-            {value === 1 && <Deployment />}
-          </div>
-        </Container>
-      </Page>
-    </>
+    <Page className={classes.root} title="Profile">
+      <Container maxWidth="lg">
+        <Tabs
+          onChange={handleTabsChange}
+          scrollButtons="auto"
+          value={value}
+          variant="scrollable"
+        >
+          {tabs.map(tab => (
+            <Tab key={tab.value} label={tab.label} value={tab.value} />
+          ))}
+        </Tabs>
+        <Divider className={classes.divider} />
+        <div className={classes.content}>
+          {value === 0 && <Account />}
+          {value === 1 && <Deployment />}
+          {value === 2 && <Qualifications />}
+        </div>
+      </Container>
+    </Page>
+  </>
   )
 }
 
