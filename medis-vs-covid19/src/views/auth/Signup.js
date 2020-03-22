@@ -26,6 +26,7 @@ import StudentStep4 from './student/StudentStep4'
 import IntsitutionStep1 from './institution/InstitutionStep1'
 import InstitutionStep2 from './institution/InstitutionStep2'
 import InstitutionStep3 from './institution/InstitutionStep3'
+import InstitutionStep4 from './institution/InstitutionStep4'
 import { flexibleCompare } from '@fullcalendar/core'  // needed?
 import { isJSDocAugmentsTag } from 'typescript' // needed?
 
@@ -95,6 +96,8 @@ const CurrentStepFacility = props => {
       return <InstitutionStep2 {...props} />
     case 2:
       return <InstitutionStep3 {...props} />
+    case 3:
+      return <InstitutionStep4 {...props} />
   }
 }
 
@@ -159,6 +162,10 @@ export default function HorizontalLinearStepper(props) {
   }
 
   const handleNext = () => {
+    if(getText(activeStep) === 'Weiter zur Plattform'){
+      props.history.push("/settings");
+    }
+
     let newSkipped = skipped
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values())
