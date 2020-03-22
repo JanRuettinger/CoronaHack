@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { LinearProgress } from '@material-ui/core';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import HomeIcon from '@material-ui/icons/Home';
-import { Select, MenuItem, Checkbox, TextField, Button, Card, Typography } from '@material-ui/core'
+import { Select, MenuItem, Checkbox, TextField, Button, Card, Typography, FormControl, InputLabel } from '@material-ui/core'
 import { Link as RouterLink } from 'react-router-dom'
 import Results from './Results';
 import { Container } from '@material-ui/core';
@@ -255,21 +255,24 @@ function HelperDataBase({ route }) {
               <Typography className={classes.bold}>
                 Gesuchte Kompetenz *
               </Typography>
-              <Select
-                labelId="profession"
-                id="profession"
-                value={profession}
-                onChange={changeProfession}
-                className={classes.select}
-              >
-                {
-                  professions.map(({ text, fieldValue }, i) => {
-                    return(
-                      <MenuItem value={fieldValue}>{text}</MenuItem>
-                    )
-                  })
-                }
-              </Select>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Kompetenz</InputLabel>
+                <Select
+                  labelId="profession"
+                  id="profession"
+                  value={profession}
+                  onChange={changeProfession}
+                  className={classes.select}
+                >
+                  {
+                    professions.map(({ text, fieldValue }, i) => {
+                      return(
+                        <MenuItem value={fieldValue}>{text}</MenuItem>
+                      )
+                    })
+                  }
+                </Select>
+              </FormControl>
             </div>
             <div className={classes.inputTuple}>
               { !(progressOptions.has(profession)) ? (
@@ -279,24 +282,27 @@ function HelperDataBase({ route }) {
                     <Typography className={classes.bold}>
                       Ausbildungsabschnitt
                     </Typography>
-                    <Select
-                      labelId="progress"
-                      id="progress"
-                      value={abschnitt}
-                      onChange={changeAbschnitt}
-                      className={classes.select}
-                    >
-                      {
-                        progressOptions.get(profession).map(({ text, fieldValue }, i) => {
-                          return(
-                            <div className={classes.checkerRow}>
-                              <Checkbox onChange={changeProfCheck} />
-                              <MenuItem value={fieldValue}>{text}</MenuItem>
-                            </div>
-                          )
-                        })
-                      }
-                    </Select>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel id="demo-simple-select-label">Auswählen</InputLabel>
+                      <Select
+                        labelId="progress"
+                        id="progress"
+                        value={abschnitt}
+                        onChange={changeAbschnitt}
+                        className={classes.select}
+                      >
+                        {
+                          progressOptions.get(profession).map(({ text, fieldValue }, i) => {
+                            return(
+                              <div className={classes.checkerRow}>
+                                <Checkbox onChange={changeProfCheck} />
+                                <MenuItem value={fieldValue}>{text}</MenuItem>
+                              </div>
+                            )
+                          })
+                        }
+                      </Select>
+                    </FormControl>
                   </div>
                 )
               }
@@ -309,25 +315,28 @@ function HelperDataBase({ route }) {
                     <Typography className={classes.bold}>
                       Abgeschlossene Famulaturen
                     </Typography>
-                    <Select
-                      labelId="famulatur"
-                      id="famulatur"
-                      label="Alle"
-                      value={famulatur}
-                      onChange={changeFamulatur}
-                      className={classes.select}
-                    >
-                      {
-                        famulaturProfessions.get(profession).map(({ text, fieldValue }, i) => {
-                          return(
-                            <div className={classes.checkerRow}>
-                              <Checkbox onChange={changeProfCheck} />
-                              <MenuItem value={fieldValue}>{text}</MenuItem>
-                            </div>
-                          )
-                        })
-                      }
-                    </Select>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel id="demo-simple-select-label">Auswählen</InputLabel>
+                      <Select
+                        labelId="famulatur"
+                        id="famulatur"
+                        label="Alle"
+                        value={famulatur}
+                        onChange={changeFamulatur}
+                        className={classes.select}
+                      >
+                        {
+                          famulaturProfessions.get(profession).map(({ text, fieldValue }, i) => {
+                            return(
+                              <div className={classes.checkerRow}>
+                                <Checkbox onChange={changeProfCheck} />
+                                <MenuItem value={fieldValue}>{text}</MenuItem>
+                              </div>
+                            )
+                          })
+                        }
+                      </Select>
+                    </FormControl>
                   </div>
                 )
               }
