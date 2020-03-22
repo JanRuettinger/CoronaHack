@@ -12,13 +12,13 @@ import Radio from '@material-ui/core/Radio'
 import { blockRenderMap } from 'src/components/RichEditor/block'
 
 const useStyles = makeStyles(theme => ({
-  section: { marginBottom: '50px' },
+  section: { margin: '30px' },
   heading: {
     fontWeight: 'bold',
     marginBottom: '1px'
   },
   devider: {
-    margin: '0 27px 11px 0'
+    margin: '2px 27px 11px 0'
   },
   fieldHalfWidth: {
     padding: '5px',
@@ -29,9 +29,6 @@ const useStyles = makeStyles(theme => ({
     padding: '5px',
     width: 'calc(100% - 20px)',
     marginBottom: '10px'
-  },
-  account: {
-    marginTop: '50px'
   },
   email: {
     marginRight: '50px'
@@ -69,9 +66,9 @@ const InstitutionStep2 = props => {
     <>
       <div className={classes.container}>
         <div className={classes.content}>
-          <section>
+          <section className={classes.section}>
             <Typography className={classes.heading}>Ansprechpartner</Typography>
-            <Divider />
+            <Divider className={classes.devider}/>
             <TextField
               id="firstName"
               label="Vorname"
@@ -94,9 +91,9 @@ const InstitutionStep2 = props => {
               onChange={changeInstitiutionMobile}
             />
           </section>
-          <section className={classes.account}>
+          <section className={classes.section}>
             <Typography className={classes.heading}>Account</Typography>
-            <Divider />
+            <Divider className={classes.devider}/>
             <TextField
               id="email"
               label="Email"

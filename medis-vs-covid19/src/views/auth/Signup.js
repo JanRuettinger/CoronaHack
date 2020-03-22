@@ -36,6 +36,9 @@ const useStyles = makeStyles(theme => ({
     width: 100,
     marginRight: theme.spacing(1)
   },
+  stepperContainer: {
+    padding: '0 150px'
+  },
   instructions: {
     position: 'relative',
     marginTop: theme.spacing(1),
@@ -55,13 +58,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function getSteps() {
-  return [
-    'Rolle',
-    'Persönliche Information',
-    'Über deinen Einsatz',
-    'Deine Qualifikation'
-  ]
+function getSteps(role) {
+  return role === 'helper'
+    ? ['Persönliche Information', 'Über deinen Einsatz', 'Deine Qualifikation']
+    : ['Allgemeine Informationen', 'Ansprechpartner', 'Einverständnis']
 }
 
 const CurrentStepStudent = props => {
@@ -98,12 +98,14 @@ export default function HorizontalLinearStepper() {
   const classes = useStyles()
   const [activeStep, setActiveStep] = React.useState(0)
   const [skipped, setSkipped] = React.useState(new Set())
-  const steps = getSteps()
 
   // Signup data
   const [role, setRole] = useState('helper')
 
-  //Student data
+  // steps
+  const steps = getSteps(role)
+
+  // Student data
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [mobileNumber, setMobileNumber] = useState('')
@@ -117,7 +119,7 @@ export default function HorizontalLinearStepper() {
   const [profession, setProfession] = useState('')
   const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
 
-  //Institution data
+  // Institution data
   const [institutionName, setInstitutionName] = useState('')
   const [institutionLocation, setInstitutionLocation] = useState('')
   const [institutionEmail, setInstitutionEmail] = useState('')
@@ -182,11 +184,11 @@ export default function HorizontalLinearStepper() {
         <CardHeader title="Anmeldeformular" />
         <Divider />
         <CardContent>
-          <div>
+          <div className={classes.stepperContainer}>
             {activeStep === 0 ? (
               <div />
             ) : (
-              <Stepper activeStep={activeStep}>
+              <Stepper activeStep={activeStep - 1}>
                 {steps.map((label, index) => {
                   const stepProps = {}
                   const labelProps = {}
@@ -214,9 +216,7 @@ export default function HorizontalLinearStepper() {
               </div>
             ) : (
               <div className={classes.instructions}>
-                {activeStep === 0 && 
-                <Step0 setRole={setRole} role={role}/>
-                }
+                {activeStep === 0 && <Step0 setRole={setRole} role={role} />}
                 {role === 'helper' && activeStep > 0 && (
                   <CurrentStepStudent
                     {...{
@@ -241,9 +241,9 @@ export default function HorizontalLinearStepper() {
                       setAvailability
                     }}
                   />
-                ) }
-                
-                { role === 'facility' && activeStep > 0 && (
+                )}
+
+                {role === 'facility' && activeStep > 0 && (
                   <CurrentStepFacility
                     {...{
                       activeStep,

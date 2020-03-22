@@ -12,13 +12,13 @@ import Radio from '@material-ui/core/Radio'
 import { blockRenderMap } from 'src/components/RichEditor/block'
 
 const useStyles = makeStyles(theme => ({
-  section: { marginBottom: '50px' },
+  section: { margin: '30px' },
   heading: {
     fontWeight: 'bold',
     marginBottom: '15px'
   },
   devider: {
-    margin: '0 27px 11px 0'
+    margin: '2px 27px 11px 0'
   },
   fieldHalfWidth: {
     padding: '5px',
@@ -92,7 +92,7 @@ const InstitutionSignup = props => {
         <Typography className={classes.heading}>
           Einverständniserklärungen
         </Typography>
-        <Divider />
+        <Divider className={classes.devider}/>
         <div className={classes.checkboxContainer}>
           <FormControlLabel
             control={<Checkbox />}
