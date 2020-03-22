@@ -4,6 +4,7 @@ import React, { lazy } from 'react'
 import { Redirect } from 'react-router-dom'
 import AuthLayout from './layouts/Auth'
 import LandingPage from './views/LandingPage'
+import HelperDataBase from './views/HelperDataBase'
 import StudentLayout from './layouts/StudentDashboard'
 import InstitutionLayout from './layouts/InstitutionDashboard'
 import ErrorLayout from './layouts/Error'
@@ -40,6 +41,11 @@ export default [
         path: '/dashboard',
         exact: true,
         component: lazy(() => import('src/views/InstitutionDashboard'))
+      },
+      {
+        path: '/helferdatenbank',
+        exact: true,
+        component: HelperDataBase
       },
       {
         component: () => <Redirect to="/errors/error-404" />
