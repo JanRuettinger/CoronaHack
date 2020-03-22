@@ -64,6 +64,17 @@ function getSteps() {
   ]
 }
 
+function getText(activeStep) {
+  const nextLabels = [
+    'Weiter',
+    'Weiter',
+    'Weiter',
+    'Anmelden',
+    'Weiter zur Plattform'
+  ];
+  return nextLabels[activeStep]
+}
+
 const CurrentStep = props => {
   const { activeStep } = props
 
@@ -264,26 +275,14 @@ export default function HorizontalLinearStepper() {
                 </Button>
               )}
             </div>
-            {activeStep === steps.length - 1 ? (
-                <Button
-                  color="primary"
-                  variant="contained"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  Weiter zur Plattform
-                </Button>
-              ) : (
-                <Button
-                  color="primary"
-                  variant="contained"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  Weiter
-                </Button>
-              )
-            }
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={handleNext}
+              className={classes.button}
+            >
+              {getText(activeStep)}
+            </Button>
           </div>
         </CardActions>
       </Card>
