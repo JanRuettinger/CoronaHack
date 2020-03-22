@@ -18,7 +18,10 @@ import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns';
 import { makeStyles } from '@material-ui/core/styles'
 
-import {compensationOptions} from './config'
+import {
+  compensationOptions,
+  availabilityOptions
+} from './config'
 
 const useStyles = makeStyles(theme => ({
   section: { marginBottom: '50px' },
@@ -52,7 +55,8 @@ const Step_2 = props => {
     setOperationPlace,
     operationPlace,
     startDate,
-    compensation
+    compensation,
+    availability
   } = props
 
   const changeLocation = event => {
@@ -101,26 +105,28 @@ const Step_2 = props => {
             }}
           />
         </MuiPickersUtilsProvider>
-        <TextField
-          id="availability"
-          label="Zeitliche Verfügbarkeit"
-          variant="outlined"
-          className={classes.field}
-          onChange={changeAvailability}
-        />
-      </section>
-      <section className={classes.section}>
-      <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="profession-select-label">Vergütung</InputLabel>
-            <Select
-              id="educationalProgress"
-              value={compensation}
-              onChange={changeCompensation}
-              className={classes.field}
-            > 
-             {compensationOptions.map(({text, value}) => <MenuItem value={value}>{text}</MenuItem>)}
-            </Select>
-          </FormControl>
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel id="profession-select-label">Zeitliche Verfügbarkeit</InputLabel>
+          <Select
+            id="compensation"
+            value={availability}
+            onChange={changeAvailability}
+            className={classes.field}
+          > 
+            {availabilityOptions.map(({text, value}) => <MenuItem value={value}>{text}</MenuItem>)}
+          </Select>
+        </FormControl>
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel id="profession-select-label">Vergütung</InputLabel>
+          <Select
+            id="compensation"
+            value={compensation}
+            onChange={changeCompensation}
+            className={classes.field}
+          > 
+            {compensationOptions.map(({text, value}) => <MenuItem value={value}>{text}</MenuItem>)}
+          </Select>
+        </FormControl>
       </section>
       <section className={classes.section}>
         <Typography className={classes.heading}>

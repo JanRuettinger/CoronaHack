@@ -101,11 +101,19 @@ const compensationOptions = [
     {text: 'Ich benötige eine Vergütung', value: 'compensation'}
 ]
 
+const availabilityOptions = [
+    {text: 'max. 10h/Woche', value: 'max10h'},
+    {text: 'max. 20h/Woche', value: 'max20h'},
+    {text: 'max. 30h/Woche', value: 'max30h'},
+    {text: 'max. 40h/Woche', value: 'max40h'}
+]
+
 export {
     progressOptions,
     professions,
     famulaturProfessions,
     initialDomainExperience,
     initialFamulaturen,
-    compensationOptions
+    compensationOptions,
+    availabilityOptions
 } 
