@@ -194,36 +194,44 @@ function LandingPage({ route }) {
               </div>
             </div>
             <div className={classes.selectionCards}>
-              <Card className={classes.selectionCard}>
-                <div className={classes.cardColumns}>
-                  <div>
-                    <Typography className={classes.selectionHeader}>
-                      Medizinstudierender
-                    </Typography>
-                    <Typography className={classes.selectionMain}>
-                      Ich möchte in einer Einrichtung Unterstützung leisten
-                    </Typography>
-                  </div>
-                  <div className={classes.iconDiv}>
-                    <PermIdentityIcon className={classes.icon} />
-                  </div>
-                </div>
-              </Card>
-              <Card className={classes.selectionCard}>
-                <div className={classes.cardColumns}>
-                  <div>
-                    <Typography className={classes.selectionHeader}>
-                      Einrichtung
-                    </Typography>
-                    <Typography className={classes.selectionMain}>
-                      Ich habe Bedarf an Unterstützung
-                    </Typography>
-                  </div>
-                  <div className={classes.iconDiv}>
-                    <HomeIcon className={classes.icon} />
-                  </div>
-                </div>
-              </Card>
+              <RouterLink to="/auth/signup">
+                <Button>
+                  <Card className={classes.selectionCard}>
+                    <div className={classes.cardColumns}>
+                      <div>
+                        <Typography className={classes.selectionHeader}>
+                          Medizinstudierender
+                        </Typography>
+                        <Typography className={classes.selectionMain}>
+                          Ich möchte in einer Einrichtung Unterstützung leisten
+                        </Typography>
+                      </div>
+                      <div className={classes.iconDiv}>
+                        <PermIdentityIcon className={classes.icon} />
+                      </div>
+                    </div>
+                  </Card>
+                </Button>
+              </RouterLink>
+              <RouterLink to="/auth/signup">
+                <Button>
+                  <Card className={classes.selectionCard}>
+                    <div className={classes.cardColumns}>
+                      <div>
+                        <Typography className={classes.selectionHeader}>
+                          Einrichtung
+                        </Typography>
+                        <Typography className={classes.selectionMain}>
+                          Ich habe Bedarf an Unterstützung
+                        </Typography>
+                      </div>
+                      <div className={classes.iconDiv}>
+                        <HomeIcon className={classes.icon} />
+                      </div>
+                    </div>
+                  </Card>
+                </Button>
+              </RouterLink>
             </div>
             <Suspense fallback={<LinearProgress />}>
               {renderRoutes(route.routes)}
