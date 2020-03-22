@@ -215,7 +215,7 @@ export default function HorizontalLinearStepper(props) {
 
   return (
     <div className={classes.root}>
-      <Card className={classes.card}>
+      <Card className={classes.root}>
         <CardHeader title="Anmeldeformular" />
         <Divider />
         <CardContent>
