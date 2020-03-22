@@ -26,8 +26,6 @@ import StudentStep4 from './student/StudentStep4'
 import IntsitutionStep1 from './institution/InstitutionStep1'
 import InstitutionStep2 from './institution/InstitutionStep2'
 import InstitutionStep3 from './institution/InstitutionStep3'
-import { flexibleCompare } from '@fullcalendar/core'  // needed?
-import { isJSDocAugmentsTag } from 'typescript' // needed?
 
 import {
   initialDomainExperience, 
@@ -143,7 +141,7 @@ export default function HorizontalLinearStepper(props) {
   const [profession, setProfession] = useState('')
   const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
   const [domainExperience, setDomainExperience] = useState(initialDomainExperience)
-  const [famulaturen, setFamulaturen] = useState('')
+  const [famulaturen, setFamulaturen] = useState(initialFamulaturen)
   const [certificate, setCertificate] = useState('nocerti')
   const [datenschutz, setDatenschutz] = useState(false)
   const [confirmation, setConfirmation] = useState(false)

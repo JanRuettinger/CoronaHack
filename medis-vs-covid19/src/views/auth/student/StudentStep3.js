@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Typography, TextField, Divider, Select
 } from '@material-ui/core';
@@ -11,9 +11,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText'
 
-import {professions, progressOptions, famulaturProfessions} from './config'
+import {
+  professions, 
+  progressOptions
+} from './config'
 
 const useStyles = makeStyles((theme) => ({
   section: { marginBottom: '20px' },

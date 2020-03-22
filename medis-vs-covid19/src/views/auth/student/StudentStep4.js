@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Typography, TextField, Divider, Select
+  Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import InputLabel from '@material-ui/core/InputLabel';
-import {professions, progressOptions} from './config'
+
 
 const useStyles = makeStyles((theme) => ({
   confirmLogo: {
