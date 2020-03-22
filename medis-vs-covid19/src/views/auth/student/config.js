@@ -1,14 +1,15 @@
-const professions = [{text: 'Arzt/Ärztin', fieldValue: 'arzt'},
-                            {text: 'Medizinstudent', fieldValue: 'medizinstudent'},
-                            {text: 'MFA', fieldValue: 'mfa'},
-                            {text: 'MTA', fieldValue: 'mta'},
-                            {text: 'NotfallsanitäterIn', fieldValue: 'notfallsanitaeter'},
-                            {text: 'PflegestudentIn', fieldValue: 'pflegestudent'},
-                            {text: 'PharmaziestudentIn', fieldValue: 'pharmaziestudent'},
-                            {text: 'SanitäterIn', fieldValue: 'sanitaeter'},
-                            {text: 'ZahnmedizinstudentIn', fieldValue: 'zahnmedizinstudent'},
-                            {text: 'Sonstige', fieldValue: 'sonstige'}
-                        ]
+const professions = [
+    {text: 'Arzt/Ärztin', fieldValue: 'arzt'},
+    {text: 'Medizinstudent', fieldValue: 'medizinstudent'},
+    {text: 'MFA', fieldValue: 'mfa'},
+    {text: 'MTA', fieldValue: 'mta'},
+    {text: 'NotfallsanitäterIn', fieldValue: 'notfallsanitaeter'},
+    {text: 'PflegestudentIn', fieldValue: 'pflegestudent'},
+    {text: 'PharmaziestudentIn', fieldValue: 'pharmaziestudent'},
+    {text: 'SanitäterIn', fieldValue: 'sanitaeter'},
+    {text: 'ZahnmedizinstudentIn', fieldValue: 'zahnmedizinstudent'},
+    {text: 'Sonstige', fieldValue: 'sonstige'}
+]
 
 const progressOptions = new Map()
 

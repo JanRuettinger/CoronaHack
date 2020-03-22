@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText'
 
 import {professions, progressOptions} from './config'
 
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     width: 'calc(50% - 10px)'
   },
   formControl: {
-    margin: theme.spacing(3),
+    width: 'calc(50% - 10px)'
   },
   formControlSelect: {
     display: 'none'
@@ -35,8 +36,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Step_3 = (props) => {
-  const [profession, setProfession] = useState('')
-  const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
+  
+  const {
+    setProfession,
+    setEducationalProgress,
+    profession,
+    educationalProgress   
+  } = props
+
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -59,6 +66,10 @@ const Step_3 = (props) => {
     setProfession(event.target.value)
   }
 
+  const changeEducationalProgress = (event) => {
+    setEducationalProgress(event.target.value)
+  }
+
   return (
     <div>
       <section className={classes.section}>
@@ -69,67 +80,46 @@ const Step_3 = (props) => {
             id="profession"
             value={profession}
             onChange={changeProfession}
+            className={classes.field}
           >
-            {professions.map(({text, fieldValue}) => {
+            {professions.map(({text, fieldValue}, i) => {
                 return(
                 <MenuItem value={fieldValue}>{text}</MenuItem>
                 )
             })}
           </Select> 
         </FormControl>
-        <FormControl className={classes.formControlSelect}>
-          <Select
-            id="eductionalregion"
-            value="Ausbildungsabschnitt"
+        {
+          profession && profession != 'sonstige' ? (
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="profession-select-label">Fortschritt</InputLabel>
+            <Select
+              id="educationalProgress"
+              value={educationalProgress}
+              onChange={changeEducationalProgress}
+              className={classes.field}
+            > 
+              {progressOptions.get(profession).map(({text, fieldValue}) => (<MenuItem value={fieldValue}>{text}</MenuItem>))}
+            </Select>
+          </FormControl>
+          ) : (<p></p>)
+        }
+        {profession === 'sonstige' ? (
+            <><TextField
+            id="profession"
+            label="Ausbildung"
             variant="outlined"
             className={classes.field}
-          >
-            {!profession || profession === 'sonstige' ? (
-              <div>TODO Eingabefeld für profession</div>
-            ) : (
-              progressOptions.get(profession).map(({text, fieldValue}) => (<MenuItem value={fieldValue}>{text}</MenuItem>))
-            )}
-            <MenuItem value={1}>Vorklinischer Abschnitt (1. - 4. Semester)</MenuItem>
-            <MenuItem value={2}>5. - 8. Semester</MenuItem>
-            <MenuItem value={3}>> 8. Semester</MenuItem>
-          </Select>
-        </FormControl>
-      </section>
-      <section className={classes.section}>
-        <Typography className={classes.heading}>Welche Famulaturen hast du bereits abgeschlossen? (Mehrfachauswahl möglich)</Typography>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={ana} onChange={handleChange} name="ana" />}
-              label="Anasthäsie"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={inn} onChange={handleChange} name="inn" />}
-              label="Innere Medizin"
-            />
-          </FormGroup>
-        </FormControl>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={not} onChange={handleChange} name="not" />}
-              label="Notaufnahme"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={chi} onChange={handleChange} name="chi" />}
-              label="Chirurgie"
-            />
-          </FormGroup>
-        </FormControl>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={int} onChange={handleChange} name="int" />}
-              label="Intensivmedizin"
-            />
-          </FormGroup>
-        </FormControl>
-
+            onChange={changeProfession}
+          />
+          <TextField
+            id="educationalProgress"
+            label="Ausbildungsfortschritt (z.B. 1. Jahr)"
+            variant="outlined"
+            className={classes.field}
+            onChange={changeEducationalProgress}
+          /></>
+          ) : <p></p>}
       </section>
       <section className={classes.section}>
         <Typography className={classes.heading}>Anerkennung für Studiumsäquivalente</Typography>

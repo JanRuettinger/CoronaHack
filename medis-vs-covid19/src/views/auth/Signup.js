@@ -237,7 +237,13 @@ export default function HorizontalLinearStepper() {
                       compensation,
                       setCompensation,
                       availability,
-                      setAvailability
+                      setAvailability,
+                      operationPlace, 
+                      setOperationPlace, // "Bevorzugte Einsatzstellen"
+                      profession, 
+                      setProfession,
+                      educationalProgress, 
+                      setEducationalProgress
                     }}
                   />
                 ) : (
