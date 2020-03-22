@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18
   },
   root: {
-    background: '#eee'
+    background: '#c8cacc'
   },
   buttonbar: {
     marginLeft: 'auto',
@@ -45,7 +45,10 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: 'top',
     height: 45,
     background: '#ED1171',
-    color: 'white'
+    color: 'white',
+    '&:hover': {
+      background: '#ED1171',
+    }
   },
   bold: {
     fontWeight: 'bold',
@@ -95,7 +98,8 @@ const useStyles = makeStyles((theme) => ({
   },
   selectionMain: {
     color: 'white',
-    width: 200
+    fontSize: 12,
+    width: 225
   },
   icon: {
     width: 40,
@@ -129,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
 function LandingPage({ route, history }) {
   const classes = useStyles();
 
-  const [status, setStatusBase] = React.useState("");
+  const [status, setStatusBase] = useState('');
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -147,7 +151,7 @@ function LandingPage({ route, history }) {
     auth.signInWithEmailAndPassword(email, password)
     .then(function(firebaseUser) {
       setStatusBase({ msg: "Credentials verified.", key: Math.random() });
-      history.push("/settings");
+      history.push("/dashboard");
     })
     .catch(function(error) {
       var errorCode = error.code;
@@ -188,6 +192,13 @@ function LandingPage({ route, history }) {
               LOGIN
             </Button>
             {status ? <AlertMessage key={status.key} message={status.msg} /> : null}
+            {/* <RouterLink to="/dashboard">
+              <Button 
+                variant="contained"
+                className={classes.loginButton}>
+                LOGIN
+              </Button>
+            </RouterLink> */}
           </div>
         </Toolbar>
       </AppBar>
@@ -198,12 +209,12 @@ function LandingPage({ route, history }) {
             <div>
               <Card className={classes.card}>
                 <div className={classes.logoRow}>
-                  <img className={classes.logoRowImg} height="70" src="/images/logos/ImagefromiOS.png"/>
+                  <img className={classes.logoRowImg} height="70" src="/images/logos/Logo_01.png"/>
                   <img className={classes.logoRowImg} height="50" src="/images/logos/medis-vs-covid19-logo-03.svg"/>
-                  <img className={classes.logoRowImg} height="60" src="/images/logos/bundesVersicherung.png"/>
+                  <img className={classes.logoRowImg} height="60" src="/images/logos/2011-bvmd_logo-cmyk.jpg"/>
                 </div>
                 <Typography className={classes.bold}>
-                  Medizinstudierende im Kampf gegen COVID-19!
+                  match4healthcare - Medizinstudierende im Kampf gegen COVID-19!
                 </Typography>
                 <Typography className={classes.text}>
                   Angefangen hat unsere Geschichte am 16. März 2020 mit einer rasant wachsenden Facebook Gruppe. Mehr als 19.500 Studierende haben sich bis zum 20. März 2020 entschlossen, freiwillig ihre Zeit dem Dienste zur Verfügung zu stellen. Um den Bedarf der Kliniken übersichtlicher aufzulisten, haben wir diese Webseite erstellt. Wir bemühen uns, dass wir alle wichtigen Links zu Programmen von einzelnen Fachschaften und Kliniken aus den Facebook-Gruppen „Medizinstudierende vs. COVID-19“ auf dieser Seite auflisten.
@@ -223,9 +234,9 @@ function LandingPage({ route, history }) {
                 Unterstützt von:  
               </Typography>
               <div className={classes.supporterRow}>
-                <img className={classes.logoRowImg} height="40" src="/images/logos/Logo_01.png"/>
+                <img className={classes.logoRowImg} height="40" src="/images/logos/ImagefromiOS.png"/>
                 <img className={classes.logoRowImg} height="40" src="/images/logos/hashtagLogo.jpg"/>
-                <img className={classes.logoRowImg} height="40" src="/images/logos/2011-bvmd_logo-cmyk.jpg"/>
+                <img className={classes.logoRowImg} height="40" src="/images/logos/bundesVersicherung.png"/>
                 <img className={classes.logoRowImg} height="40" src="/images/logos/bundesKammer.png"/>
               </div>
             </div>
@@ -236,7 +247,7 @@ function LandingPage({ route, history }) {
                     <div className={classes.cardColumns}>
                       <div>
                         <Typography className={classes.selectionHeader}>
-                          Medizinstudierender
+                          Als Helfer registrieren
                         </Typography>
                         <Typography className={classes.selectionMain}>
                           Ich möchte in einer Einrichtung Unterstützung leisten
@@ -255,7 +266,7 @@ function LandingPage({ route, history }) {
                     <div className={classes.cardColumns}>
                       <div>
                         <Typography className={classes.selectionHeader}>
-                          Einrichtung
+                          Als Institution registrieren
                         </Typography>
                         <Typography className={classes.selectionMain}>
                           Ich habe Bedarf an Unterstützung
