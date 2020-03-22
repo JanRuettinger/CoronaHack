@@ -11,8 +11,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     '@media all and (-ms-high-contrast:none)': {
       height: 0 // IE11 fix
-    },
-    backgroundColor: '#7A7B7C'
+    }
   },
   content: {
     flexGrow: 1,
