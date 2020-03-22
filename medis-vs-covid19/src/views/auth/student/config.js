@@ -7,8 +7,7 @@ const professions = [
     {text: 'PflegestudentIn', fieldValue: 'pflegestudent'},
     {text: 'PharmaziestudentIn', fieldValue: 'pharmaziestudent'},
     {text: 'SanitäterIn', fieldValue: 'sanitaeter'},
-    {text: 'ZahnmedizinstudentIn', fieldValue: 'zahnmedizinstudent'},
-    {text: 'Sonstige', fieldValue: 'sonstige'}
+    {text: 'ZahnmedizinstudentIn', fieldValue: 'zahnmedizinstudent'}
 ]
 
 const progressOptions = new Map()
@@ -54,7 +53,30 @@ progressOptions.set('zahnmedizinstudent', [
 ])
 progressOptions.set('sonstige', [])
 
+const defaultFamulaturOptions = {
+    anaesthesie: false,
+    chirugie: false,
+    inneremedizin: false, 
+    intensivmedizin: false,
+    notaufnahme: false,
+    nofamulatur: false,
+    allgemeinmedizin: false
+}
+
+const famulaturProfessions = new Map() // key = profession, value = array w/ famulatur options
+famulaturProfessions.set('medizinstudent',[
+        {text: 'Anästhesie', value: 'anaesthesie'},
+        {text: 'Chirugie', value: 'chirugie'},
+        {text: 'Innere Medizin', value: 'inneremedizin'},
+        {text: 'Intensivmedizin', value: 'intensivmedizin'},
+        {text: 'Notaufnahme', value: 'notaufnahme'},
+        {text: 'Ich habe noch keine Famulatur abgeschlossen', value: 'nofamulatur'},
+        {text: 'Allgemeinmedizin', value: 'allgemeinmedizin'}
+    ])
+
 export {
     progressOptions,
-    professions
+    professions,
+    famulaturProfessions,
+    defaultFamulaturOptions
 } 

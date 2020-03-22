@@ -13,7 +13,7 @@ import Radio from '@material-ui/core/Radio';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText'
 
-import {professions, progressOptions} from './config'
+import {professions, progressOptions, famulaturProfessions} from './config'
 
 const useStyles = makeStyles((theme) => ({
   section: { marginBottom: '20px' },
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     width: 'calc(50% - 10px)'
   },
   formControl: {
+    margin: theme.spacing(3),
     width: 'calc(50% - 10px)'
   },
   formControlSelect: {
@@ -33,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
   anmerkungen: {
     width: '100%',
   },
+  checkboxContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    height: '150px' // quick and dirty way to hold 3 checkboxes per column
+  }
 }));
 
 const Step_3 = (props) => {
@@ -40,8 +47,10 @@ const Step_3 = (props) => {
   const {
     setProfession,
     setEducationalProgress,
+    setFamulaturen,
     profession,
-    educationalProgress   
+    educationalProgress,
+    famulaturen   
   } = props
 
   const classes = useStyles();
@@ -70,6 +79,20 @@ const Step_3 = (props) => {
     setEducationalProgress(event.target.value)
   }
 
+  const changeFamulaturen = (event) => {
+    setFamulaturen({...famulaturen, [event.target.name] : event.target.checked})
+  }
+
+  const {
+    anaesthesie,
+    chirugie,
+    inneremedizin, 
+    intensivmedizin,
+    notaufnahme,
+    nofamulatur,
+    allgemeinmedizin,
+  } = famulaturen
+
   return (
     <div>
       <section className={classes.section}>
@@ -90,7 +113,7 @@ const Step_3 = (props) => {
           </Select> 
         </FormControl>
         {
-          profession && profession != 'sonstige' ? (
+          profession ? (
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="profession-select-label">Fortschritt</InputLabel>
             <Select
@@ -104,23 +127,46 @@ const Step_3 = (props) => {
           </FormControl>
           ) : (<p></p>)
         }
-        {profession === 'sonstige' ? (
-            <><TextField
-            id="profession"
-            label="Ausbildung"
-            variant="outlined"
-            className={classes.field}
-            onChange={changeProfession}
-          />
-          <TextField
-            id="educationalProgress"
-            label="Ausbildungsfortschritt (z.B. 1. Jahr)"
-            variant="outlined"
-            className={classes.field}
-            onChange={changeEducationalProgress}
-          /></>
-          ) : <p></p>}
       </section>
+      {
+          famulaturProfessions.get(profession) ? (
+          <section className={classes.section}>
+            <FormControl className={classes.formControl}>
+              <Typography className={classes.heading}>
+                Deine Famulaturen
+              </Typography>
+              <Divider />
+              <div className={classes.checkboxContainer}>
+                  <FormControlLabel
+                    control={<Checkbox checked={anaesthesie} onChange={changeFamulaturen} name="anaesthesie"/>}
+                    label="Anästhesie"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox checked={chirugie} onChange={changeFamulaturen} name="chirugie"/>}
+                    label="Chirugie"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox checked={inneremedizin} onChange={changeFamulaturen} name="inneremedizin"/>}
+                    label="Innere Medizin"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox checked={notaufnahme} onChange={changeFamulaturen} name="notaufnahme"/>}
+                    label="Intensivmedizin"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox checked={allgemeinmedizin} onChange={changeFamulaturen} name="allgemeinmedizin"/>}
+                    label="Allgemeinmedizin"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox checked={nofamulatur} onChange={changeFamulaturen} name="nofamulatur"/>}
+                    label="Keine Famulatur"
+                  />
+              </div>
+            </FormControl>
+          </section>
+          ) : (<p></p>)
+        }
+      
       <section className={classes.section}>
         <Typography className={classes.heading}>Anerkennung für Studiumsäquivalente</Typography>
         <FormControl component="fieldset">

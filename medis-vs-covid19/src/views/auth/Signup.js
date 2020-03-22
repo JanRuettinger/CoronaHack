@@ -27,6 +27,8 @@ import InstitutionSignup from './institution/InstitutionSignup'
 import { flexibleCompare } from '@fullcalendar/core'
 import { isJSDocAugmentsTag } from 'typescript'
 
+import {defaultFamulaturOptions} from './student/config'
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
@@ -116,6 +118,7 @@ export default function HorizontalLinearStepper() {
   const [operationPlace, setOperationPlace] = useState({}) // "Bevorzugte Einsatzstellen"
   const [profession, setProfession] = useState('')
   const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
+  const [famulaturen, setFamulaturen] = useState(defaultFamulaturOptions)
 
   //Institution data
   const [institutionName, setInstitutionName] = useState('')
@@ -243,7 +246,9 @@ export default function HorizontalLinearStepper() {
                       profession, 
                       setProfession,
                       educationalProgress, 
-                      setEducationalProgress
+                      setEducationalProgress,
+                      famulaturen, 
+                      setFamulaturen
                     }}
                   />
                 ) : (
