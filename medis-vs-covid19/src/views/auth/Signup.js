@@ -29,7 +29,10 @@ import InstitutionStep3 from './institution/InstitutionStep3'
 import { flexibleCompare } from '@fullcalendar/core'  // needed?
 import { isJSDocAugmentsTag } from 'typescript' // needed?
 
-import {initialDomainExperience} from './student/config'
+import {
+  initialDomainExperience, 
+  initialFamulaturen
+} from './student/config'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -140,6 +143,7 @@ export default function HorizontalLinearStepper(props) {
   const [profession, setProfession] = useState('')
   const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
   const [domainExperience, setDomainExperience] = useState(initialDomainExperience)
+  const [famulaturen, setFamulaturen] = useState()
 
   // Institution data
   const [institutionName, setInstitutionName] = useState('')

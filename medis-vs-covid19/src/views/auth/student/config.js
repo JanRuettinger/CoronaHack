@@ -75,6 +75,16 @@ const initialDomainExperience = {
     pflege: false
 }
 
+const initialFamulaturen = {
+    anaesthesie: false,
+    chirugie: false,
+    inneremedizin: false, 
+    intensivmedizin: false,
+    notaufnahme: false,
+    allgemeinmedizin: false, 
+    nofamulatur: false
+}
+
 const famulaturProfessions = new Map() // key = profession, value = array w/ famulatur options
 famulaturProfessions.set('medizinstudent',[
         {text: 'Anästhesie', value: 'anaesthesie'},
@@ -86,9 +96,16 @@ famulaturProfessions.set('medizinstudent',[
         {text: 'Allgemeinmedizin', value: 'allgemeinmedizin'}
     ])
 
+const compensationOptions = [
+    {text: 'Ich helfe auch ohne eine Vergütung', value: 'nocompensation'},
+    {text: 'Ich benötige eine Vergütung', value: 'compensation'}
+]
+
 export {
     progressOptions,
     professions,
     famulaturProfessions,
-    initialDomainExperience
+    initialDomainExperience,
+    initialFamulaturen,
+    compensationOptions
 } 

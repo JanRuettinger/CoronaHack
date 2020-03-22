@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     width: 'calc(50% - 10px)'
   },
   formControl: {
-    margin: theme.spacing(3),
+    margin: theme.spacing(1),
     width: 'calc(50% - 10px)'
   },
   formControlSelect: {
@@ -63,12 +63,6 @@ const Step_3 = (props) => {
     int: false
   });
 
-  const { ana, inn, not, chi, int } = state;
-
-  const handleChange = event => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
   const handleChangeRadio = () => {};
 
   const changeProfession = event => {
@@ -89,7 +83,6 @@ const Step_3 = (props) => {
     inneremedizin, 
     intensivmedizin,
     notaufnahme,
-    nofamulatur,
     allgemeinmedizin,
     pflege,
     verwaltung,
@@ -131,6 +124,15 @@ const Step_3 = (props) => {
           </FormControl>
           ) : (<p></p>)
         }
+      </section>
+      <section className={classes.section}>
+        <Typography className={classes.heading}>Anerkennung für Studiumsäquivalente</Typography>
+        <FormControl component="fieldset">
+          <RadioGroup aria-label="certificate" name="certificate" value={'noCerti'} onChange={handleChangeRadio}>
+            <FormControlLabel value="certi" control={<Radio />} label="Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig" />
+            <FormControlLabel value="noCerti" control={<Radio />} label="Ich helfe auch ohne Anerkennung bzw. benötige diese nicht" />
+          </RadioGroup>
+        </FormControl>
       </section>
       <section className={classes.section}>
         <FormControl className={classes.formControl}>
@@ -179,15 +181,6 @@ const Step_3 = (props) => {
                 label="Pflege"
               />
           </div>
-        </FormControl>
-      </section>
-      <section className={classes.section}>
-        <Typography className={classes.heading}>Anerkennung für Studiumsäquivalente</Typography>
-        <FormControl component="fieldset">
-          <RadioGroup aria-label="certificate" name="certificate" value={'noCerti'} onChange={handleChangeRadio}>
-            <FormControlLabel value="certi" control={<Radio />} label="Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig" />
-            <FormControlLabel value="noCerti" control={<Radio />} label="Ich helfe auch ohne Anerkennung bzw. benötige diese nicht" />
-          </RadioGroup>
         </FormControl>
       </section>
       <section className={classes.section}>

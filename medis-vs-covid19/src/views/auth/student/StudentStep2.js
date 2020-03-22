@@ -4,7 +4,11 @@ import {
   TextField,
   Divider,
   Checkbox,
-  FormControlLabel
+  FormControlLabel, 
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from '@material-ui/core'
 import {
   MuiPickersUtilsProvider,
@@ -14,6 +18,8 @@ import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns';
 import { makeStyles } from '@material-ui/core/styles'
 
+import {compensationOptions} from './config'
+
 const useStyles = makeStyles(theme => ({
   section: { marginBottom: '50px' },
   heading: {
@@ -21,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   },
   field: {
     padding: '5px',
+    width: 'calc(50% - 10px)'
+  },
+  formControl: {
+    margin: theme.spacing(1),
     width: 'calc(50% - 10px)'
   },
   checkboxContainer: {
@@ -41,7 +51,8 @@ const Step_2 = props => {
     setCompensation,
     setOperationPlace,
     operationPlace,
-    startDate
+    startDate,
+    compensation
   } = props
 
   const changeLocation = event => {
@@ -97,15 +108,19 @@ const Step_2 = props => {
           className={classes.field}
           onChange={changeAvailability}
         />
-        <div>
-          <TextField
-            id="compensation"
-            label="Vergütung"
-            variant="outlined"
-            className={classes.field}
-            onChange={changeCompensation}
-          />
-        </div>
+      </section>
+      <section className={classes.section}>
+      <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="profession-select-label">Vergütung</InputLabel>
+            <Select
+              id="educationalProgress"
+              value={compensation}
+              onChange={changeCompensation}
+              className={classes.field}
+            > 
+             {compensationOptions.map(({text, value}) => <MenuItem value={value}>{text}</MenuItem>)}
+            </Select>
+          </FormControl>
       </section>
       <section className={classes.section}>
         <Typography className={classes.heading}>
