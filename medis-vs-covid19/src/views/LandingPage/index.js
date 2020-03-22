@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { renderRoutes } from 'react-router-config';
+import React, { Suspense, useState } from 'react';
+import { renderRoutes, withRouter } from 'react-router-config';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { LinearProgress } from '@material-ui/core';
@@ -7,6 +7,8 @@ import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import HomeIcon from '@material-ui/icons/Home';
 import { AppBar, Toolbar, TextField, Button, Card, Typography } from '@material-ui/core'
 import { Link as RouterLink } from 'react-router-dom'
+import { auth } from '../../firebase';
+import AlertMessage from "./AlertMessage";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -124,8 +126,36 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function LandingPage({ route }) {
+function LandingPage({ route, history }) {
   const classes = useStyles();
+
+  const [status, setStatusBase] = React.useState("");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const changeEmail = event => {
+    setEmail(event.target.value)
+  }
+
+  const changePassword = event => {
+    setPassword(event.target.value)
+  }
+
+  const handleLogin = async event => {
+    event.preventDefault();
+
+    auth.signInWithEmailAndPassword(email, password)
+    .then(function(firebaseUser) {
+      setStatusBase({ msg: "Credentials verified.", key: Math.random() });
+      history.push("/settings");
+    })
+    .catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // Handle Errors here.
+      setStatusBase({ msg: "Your login credentials could not be verified, please try again.", key: Math.random() });
+    });
+  };
 
   return (
     <>
@@ -138,20 +168,26 @@ function LandingPage({ route }) {
             <TextField
               id="email"
               label="E-Mail Adresse"
+              type="email"
+              onChange={changeEmail}
               variant="outlined"
               className={classes.field}
             />
             <TextField
               id="password"
               label="Passwort"
+              type="password"
+              onChange={changePassword}
               variant="outlined"
               className={classes.field}
             />
             <Button 
+              onClick={handleLogin}
               variant="contained"
               className={classes.loginButton}>
               LOGIN
             </Button>
+            {status ? <AlertMessage key={status.key} message={status.msg} /> : null}
           </div>
         </Toolbar>
       </AppBar>
