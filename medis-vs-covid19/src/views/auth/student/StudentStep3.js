@@ -50,20 +50,16 @@ const Step_3 = (props) => {
     setDomainExperience,
     profession,
     educationalProgress,
-    domainExperience
+    domainExperience,
+    certificate,
+    setCertificate
   } = props
 
   const classes = useStyles();
 
-  const [state, setState] = React.useState({
-    ana: false,
-    inn: false,
-    not: false,
-    chi: false,
-    int: false
-  });
-
-  const handleChangeRadio = () => {};
+  const changeCertificate = (event) => {
+    setCertificate(event.target.defaultValue)
+  };
 
   const changeProfession = event => {
     setProfession(event.target.value)
@@ -128,7 +124,7 @@ const Step_3 = (props) => {
       <section className={classes.section}>
         <Typography className={classes.heading}>Anerkennung für Studiumsäquivalente</Typography>
         <FormControl component="fieldset">
-          <RadioGroup aria-label="certificate" name="certificate" value={'noCerti'} onChange={handleChangeRadio}>
+          <RadioGroup aria-label="certificate" name="certificate" value={certificate} onChange={changeCertificate}>
             <FormControlLabel value="certi" control={<Radio />} label="Eine Anerkennung als Teil eines Studienabschnitts (Pflegepraktikum/Famulatur) ist wichtig" />
             <FormControlLabel value="noCerti" control={<Radio />} label="Ich helfe auch ohne Anerkennung bzw. benötige diese nicht" />
           </RadioGroup>

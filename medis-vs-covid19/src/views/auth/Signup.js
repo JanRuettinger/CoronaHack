@@ -143,7 +143,8 @@ export default function HorizontalLinearStepper(props) {
   const [profession, setProfession] = useState('')
   const [educationalProgress, setEducationalProgress] = useState('') // "Ausbildungsabschnitt"
   const [domainExperience, setDomainExperience] = useState(initialDomainExperience)
-  const [famulaturen, setFamulaturen] = useState()
+  const [famulaturen, setFamulaturen] = useState('')
+  const [certificate, setCertificate] = useState('nocerti')
 
   // Institution data
   const [institutionName, setInstitutionName] = useState('')
@@ -273,7 +274,11 @@ export default function HorizontalLinearStepper(props) {
                       educationalProgress, 
                       setEducationalProgress,
                       domainExperience, 
-                      setDomainExperience
+                      setDomainExperience,
+                      certificate, 
+                      setCertificate, 
+                      famulaturen, 
+                      setFamulaturen
                     }}
                   />
                 )}
