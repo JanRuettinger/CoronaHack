@@ -39,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     flexWrap: 'wrap',
     height: '150px' // quick and dirty way to hold 3 checkboxes per column
+  },
+  step3Container: {
+    overflow: 'scroll',
+    height: '500px'
   }
 }));
 
@@ -99,7 +103,7 @@ const Step_3 = (props) => {
   } = domainExperience
 
   return (
-    <div>
+    <div className={classes.step3Container}>
       <section className={classes.section}>
         <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel id="profession">Ausbildungsgrad</InputLabel>

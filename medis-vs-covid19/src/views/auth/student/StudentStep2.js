@@ -123,6 +123,8 @@ const Step_2 = props => {
             value={compensation}
             onChange={changeCompensation}
             className={classes.field}
+            label="Vergütung"
+            labelId="compensation-label"
           > 
             {compensationOptions.map(({text, value}) => <MenuItem value={value}>{text}</MenuItem>)}
           </Select>
