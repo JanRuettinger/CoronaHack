@@ -110,7 +110,7 @@ function getText(activeStep) {
 }
 
 
-export default function HorizontalLinearStepper() {
+export default function HorizontalLinearStepper(props) {
   const classes = useStyles()
   const [activeStep, setActiveStep] = React.useState(0)
   const [skipped, setSkipped] = React.useState(new Set())
