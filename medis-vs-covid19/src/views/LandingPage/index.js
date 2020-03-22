@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18
   },
   root: {
-    background: '#eee'
+    background: '#c8cacc'
   },
   buttonbar: {
     marginLeft: 'auto',
@@ -43,7 +43,10 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: 'top',
     height: 45,
     background: '#ED1171',
-    color: 'white'
+    color: 'white',
+    '&:hover': {
+      background: '#ED1171',
+    }
   },
   bold: {
     fontWeight: 'bold',
@@ -93,7 +96,8 @@ const useStyles = makeStyles((theme) => ({
   },
   selectionMain: {
     color: 'white',
-    width: 200
+    fontSize: 12,
+    width: 225
   },
   icon: {
     width: 40,
@@ -147,11 +151,13 @@ function LandingPage({ route }) {
               variant="outlined"
               className={classes.field}
             />
-            <Button 
-              variant="contained"
-              className={classes.loginButton}>
-              LOGIN
-            </Button>
+            <RouterLink to="/dashboard">
+              <Button 
+                variant="contained"
+                className={classes.loginButton}>
+                LOGIN
+              </Button>
+            </RouterLink>
           </div>
         </Toolbar>
       </AppBar>
@@ -162,12 +168,12 @@ function LandingPage({ route }) {
             <div>
               <Card className={classes.card}>
                 <div className={classes.logoRow}>
-                  <img className={classes.logoRowImg} height="70" src="/images/logos/ImagefromiOS.png"/>
+                  <img className={classes.logoRowImg} height="70" src="/images/logos/Logo_01.png"/>
                   <img className={classes.logoRowImg} height="50" src="/images/logos/medis-vs-covid19-logo-03.svg"/>
-                  <img className={classes.logoRowImg} height="60" src="/images/logos/bundesVersicherung.png"/>
+                  <img className={classes.logoRowImg} height="60" src="/images/logos/2011-bvmd_logo-cmyk.jpg"/>
                 </div>
                 <Typography className={classes.bold}>
-                  Medizinstudierende im Kampf gegen COVID-19!
+                  match4healthcare - Medizinstudierende im Kampf gegen COVID-19!
                 </Typography>
                 <Typography className={classes.text}>
                   Angefangen hat unsere Geschichte am 16. März 2020 mit einer rasant wachsenden Facebook Gruppe. Mehr als 19.500 Studierende haben sich bis zum 20. März 2020 entschlossen, freiwillig ihre Zeit dem Dienste zur Verfügung zu stellen. Um den Bedarf der Kliniken übersichtlicher aufzulisten, haben wir diese Webseite erstellt. Wir bemühen uns, dass wir alle wichtigen Links zu Programmen von einzelnen Fachschaften und Kliniken aus den Facebook-Gruppen „Medizinstudierende vs. COVID-19“ auf dieser Seite auflisten.
@@ -187,43 +193,51 @@ function LandingPage({ route }) {
                 Unterstützt von:  
               </Typography>
               <div className={classes.supporterRow}>
-                <img className={classes.logoRowImg} height="40" src="/images/logos/Logo_01.png"/>
+                <img className={classes.logoRowImg} height="40" src="/images/logos/ImagefromiOS.png"/>
                 <img className={classes.logoRowImg} height="40" src="/images/logos/hashtagLogo.jpg"/>
-                <img className={classes.logoRowImg} height="40" src="/images/logos/2011-bvmd_logo-cmyk.jpg"/>
+                <img className={classes.logoRowImg} height="40" src="/images/logos/bundesVersicherung.png"/>
                 <img className={classes.logoRowImg} height="40" src="/images/logos/bundesKammer.png"/>
               </div>
             </div>
             <div className={classes.selectionCards}>
-              <Card className={classes.selectionCard}>
-                <div className={classes.cardColumns}>
-                  <div>
-                    <Typography className={classes.selectionHeader}>
-                      Medizinstudierender
-                    </Typography>
-                    <Typography className={classes.selectionMain}>
-                      Ich möchte in einer Einrichtung Unterstützung leisten
-                    </Typography>
-                  </div>
-                  <div className={classes.iconDiv}>
-                    <PermIdentityIcon className={classes.icon} />
-                  </div>
-                </div>
-              </Card>
-              <Card className={classes.selectionCard}>
-                <div className={classes.cardColumns}>
-                  <div>
-                    <Typography className={classes.selectionHeader}>
-                      Einrichtung
-                    </Typography>
-                    <Typography className={classes.selectionMain}>
-                      Ich habe Bedarf an Unterstützung
-                    </Typography>
-                  </div>
-                  <div className={classes.iconDiv}>
-                    <HomeIcon className={classes.icon} />
-                  </div>
-                </div>
-              </Card>
+              <RouterLink to="/auth/signup">
+                <Button>
+                  <Card className={classes.selectionCard}>
+                    <div className={classes.cardColumns}>
+                      <div>
+                        <Typography className={classes.selectionHeader}>
+                          Als Helfer registrieren
+                        </Typography>
+                        <Typography className={classes.selectionMain}>
+                          Ich möchte in einer Einrichtung Unterstützung leisten
+                        </Typography>
+                      </div>
+                      <div className={classes.iconDiv}>
+                        <PermIdentityIcon className={classes.icon} />
+                      </div>
+                    </div>
+                  </Card>
+                </Button>
+              </RouterLink>
+              <RouterLink to="/auth/signup">
+                <Button>
+                  <Card className={classes.selectionCard}>
+                    <div className={classes.cardColumns}>
+                      <div>
+                        <Typography className={classes.selectionHeader}>
+                          Als Institution registrieren
+                        </Typography>
+                        <Typography className={classes.selectionMain}>
+                          Ich habe Bedarf an Unterstützung
+                        </Typography>
+                      </div>
+                      <div className={classes.iconDiv}>
+                        <HomeIcon className={classes.icon} />
+                      </div>
+                    </div>
+                  </Card>
+                </Button>
+              </RouterLink>
             </div>
             <Suspense fallback={<LinearProgress />}>
               {renderRoutes(route.routes)}
