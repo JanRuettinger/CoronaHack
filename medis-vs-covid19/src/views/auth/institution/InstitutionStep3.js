@@ -88,80 +88,7 @@ const InstitutionSignup = props => {
 
   return (
     <>
-      <div className={classes.container}>
-        <div className={classes.content}>
-        <Typography className={classes.heading}>Ansprechpartner</Typography>
-            <Divider classNam={classes.devider} />
       <section className={classes.section}>
-        <TextField
-          id="institution-name"
-          label="Name der Institution"
-          variant="outlined"
-          className={classes.fieldFullWidth}
-          onChange={changeInstitiutionName}
-        />
-        <TextField
-          id="location"
-          label="Ort"
-          variant="outlined"
-          className={classes.fieldHalfWidth}
-          onChange={changeInstitiutionLocation}
-        />
-      </section>
-      <section>
-        <Typography className={classes.heading}>Art der Institution</Typography>
-        <RadioGroup
-          className={classes.radioGroup}
-          aria-label="institution"
-          name="institution"
-          value={institutionKind}
-          onChange={handleChangeRadio}
-        >
-          <div className={classes.radioContainer}>
-            <FormControlLabel
-              className={classes.radio}
-              value="hospital"
-              control={<Radio />}
-              label="Krankenhaus"
-            />
-            <FormControlLabel
-              className={classes.radio}
-              value="arztpraxis"
-              control={<Radio />}
-              label="Arztpraxis"
-            />
-            <FormControlLabel
-              className={classes.radio}
-              value="rettungsdienst"
-              control={<Radio />}
-              label="Rettungsdienst"
-            />
-          </div>
-
-          <div className={classes.radioContainer}>
-            <FormControlLabel
-              className={classes.radio}
-              value="pflegedienst-pflegeheim"
-              control={<Radio />}
-              label="Pflegedienst / Pflegeheim"
-            />
-            <FormControlLabel
-              className={classes.radio}
-              value="apotheke"
-              control={<Radio />}
-              label="Apotheke"
-            />
-            <FormControlLabel
-              className={classes.radio}
-              value="gesundheitsamt-versorgungsinstitution"
-              control={<Radio />}
-              label="Gesundheitsamt/ Versorgungsinstitution"
-            />
-          </div>
-        </RadioGroup>
-      </section>
-
-      {/* <section className={classes.section}>
         <Typography className={classes.heading}>
           Einverständniserklärungen
         </Typography>
@@ -180,10 +107,7 @@ const InstitutionSignup = props => {
             label="Hiermit akzeptiere ich die Datenschutzbedingungen.*"
           />
         </div>
-      </section> */}
-    {/* </div> */}
-      </div>
-      </div>
+      </section>
     </>
   )
 }

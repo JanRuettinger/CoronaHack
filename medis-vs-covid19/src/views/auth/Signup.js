@@ -19,10 +19,12 @@ import {
 } from '../../utilities'
 import { auth } from '../../firebase'
 import Step0 from './Step0'
-import Step1 from './student/StudentStep1'
-import Step2 from './student/StudentStep2'
-import Step3 from './student/StudentStep3'
-import InstitutionSignup from './institution/InstitutionStep1'
+import StudentStep1 from './student/StudentStep1'
+import StudentStep2 from './student/StudentStep2'
+import StudentStep3 from './student/StudentStep3'
+import IntsitutionStep1 from './institution/InstitutionStep1'
+import InstitutionStep2 from './institution/InstitutionStep2'
+import InstitutionStep3 from './institution/InstitutionStep3'
 import { flexibleCompare } from '@fullcalendar/core'
 import { isJSDocAugmentsTag } from 'typescript'
 
@@ -67,32 +69,30 @@ const CurrentStepStudent = props => {
 
   switch (activeStep) {
     case 1:
-      return <Step1 {...props} />
+      return <StudentStep1 {...props} />
     case 2:
-      return <Step2 {...props} />
+      return <StudentStep2 {...props} />
     case 3:
-      return <Step3 {...props} />
+      return <StudentStep3 {...props} />
     default:
       return 'Unknown step'
   }
 }
 
-// const CurrentStep = props => {
-//   const { activeStep } = props
+const CurrentStepFacility = props => {
+  const { activeStep } = props
 
-//   switch (activeStep) {
-//     case 0:
-//       return <Step0 {...props} />
-//     case 1:
-//       return <Step1 {...props} />
-//     case 2:
-//       return <Step2 {...props} />
-//     case 3:
-//       return <Step3 {...props} />
-//     default:
-//       return 'Unknown step'
-//   }
-// }
+  switch (activeStep) {
+    case 1:
+      return <IntsitutionStep1 {...props} />
+    case 2:
+      return <InstitutionStep2 {...props} />
+    case 3:
+      return <InstitutionStep3 {...props} />
+    default:
+      return 'Unknown step'
+  }
+}
 
 export default function HorizontalLinearStepper() {
   const classes = useStyles()
@@ -244,7 +244,7 @@ export default function HorizontalLinearStepper() {
                 ) }
                 
                 { role === 'facility' && activeStep > 0 && (
-                  <InstitutionSignup
+                  <CurrentStepFacility
                     {...{
                       activeStep,
                       institutionName,
