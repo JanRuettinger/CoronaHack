@@ -3,14 +3,13 @@
 import React, { lazy } from 'react'
 import { Redirect } from 'react-router-dom'
 import AuthLayout from './layouts/Auth'
-import MenuNavBarLayout from './layouts/MenuNavBar'
+import DashboardLayout from './layouts/Dashboard'
 import ErrorLayout from './layouts/Error'
 import Profile from './views/Profile'
-import DashboardLayout from './layouts/Dashboard'
-import DashboardAnalyticsView from './views_old/DashboardAnalytics'
-import DashboardDefaultView from './views_old/DashboardDefault'
-import OverviewView from './views_old/Overview'
-import PresentationView from './views_old/Presentation'
+// import DashboardAnalyticsView from './views_old/DashboardAnalytics'
+// import DashboardDefaultView from './views_old/DashboardDefault'
+// import OverviewView from './views_old/Overview'
+// import PresentationView from './views_old/Presentation'
 
 export default [
   {
@@ -34,7 +33,7 @@ export default [
   },
   {
     path: '/',
-    component: MenuNavBarLayout,
+    component: DashboardLayout,
     routes: [
       {
         path: '/settings',
