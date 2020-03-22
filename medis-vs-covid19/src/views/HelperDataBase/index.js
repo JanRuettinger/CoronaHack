@@ -95,7 +95,7 @@ function HelperDataBase({ route }) {
     "startzeit": "21.04.2020",
     "verfuegbarkeit": "20 h pro Woche",
     "verguetung": "nicht benötigt",
-    "email": "", // "greta@web.de",
+    "email": "greta@web.de",
     "Telefonnummer":"+4917666612312"
   },
   {
@@ -107,7 +107,7 @@ function HelperDataBase({ route }) {
     "startzeit": "24.03.2020",
     "verfuegbarkeit": "30 h pro Woche",
     "verguetung": "nicht benötigt",
-    "email": "", //"david@web.de",
+    "email": "david@web.de",
     "Telefonnummer":"+4917666612312"
   },
   {
@@ -119,7 +119,7 @@ function HelperDataBase({ route }) {
     "startzeit": "24.03.2020",
     "verfuegbarkeit": "30 h pro Woche",
     "verguetung": "nicht benötigt",
-    "email": "", // "david@web.de",
+    "email": "david@web.de",
     "Telefonnummer":"+4917666612312"
   },
   {

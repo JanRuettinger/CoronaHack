@@ -110,9 +110,11 @@ function Results({ className, customers, ...rest }) {
 
   const [open, setOpen] = React.useState(false);
 
-  let activeCustomer = customers[0];
-  const showData = (e) => {
-    activeCustomer = e.target.getAttribute('dataCustomer');
+  const [selectedHelper, setSelectedHelper] = React.useState(customers[0]);
+
+  const showData = (customer) => {
+    console.log(customer);
+    setSelectedHelper(customer);
     setOpen(true);
   };
 
@@ -132,13 +134,13 @@ function Results({ className, customers, ...rest }) {
         <div className={classes.modalStyle}>
           <Typography className={classes.moHeader}>Kontaktdaten</Typography>
           <Typography id="simple-modal-description">
-            Name: {activeCustomer.name}
+            Name: {selectedHelper.name}
           </Typography>
           <Typography id="simple-modal-description">
-            E-Mail: {activeCustomer.email}
+            E-Mail: {selectedHelper.email}
           </Typography>
           <Typography id="simple-modal-description">
-            Telefonnummer: {activeCustomer.Telefonnummer}
+            Telefonnummer: {selectedHelper.Telefonnummer}
           </Typography>
         </div>
       </Modal>
@@ -241,7 +243,7 @@ function Results({ className, customers, ...rest }) {
                           component={RouterLink}
                           size="small"
                           dataCustomer={customer}
-                          onClick={showData}
+                          onClick={showData.bind(this, customer)}
                           variant="outlined"
                         >
                           Kontaktdaten
