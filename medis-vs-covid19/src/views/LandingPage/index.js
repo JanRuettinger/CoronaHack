@@ -151,7 +151,7 @@ function LandingPage({ route, history }) {
     auth.signInWithEmailAndPassword(email, password)
     .then(function(firebaseUser) {
       setStatusBase({ msg: "Credentials verified.", key: Math.random() });
-      history.push("/dashboard");
+      history.push("/settings");
     })
     .catch(function(error) {
       var errorCode = error.code;
