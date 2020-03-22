@@ -1,5 +1,5 @@
 import React, { Suspense, useState } from 'react';
-import { renderRoutes, withRouter } from 'react-router-config';
+import { renderRoutes } from 'react-router-config';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { LinearProgress } from '@material-ui/core';
@@ -192,13 +192,6 @@ function LandingPage({ route, history }) {
               LOGIN
             </Button>
             {status ? <AlertMessage key={status.key} message={status.msg} /> : null}
-            {/* <RouterLink to="/dashboard">
-              <Button 
-                variant="contained"
-                className={classes.loginButton}>
-                LOGIN
-              </Button>
-            </RouterLink> */}
           </div>
         </Toolbar>
       </AppBar>

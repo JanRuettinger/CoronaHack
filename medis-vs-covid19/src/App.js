@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Router } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 import { createBrowserHistory } from 'history'
@@ -20,11 +20,42 @@ import './mixins/validate'
 import './mixins/prismjs'
 import './mock'
 import './assets/scss/main.scss'
+import { auth } from './firebase';
 
 const history = createBrowserHistory()
 const store = configureStore()
 
 function App() {
+  const [authUser,setAuthUser] = useState(null);
+  const [authWasListened,setAuthWasListened] = useState(false);
+
+  useEffect(()=>{
+    // console.log('Running App useEffect...');
+    const authListener = auth.onAuthStateChanged(
+      (authUser) => {
+        // console.log(authUser);
+        // console.log(authUser.uid);
+
+        if(authUser) {
+          setAuthUser(authUser);
+          setAuthWasListened(true);
+        } else {
+          setAuthUser(null);
+          setAuthWasListened(true);
+        }
+
+      }
+    );
+    return authListener;
+
+  },[]);
+
+  // return(
+  //   authWasListened ?
+  //   <Layout/>
+  //   : <div>Waiting for auth...</div>
+  // );
+
   return (
     <StoreProvider store={store}>
       <ThemeProvider theme={theme}>
