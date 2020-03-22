@@ -7,7 +7,8 @@ import { AppBar, Toolbar } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   root: {
-    boxShadow: 'none'
+    boxShadow: 'none',
+    background: '#C8CACC'
   }
 }))
 
@@ -15,7 +16,7 @@ function TopBar({ className, ...rest }) {
   const classes = useStyles()
 
   return (
-    <AppBar {...rest} className={clsx(classes.root, className)} color="primary">
+    <AppBar {...rest} className={clsx(classes.root, className)} color="grey">
       <Toolbar>
         <RouterLink to="/">
           <img alt="Logo" src="/images/logos/logo--match4healthcare.svg" />
